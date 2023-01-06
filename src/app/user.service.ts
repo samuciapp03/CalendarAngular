@@ -13,7 +13,7 @@ export class UserService {
   }
 
   getAllUsers(): Observable<Object> {
-    return this.client.get("http://localhost:8080/api/users")
+    return this.client.get("http://localhost:8080/api/users/")
 
   }
 
@@ -26,7 +26,7 @@ export class UserService {
   }
 
   createUser(user: User): Observable<Object> {
-    return this.client.post("http://localhost:8080/api/users", user);
+    return this.client.post("http://localhost:8080/api/users/", user);
   }
 
   updateUser(id:number, user:User):Observable<Object>{
@@ -39,9 +39,10 @@ export class UserService {
   }
 
   //Not sure
+  /*
   addUserToGroup(idGroup:number, idUser:number):Observable<Object>{
     return this.client.put("http://localhost:8080/api/users/"+idGroup+"/"+idUser, idGroup, idUser);
-  }
+  }*/
 
 
 }

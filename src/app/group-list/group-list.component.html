@@ -7,7 +7,7 @@
 
     <div class="row">
 
-        <table class="table table-bordered table-hover">
+        <table class="table table-bordered table-hover" >
             <thead>
                 <tr>
 
@@ -35,16 +35,17 @@
             </thead>
 
             <tbody>
-                <tr *ngFor="let group of groupList">
+                <tr *ngFor = "let group of groupList">
                     <td scope="col">{{group.id}}</td>
                     <td scope="col">{{group.groupName}}</td>
                     <td scope="col">{{group.roles}}</td>
                     <td scope="col">{{group.permissions}}</td>
                     <td scope="col">{{group.enabled}}</td>
                     <td scope="col">{{group.creationUser}}</td>
-                    <td scope="col">{{group.creationTime}}</td>
+                    <td scope="col">{{group.creationTime + 'UTC' | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
                     <td scope="col">{{group.updateUser}}</td>
-                    <td scope="col">{{group.updateTime}}</td>
+                    <td scope="col">{{group.updateTime + 'UTC' | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
+
                     <td>
                         <button type="button" class="btn btn-primary" style="width: 44px" (click)="detail(group.id)">
                             <i class="far fa-eye"></i>

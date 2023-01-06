@@ -11,7 +11,7 @@ export class GroupListComponent implements OnInit {
 
   groupList: Array<Group> = new Array();
 
-  constructor(private groupService: GroupService, private actRoute: ActivatedRoute, private router: Router) {
+  constructor(private groupService: GroupService, private route: ActivatedRoute, private router: Router) {
 
   }
 

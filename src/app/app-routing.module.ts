@@ -10,15 +10,15 @@ import { UserEditComponent } from './user-edit/user-edit.component';
 import { UserListComponent } from './user-list/user-list.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'api/group-list', pathMatch: 'full'},
+  { path: '', redirectTo: 'api/user-list', pathMatch: 'full'},
   { path: 'api/group-list', component: GroupListComponent },
   { path: 'api/user-list', component: UserListComponent},
-  { path:'api/group-detail/:id', component:GroupDetailComponent},
-  { path:'api/user-detail/:id', component:UserDetailComponent},
-  { path:'api/user-edit/:id', component:UserEditComponent},
-  { path:'api/group-edit/:id', component:GroupEditComponent},
-  { path:'api/group-create', component:GroupCreateComponent},
-  { path:'api/user-create', component:UserCreateComponent}
+  { path: 'api/group-detail/:id', component:GroupDetailComponent},
+  { path: 'api/user-detail/:id', component:UserDetailComponent},
+  { path: 'api/user-edit/:id', component:UserEditComponent},
+  { path: 'api/group-edit/:id', component:GroupEditComponent},
+  { path: 'api/group-create', component:GroupCreateComponent},
+  { path: 'api/user-create', component:UserCreateComponent}
 ];
 
 @NgModule({

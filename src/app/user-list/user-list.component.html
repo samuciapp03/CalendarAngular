@@ -8,7 +8,7 @@
     <div class="row">
 
 
-        <table class="table table-bordered table-hover" id="user-datatable">
+        <table datatable class="table table-hover table-bordered table-striped" [dtTrigger]="dtTrigger">
             <thead>
                 <tr>
 
@@ -26,8 +26,7 @@
 
                     <th scope="col" class="align-text-top">Ultimo acesso</th>
 
-                    <th scope="col" class="align-text-top">Data modifica
-                        password</th>
+                    <th scope="col" class="align-text-top">Data modifica password</th>
 
                     <th scope="col" class="align-text-top">Gruppo</th>
 
@@ -35,37 +34,39 @@
 
                     <th scope="col" class="align-text-top">Utente eliminato</th>
 
+                    <th scope="col" class="align-text-top">Azioni</th>
 
                 </tr>
             </thead>
             <tbody>
 
 
-                <tr>
-                    <td>TEST</td>
-                    <td>TEST</td>
-                    <td>TEST</td>
-                    <td>TEST</td>
-                    <td>TEST</td>
-                    <td>TEST</td>
-                    <td>TEST</td>
-                    <td>TEST</td>
-                    <td>TEST</td>
-                    <td>TEST</td>
-                    <td>TEST</td>
+                <tr *ngFor="let user of list">
+                    <td scope="col">{{user.id}}</td>
+                    <td scope="col">{{user.name}}</td>
+                    <td scope="col">{{user.lastName}}</td>
+                    <td scope="col">{{user.email}}</td>
+                    <td scope="col">{{user.username}}</td>
+                    <td scope="col">{{user.password}}</td>
+                    <td scope="col">{{user.lastLogin + 'UTC' | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
+                    <td scope="col">{{user.dateModifiedPass + 'UTC' | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
+                    <td scope="col">{{user.groupName}}</td>
+                    <td scope="col">{{user.verified}}</td>
+                    <td scope="col">{{user.deleted}}</td>
+                    
 
-                    <td>
-
-                        <button type="button" class="btn btn-primary" style="width: 44px" (click)="detail(1)">
+                   <td>
+                        <button type="button" class="btn btn-primary" style="width: 44px" (click)="detail(user.id)">
                             <i class="far fa-eye"></i>
                         </button>
-                        <button type="button" class="btn btn-success" style="width: 44px" (click)="edit(1)">
+                        <button type="button" class="btn btn-success" style="width: 44px" (click)="edit(user.id)">
                             <i class="fas fa-edit"></i>
                         </button>
                         <button type="button" class="btn btn-danger" style="width: 44px" (click)="deleteUser()">
                             <i class="far fa-trash-alt"></i>
                         </button>
                     </td>
+                    
                 </tr>
 
 

@@ -12,7 +12,7 @@ export class GroupService {
   }
 
   getAllGroups(): Observable<Group[]> {
-    return this.client.get<Group[]>("http://localhost:8080/api/groups");
+    return this.client.get<Group[]>("http://localhost:8080/api/groups/");
   }
 
 /* Object return
@@ -31,7 +31,7 @@ export class GroupService {
   }
 
   createGroup(group: Group): Observable<Object> {
-    return this.client.post("http://localhost:8080/api/groups", group);
+    return this.client.post("http://localhost:8080/api/groups/", group);
   }
 
 
