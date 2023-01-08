@@ -1,81 +1,58 @@
-<div class="invisible">
-    <input type="hidden" id="action" name="action" value="create">
+<div class="container" style="width: 75%;">
+    <legend>Crea Utente</legend>
+    <form>
+      <div class="mb-3">
+        <label for="groupName" class="form-label">Nome Utente</label>
+        <input type="text" name="name" [(ngModel)] = "user.name" class="form-control" placeholder="Inserire nome dell'utente" id="Name" />
+      </div>
+      <div class="mb-3">
+        <label for="lastName" class="form-label">Cognome</label>
+        <input type="text" name="lastName" [(ngModel)] = "user.lastName" class="form-control" id="lastName" placeholder="Inserire cognome"  />
+      </div>
 
-</div>
-<div class="text-danger">
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" name="email" [(ngModel)] = "user.email" class="form-control" id="email" placeholder="Inserire email"  />
+      </div>
 
-</div>
-<div class="form-user row">
-    <label for="Nome Utente" class="col-sm-2 col-form-label">Nome
-        Utente</label>
-    <div class="col-sm-10">
-        <input type="text" id="userName" name="userName" value="${userName}">
-        <br />
-    </div>
-</div>
+      <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input type="text" name="username" [(ngModel)] = "user.username" class="form-control" id="username" placeholder="Inserire username"  />
+      </div>
 
-<div class="form-user row">
-    <label for="Cognome" class="col-sm-2 col-form-label">Cognome</label>
-    <div class="col-sm-10">
-        <input type="text" id="lastName" name="lastName" value="${lastName}">
-        <br />
-    </div>
-</div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="text" name="password" [(ngModel)] = "user.password" class="form-control" id="password" placeholder="Inserire password"  />
+      </div>
+  
+    </form>
+  
+    <p>Seleziona Il Grouppo di Appartenenza</p>
+    <ng-select [multiple]="false" [(ngModel)]="user.groupId" placeholder="Selezionare il gruppo di appartenenza" >
+      <ng-option *ngFor="let group of list" [value]="group.id" >{{group.groupName}}</ng-option>   
+    </ng-select>
+  
+  
+    <form>
+        <div class="mb-3">
+            <label for="verified" class="form-label">Verificato</label>
+            <input type="checkbox" name="verified" [(ngModel)] = "user.verified" class="form-control" id="verified"  />
+          </div>
 
-<div class="form-user row">
-    <label for="Email" class="col-sm-2 col-form-label">Email</label>
-    <div class="col-sm-10">
-        <input type="text" id="email" name="email" value="${email}"><br />
-    </div>
-</div>
+          <div class="mb-3">
+            <label for="elimitato" class="form-label">Elimitato</label>
+            <input type="checkbox" name="elimitato" [(ngModel)] = "user.deleted" class="form-control" id="elimitato"   />
+          </div>
 
-<div class="form-user row">
-    <label for="Username" class="col-sm-2 col-form-label">Username</label>
-    <div class="col-sm-10">
-        <input type="text" id="username" name="username" value="${username}"><br />
-    </div>
-</div>
-
-<div class="form-user row">
-    <label for="Password" class="col-sm-2 col-form-label">Password</label>
-    <div class="col-sm-10">
-        <input type="text" id="password" name="password" value="${password}"><br />
-    </div>
-</div>
-
-<div class="form-user row">
-    <label for="Gruppo" class="col-sm-2 col-form-label">Gruppo</label>
-    <div class="col-sm-10" style="width: 222.500px">
-        <select id="groupName" name="groupName" class="form-select" aria-label="Default select example">
-
-            <!-- implement group dropdown
-                <c:forEach items="${groupList}" var="group">
-                    <option value="${group.id}">${group.groupName}</option>
-                </c:forEach>
--->
-        </select>
-    </div>
-</div>
-
-<div class="form-user row">
-    <label for="verified" class="col-sm-2 col-form-label">Utente
-        verificato</label>
-    <div class="col-sm-10">
-        <input class="form-check-input" type="checkbox" id="verified" name="verified">
-
-    </div>
-</div>
-
-<div class="form-user row">
-    <label for="deleted" class="col-sm-2 col-form-label">Utente
-        eliminato</label>
-    <div class="col-sm-10">
-        <input class="form-check-input" type="checkbox" id="deleted" name="deleted">
-    </div>
-</div>
+          <div class="mb-3">
+            <label for="creationUser" class="form-label">Utente creazione</label>
+            <input type="text" name="creationUser" [(ngModel)] = "user.creationUser" class="form-control" id="creationUser" placeholder="Inserire utente creazione"  />
+          </div>
 
 
-<div>
-    <button type="submit" class="btn btn-success" onclick="enabled()">Crea
-        utente</button>
-</div>
+    </form>
+  
+  
+      <button type="button" (click)="createUser()" class="btn btn-primary">Crea</button>
+    
+  </div>

@@ -1,0 +1,66 @@
+<div class="container" style="width: 75%;">
+    <legend>Aggiorna Utente</legend>
+    <form>
+      <div class="mb-3">
+        <label for="groupName" class="form-label">Nome Utente</label>
+        <input type="text" name="name" [(ngModel)] = "user.name" class="form-control" placeholder="Inserire nome dell'utente" id="Name" value="user.name" />
+      </div>
+      <div class="mb-3">
+        <label for="lastName" class="form-label">Cognome</label>
+        <input type="text" name="lastName" [(ngModel)] = "user.lastName" class="form-control" id="lastName" placeholder="Inserire cognome" value="user.lastName"   />
+      </div>
+
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" name="email" [(ngModel)] = "user.email" class="form-control" id="email" placeholder="Inserire email" value="user.email"   />
+      </div>
+
+      <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input type="text" name="username" [(ngModel)] = "user.username" class="form-control" id="username" placeholder="Inserire username" value="user.username"  />
+      </div>
+
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="text" name="password" [(ngModel)] = "user.password" class="form-control" id="password" placeholder="Inserire password" value="user.password"   />
+      </div>
+  
+    </form>
+  
+    <p>Seleziona Il Grouppo di Appartenenza</p>
+    <ng-select [multiple]="false" [(ngModel)]="user.groupId" placeholder="Selezionare il gruppo di appartenenza" >
+      <ng-option *ngFor="let group of list" [value]="group.id" >{{group.groupName}}</ng-option>   
+    </ng-select>
+    <br/>
+  
+  
+    <form>
+        <div class="mb-3">
+            <label for="verified" class="form-label">Verificato</label>
+            <input type="checkbox" name="verified" [(ngModel)] = "user.verified"  id="verified"  />
+          </div>
+          <br/>
+
+          <div class="mb-3">
+            <label for="elimitato" class="form-label">Elimitato</label>
+            <input type="checkbox" name="elimitato" [(ngModel)] = "user.deleted"  id="elimitato"   />
+          </div>
+
+          <div class="mb-3">
+            <label for="creationUser" class="form-label">Utente creazione</label>
+            <input type="text" name="creationUser" [(ngModel)] = "user.creationUser" class="form-control" id="creationUser" placeholder="Inserire utente creazione" value="user.createUser"   />
+          </div>
+
+          <div class="mb-3">
+            <label for="updateUser" class="form-label">Utente Aggiornamento</label>
+            <input type="text" name="updateUser" [(ngModel)] = "user.updateUser" class="form-control" id="updateUser" placeholder="Inserire utente aggiornamento" value="user.updateUser"  />
+          </div>
+
+
+    </form>
+  
+  
+      <button type="button" (click)="updateUser()" class="btn btn-primary">Aggiorna</button>
+    
+  </div>
+

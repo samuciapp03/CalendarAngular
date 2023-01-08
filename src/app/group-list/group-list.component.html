@@ -1,74 +1,56 @@
 <div class="container pb-3">
-    <button type="button" class="btn btn-success" (click)="createGroup()">Crea nuovo gruppo</button>
+    <button type="button" class="btn btn-success" (click)="groupCreate()">Crea nuovo gruppo</button>
 </div>
-
-
 <div class="container">
 
     <div class="row">
 
-        <table class="table table-bordered table-hover" >
+        <table datatable class="table table-hover table-bordered table-striped" [dtTrigger]="dtTrigger">
             <thead>
                 <tr>
-
-                    <th scope="col" class="align-text-top">Id</th>
-
-                    <th scope="col" class="align-text-top">Nome Gruppo</th>
-
-                    <th scope="col" class="align-text-top">Ruoli</th>
-
-                    <th scope="col" class="align-text-top">Permessi</th>
-
-                    <th scope="col" class="align-text-top">Attivo?</th>
-
-                    <th scope="col" class="align-text-top">User creazione</th>
-
-                    <th scope="col" class="align-text-top">Data creazione</th>
-
-                    <th scope="col" class="align-text-top">Aggiornamento user</th>
-
-                    <th scope="col" class="align-text-top">Data aggiornamento</th>
-
+                    <th scope="col" scope="col" class="align-text-top">id</th>
+                    <th scope="col" scope="col" class="align-text-top">Nome Gruppo</th>
+                    <th scope="col" scope="col" class="align-text-top">Permessi</th>
+                    <th scope="col" scope="col" class="align-text-top">Ruoli</th>
+                    <th scope="col" scope="col" class="align-text-top">Attivo</th>
+                    <th scope="col" scope="col" class="align-text-top">Utente Creazione</th>
+                    <th scope="col" scope="col" class="align-text-top">Data Creazione</th>
+                    <th scope="col" scope="col" class="align-text-top">Utente Aggiornamento</th>
+                    <th scope="col" scope="col" class="align-text-top">Data Aggiornamento</th>
+                    <th scope="col" class="align-text-top">Azioni</th>
                 </tr>
-
-
             </thead>
 
             <tbody>
-                <tr *ngFor = "let group of groupList">
-                    <td scope="col">{{group.id}}</td>
-                    <td scope="col">{{group.groupName}}</td>
-                    <td scope="col">{{group.roles}}</td>
-                    <td scope="col">{{group.permissions}}</td>
-                    <td scope="col">{{group.enabled}}</td>
-                    <td scope="col">{{group.creationUser}}</td>
-                    <td scope="col">{{group.creationTime + 'UTC' | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
-                    <td scope="col">{{group.updateUser}}</td>
-                    <td scope="col">{{group.updateTime + 'UTC' | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
+                <tr *ngFor="let g of list">
 
-                    <td>
-                        <button type="button" class="btn btn-primary" style="width: 44px" (click)="detail(group.id)">
+                    <td scope="col">{{g.id}}</td>
+                    <td scope="col">{{g.groupName}}</td>
+                    <td scope="col">{{g.permissions}}</td>
+                    <td scope="col">{{g.roles}}</td>
+                    <td scope="col">{{g.enabled}}</td>
+                    <td scope="col">{{g.creationUser}}</td>
+                    <td scope="col">{{g.creationTime | date:'dd/MM/yyyy HH:mm:ss'}}</td>
+                    <td scope="col">{{g.updateUser}}</td>
+                    <td scope="col">{{g.updateTime | date:'dd/MM/yyyy HH:mm:ss'}}</td>
+
+
+                    <td> <button type="button" class="btn btn-primary" (click)="groupDetail(g.id)">
                             <i class="far fa-eye"></i>
                         </button>
 
-                        <button type="button" class="btn btn-success" style="width: 44px" (click)="edit(group.id)">
+
+                        <button type="button" class="btn btn-success" (click)="groupUpdate(g.id)">
                             <i class="fas fa-edit"></i>
                         </button>
 
-                        <button type="button" class="btn btn-danger" style="width: 44px"
-                            (click)="deleteGroup(group.id)">
+                        <button type="button" class="btn btn-danger" (click)="deleteGroup(g.id)">
                             <i class="far fa-trash-alt"></i>
                         </button>
                     </td>
-                </tr>
-                <tr>
-
 
                 </tr>
-
-
             </tbody>
-
 
 
         </table>

@@ -1,43 +1,49 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute,  Router } from '@angular/router';
 import { Group } from '../group';
 import { GroupService } from '../group.service';
 import { User } from '../user';
 import { UserService } from '../user.service';
 
 @Component({
-  selector: 'app-user-create',
-  templateUrl: './user-create.component.html',
-  styleUrls: ['./user-create.component.css']
+  selector: 'app-user-update',
+  templateUrl: './user-update.component.html',
+  styleUrls: ['./user-update.component.css']
 })
-export class UserCreateComponent implements OnInit {
+export class UserUpdateComponent implements OnInit{
 
   list :Array<Group>=new Array();
+  id!:number;
+  user:User={
+    id: 0,
+    username: '',
+    password: '',
+    email: '',
+    name: '',
+    lastName: '',
+    groupName: '',
+    groupId: 0,
+    lastLogin: new Date,
+    dateModifiedPass: new Date,
+    creationTime: new Date,
+    verified: false,
+    deleted: false,
+    creationUser: '',
+    updateUser: '',
+    updateTime: new Date
+  }
 
-user:User={
-  id: 0,
-  username: '',
-  password: '',
-  email: '',
-  name: '',
-  lastName: '',
-  groupName: '',
-  groupId: 0,
-  lastLogin: new Date,
-  dateModifiedPass: new Date,
-  creationTime: new Date,
-  verified: false,
-  deleted: false,
-  creationUser: '',
-  updateUser: '',
-  updateTime: new Date
-}
-
-  constructor(private service:UserService, private actRoute:ActivatedRoute, private router:Router, private groupService:GroupService){
+  constructor(private actRoute:ActivatedRoute, private router:Router, private service:UserService, private groupService:GroupService){
 
   }
 
+
   ngOnInit(): void {
+
+    this.id=Number(this.router.url.split('/').pop());
+
+    this.getUserById(this.id);
+
     this.groupService.getAllGroups().subscribe((response)=>{
       console.log("Richesta della lista ricevuta");
       console.log(response);
@@ -65,21 +71,38 @@ user:User={
   
   
     });
+
+
+
+
     
   }
 
 
-  createUser(){
-    this.service.createUser(this.user).subscribe({
+  getUserById(id:number){
+    this.service.getUserById(id).subscribe((data)=>{
+      this.user=data;
+    });
+  }
+
+
+  updateUser(){
+    this.service.updateUser(this.user).subscribe({
       next:(data)=>{
         this.router.navigateByUrl("/users");
-      }, 
+      },
       error:(err)=>{
         console.log(err);
       }
-    })
-
+    });
   }
+
+
+
+
+
+
+
 
 
 }

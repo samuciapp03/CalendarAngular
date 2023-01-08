@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ADTSettings } from 'angular-datatables/src/models/settings';
-import { User } from 'app/user';
-import { UserService } from 'app/user.service';
+
 import { Subject } from 'rxjs';
+import { User } from '../user';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-user-list',
@@ -23,7 +24,7 @@ export class UserListComponent {
       { data: 'username' },
       { data: 'password' },
       { data: 'lastLogin' },
-      { data: 'dateModifiedPass' },
+      { data: 'dateModifiedPass'},
       { data: 'groupName' },
       { data: 'verified' },
       { data: 'deleted' },
@@ -38,7 +39,7 @@ export class UserListComponent {
 
   list: Array<User> = new Array();
   
-  constructor(private route: ActivatedRoute, private router: Router, private userService : UserService) {
+  constructor(private route: ActivatedRoute, private router: Router,  private userService:UserService) {
     
   }
 
@@ -76,8 +77,11 @@ export class UserListComponent {
           dateModifiedPass: new Date(u.dateModifiedPass),
           deleted: u.deleted,
           verified: u.verified,
-          groupId: u.groupId
-
+          groupId: u.groupId,
+          creationTime:u.creationTime,
+          creationUser:u.creationUser,
+          updateUser:u.updateUser,
+          updateTime:new Date(u.updateTime)
           
         });
         
@@ -91,20 +95,31 @@ export class UserListComponent {
 
 
   createUser() {
-    this.router.navigateByUrl("/api/user-create");
+    this.router.navigateByUrl("/user-create");
 
   }
 
   detail(id: Number) {
-    this.router.navigateByUrl("/api/user-detail/" + id);
+    this.router.navigateByUrl("/user-detail/" + id);
   }
 
-  deleteUser() {
-
+  deleteUser(id:number){
+    if(confirm("Sei sicuro di voler eliminare l'utente?")){
+      
+        this.userService.deleteUser(id)
+          .subscribe(
+            data => {
+              console.log(data);
+              this.ngOnInit();
+              
+            },
+            error => console.log(error));
+      
+    }
   }
 
   edit(id:Number) {
-    this.router.navigateByUrl("/api/user-edit/"+id)
+    this.router.navigateByUrl("/user-update/"+id);
   }
 
 

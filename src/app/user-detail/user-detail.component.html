@@ -1,103 +1,83 @@
-<div class="container-fluid">
-    <div class="row">
+<div class="container" style="width: 75%;">
+    <legend>Utente</legend>
+    <!-- Поставити ngIfи -->
+    <form>
+      <div class="mb-3">
+        <label for="groupName" class="form-label">Nome Utente</label>
+        <input type="text" name="name" [(ngModel)] = "user.name" class="form-control" disabled="true" id="Name" />
+      </div>
+      <div class="mb-3">
+        <label for="lastName" class="form-label">Cognome</label>
+        <input type="text" name="lastName" [(ngModel)] = "user.lastName" class="form-control" id="lastName"disabled="true"  />
+      </div>
 
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" name="email" [(ngModel)] = "user.email" class="form-control" id="email" disabled="true"  />
+      </div>
 
+      <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input type="text" name="username" [(ngModel)] = "user.username" class="form-control" id="username" disabled="true"  />
+      </div>
 
-            <form action="user-detail" method="POST">
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="text" name="password" [(ngModel)] = "user.password" class="form-control" id="password" disabled="true"  />
+      </div>
+      <br/>
+  
+        <div class="mb-3">
+            <label for="verified" class="form-label">Verificato </label>
+            <input type="checkbox" name="verified" [(ngModel)] = "user.verified"  id="verified" disabled="true"  />
+          </div>
+          <br/>
 
-                <div class="text-danger">
-                    
-                </div>
-                <div class="form-user row">
-                    <label for="userName" class="col-sm-2 col-form-label">Nome
-                        Utente</label>
-                    <div class="col-sm-10">
-                        <input type="text" id="userName" name="userName"
-                            value="TEST" disabled readonly>
-                    </div>
-                </div>
+          <div class="mb-3">
+            <label for="elimitato" class="form-label">Elimitato </label>
+            <input type="checkbox" name="elimitato" [(ngModel)] = "user.deleted"  id="elimitato"  disabled="true"  />
+          </div>
 
-                <div class="form-user row">
-                    <label for="roles" class="col-sm-2 col-form-label">Cognome</label>
-                    <div class="col-sm-10">
-                        <input type="text" id="lastName" name="lastName"
-                        value="TEST" disabled readonly>
-                    </div>
-                </div>
+          <div class="mb-3">
+            <label for="creationUser" class="form-label">Utente creazione</label>
+            <input type="text" name="creationUser" [(ngModel)] = "user.creationUser" class="form-control" id="creationUser" disabled="true"  />
+          </div>
 
-                <div class="form-user row">
-                    <label for="permissions" class="col-sm-2 col-form-label">Email</label>
-                    <div class="col-sm-10">
-                        <input type="text" id="email" name="email"
-                        value="TEST" disabled readonly>
-                    </div>
-                </div>
+          <div class="mb-3" *ngIf="user.updateUser">
+            <label for="updateUser" class="form-label">Utente Aggiornamento</label>
+            <input type="text" name="updateUser" [(ngModel)] = "user.updateUser" class="form-control" id="updateUser" disabled="true" />
+          </div>
 
-                <div class="form-user row">
-                    <label for="enabled" class="col-sm-2 col-form-label">Username</label>
-                    <div class="col-sm-10">
-                        <input type="text" id="username" name="username"
-                        value="TEST" disabled readonly>
-                    </div>
-                </div>
+          <div class="mb-3" *ngIf="user.updateTime">
+            <label for="updateTime" class="form-label">Data Aggiornamento</label>
+            <input type="text" name="updateTime" [(ngModel)] = "user.updateTime" class="form-control" id="updateTime" disabled="true" />
+          </div>
 
-                <div class="form-user row">
-                    <label for="enabled" class="col-sm-2 col-form-label">Password</label>
-                    <div class="col-sm-10">
-                        <input type="text" id="password" name="password"
-                        value="TEST" disabled readonly>
-                    </div>
-                </div>
+          <div class="mb-3">
+            <label for="creationTime" class="form-label">Data Creazione</label>
+            <input type="text" name="creationTime" [(ngModel)] = "user.creationTime" class="form-control" id="creationTime" disabled="true"  />
+          </div>
 
-                <div class="form-user row">
-                    <label for="creationTime" class="col-sm-2 col-form-label">Ultimo
-                        accesso</label>
-                    <div class="col-sm-10">
-                        <input type="datetime-local" id="lastLogin" name="lastLogin"
-                        value="TEST" disabled readonly>
-                    </div>
-                </div>
+          <div class="mb-3">
+            <label for="dateModifiedPass" class="form-label">Data Modifica Password</label>
+            <input type="text" name="dateModifiedPass" [(ngModel)] = "user.dateModifiedPass" class="form-control" id="dateModifiedPass" disabled="true"  />
+          </div>
 
-                <div class="form-user row">
-                    <label for="creationTime" class="col-sm-2 col-form-label">Data
-                        modifica password</label>
-                    <div class="col-sm-10">
-                        <input type="datetime-local" id="dateModifiedPass"
-                            name="dateModifiedPass"value="TEST"
-                            disabled readonly>
-                    </div>
-                </div>
+          <div class="mb-3">
+            <label for="lastLogin" class="form-label">Ultimo Accesso</label>
+            <input type="datetime" name="lastLogin" [(ngModel)] = "user.lastLogin" class="form-control" id="lastLogin" disabled="true"  />
+          </div>
 
-                <div class="form-user row">
-                    <label for="creationTime" class="col-sm-2 col-form-label">Gruppo
-                        di appartenenza</label>
-                    <div class="col-sm-10">
-                        <input type="text" id="groupName" name="groupName"
-                        value="TEST" disabled readonly>
-                    </div>
-                </div>
-
-                <div class="form-user row">
-                    <label for="creationTime" class="col-sm-2 col-form-label">Utente
-                        verificato</label>
-                    <div class="col-sm-10">
-                        <input type="text" id="verified" name="verified"
-                        value="TEST" disabled readonly>
-                    </div>
-                </div>
-
-                <div class="form-user row">
-                    <label for="creationTime" class="col-sm-2 col-form-label">Utente
-                        eliminato</label>
-                    <div class="col-sm-10">
-                        <input type="text" id="deleted" name="deleted"
-                        value="TEST" disabled readonly>
-                    </div>
-                </div>
-            </form>
+          <div class="mb-3">
+            <label for="groupName" class="form-label">Gruppo Di Appartenenza</label>
+            <input type="text" name="groupName" [(ngModel)] = "user.groupName" class="form-control" id="groupName" disabled="true"  />
+          </div>
 
 
-        </main>
-    </div>
-</div>
+
+
+
+    </form>
+  
+    
+  </div>

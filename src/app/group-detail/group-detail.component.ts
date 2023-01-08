@@ -13,12 +13,15 @@ export class GroupDetailComponent implements OnInit{
   id!:number;
   group!:Group;
 
+
   constructor(private actRoute:ActivatedRoute, private router:Router, private groupService:GroupService){
 
   }
 
 ngOnInit(): void {
-  this.id=this.actRoute.snapshot.params['id'];
+  this.id=Number(this.router.url.split('/').pop());
+  console.log(this.id);
+ 
   
   this.groupService.getGroupById(this.id).subscribe(data=>{
     this.group=data;
@@ -26,6 +29,8 @@ ngOnInit(): void {
 
 
 }
+
+
 
 
 }

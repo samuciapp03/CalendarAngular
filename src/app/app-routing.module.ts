@@ -2,23 +2,24 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { GroupCreateComponent } from './group-create/group-create.component';
 import { GroupDetailComponent } from './group-detail/group-detail.component';
-import { GroupEditComponent } from './group-edit/group-edit.component';
 import { GroupListComponent } from './group-list/group-list.component';
+import { GroupUpdateComponent } from './group-update/group-update.component';
 import { UserCreateComponent } from './user-create/user-create.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
-import { UserEditComponent } from './user-edit/user-edit.component';
 import { UserListComponent } from './user-list/user-list.component';
+import { UserUpdateComponent } from './user-update/user-update.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'api/user-list', pathMatch: 'full'},
-  { path: 'api/group-list', component: GroupListComponent },
-  { path: 'api/user-list', component: UserListComponent},
-  { path: 'api/group-detail/:id', component:GroupDetailComponent},
-  { path: 'api/user-detail/:id', component:UserDetailComponent},
-  { path: 'api/user-edit/:id', component:UserEditComponent},
-  { path: 'api/group-edit/:id', component:GroupEditComponent},
-  { path: 'api/group-create', component:GroupCreateComponent},
-  { path: 'api/user-create', component:UserCreateComponent}
+  {path:'', component:GroupListComponent},
+  {path:'groups', component:GroupListComponent},
+  {path:'group-detail/:id', component:GroupDetailComponent},
+  {path:'group-update/:id', component:GroupUpdateComponent},
+  {path:'group-create', component:GroupCreateComponent},
+  {path:'users', component:UserListComponent},
+  {path:'user-detail/:id', component:UserDetailComponent},
+  {path:'user-update/:id', component:UserUpdateComponent},
+  {path:'user-create', component:UserCreateComponent}
+
 ];
 
 @NgModule({

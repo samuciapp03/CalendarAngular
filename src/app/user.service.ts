@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { User } from './user';
 
 @Injectable({
@@ -8,41 +8,43 @@ import { User } from './user';
 })
 export class UserService {
 
-  constructor(private client: HttpClient) {
-
-  }
+  constructor(private httpClient: HttpClient) { }
 
   getAllUsers(): Observable<Object> {
-    return this.client.get("http://localhost:8080/api/users/")
-
+    return this.httpClient.get('http://localhost:8080/api/users/');
   }
 
-  getUserById(id: number): Observable<Object> {
-    return this.client.get("http://localhost:8080/api/users/" + id);
+  getUserById(id: number): Observable<User> {
+    return this.httpClient.get<User>('http://localhost:8080/api/users/' + id);
   }
 
-  getUserByUsername(username: string): Observable<Object> {
-    return this.client.get("http://localhost:8080/api/users/" + username);
+  createUser(user: User):Observable<Object> {
+    return this.httpClient.post('http://localhost:8080/api/users/', user);
   }
 
-  createUser(user: User): Observable<Object> {
-    return this.client.post("http://localhost:8080/api/users/", user);
-  }
-
-  updateUser(id:number, user:User):Observable<Object>{
-    return this.client.put("http://localhost:8080/api/users/"+id, user);
-
-  }
-
-  deleteUserById(id:number):Observable<Object>{
-    return this.client.delete("http://localhost:8080/api/users/"+id)
-  }
-
-  //Not sure
   /*
-  addUserToGroup(idGroup:number, idUser:number):Observable<Object>{
-    return this.client.put("http://localhost:8080/api/users/"+idGroup+"/"+idUser, idGroup, idUser);
-  }*/
+  updateUser(user: User, updateCallback: () => null):Observable<Object> {
+    let url = 'http://localhost:8080/api/users/' + user.id;
+
+    this.httpClient.put(url, user).subscribe((response) => {
+      console.log("Risposta ricevuta");
+
+      updateCallback();
+
+    })
+  }
+  */
+
+  updateUser(user:User):Observable<Object>{
+    return this.httpClient.put('http://localhost:8080/api/users/'+user.id, user);
+  }
+
+  
+
+  deleteUser(id:number){
+    return this.httpClient.delete('http://localhost:8080/api/users/'+id);
+  }
+
 
 
 }

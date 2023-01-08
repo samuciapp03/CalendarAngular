@@ -1,118 +1,35 @@
-
-
-    <div class="text-danger">
-        <!-- insert error message-->
+<div class="container" style="width: 75%;">
+  <legend>Crea Gruppo</legend>
+  <form>
+    <div class="mb-3">
+      <label for="groupName" class="form-label">Nome gruppo</label>
+      <input type="text" name="groupName" [(ngModel)] = "groupForm.groupName" class="form-control" placeholder="Inserire nome del gruppo" id="groupName" />
+    </div>
+    <div class="mb-3">
+      <label for="permissions" class="form-label">Permessi</label>
+      <input type="text" name="permissions" [(ngModel)] = "groupForm.permissions" class="form-control" id="permissions" placeholder="Inserire permessi del gruppo"  />
     </div>
 
-    <form (ngForm)="onSubmit()">
-    <div class="invisible">
-        <input type="text" id="action" name="action" value="create">
-    </div>
-    
-    <div class="form-group row">
-        <label for="groupName" class="col-sm-2 col-form-label">Nome
-            Gruppo</label>
-        <div class="col-sm-10">
-            <input type="text" id="groupName" name="groupName" [(ngModel)]="group.groupName" 
-                placeholder="Inserire nome gruppo">
-        </div>
-    </div>
-    <div class="multi-selector">
-        <label for="roles" class="col-sm-2 col-form-label">Ruoli </label> <select
-            class="multiple-roles" name="roles" id="roles" [(ngModel)]="group.roles"
-            multiple="multiple" style="width: 16%">
-            <optgroup label="Shortcut roles">
-                <option value="SUPER_USER">SUPER_USER</option>
-                <option value="ADMIN">ADMIN</option>
-                <option value="MODERATOR">MODERATOR</option>
-                <option value="">USER</option>
-            </optgroup>
-            <optgroup label="Risorse">
-                <option value="ROLE_CREATE_RISORSE">ROLE_CREATE_RISORSE</option>
-                <option value="ROLE_READ_RISORSE">ROLE_READ_RISORSE</option>
-                <option value="ROLE_UPDATE_RISORSE">ROLE_UPDATE_RISORSE</option>
-                <option value="ROLE_DELETE_RISORSE">ROLE_DELETE_RISORSE</option>
-            </optgroup>
-            <optgroup label="Utente">
-                <option value="ROLE_CREATE_USER">ROLE_CREATE_USER</option>
-                <option value="ROLE_READ_USER">ROLE_READ_USER</option>
-                <option value="ROLE_UPDATE_USER">ROLE_UPDATE_USER</option>
-                <option value="ROLE_DELETE_USER">ROLE_DELETE_USER</option>
-            </optgroup>
-            <optgroup label="Slot">
-                <option value="ROLE_CREATE_SLOT">ROLE_CREATE_SLOT</option>
-                <option value="ROLE_READ_SLOT">ROLE_READ_SLOT</option>
-                <option value="ROLE_UPDATE_SLOT">ROLE_UPDATE_SLOT</option>
-                <option value="ROLE_DELETE_SLOT">ROLE_DELETE_SLOT</option>
-            </optgroup>
-            <optgroup label="Gruppo">
-                <option value="ROLE_CREATE_GROUP">ROLE_CREATE_GROUP</option>
-                <option value="ROLE_READ_GROUP">ROLE_READ_GROUP</option>
-                <option value="ROLE_UPDATE_GROUP">ROLE_UPDATE_GROUP</option>
-                <option value="ROLE_DELETE_GROUP">ROLE_DELETE_GROUP</option>
-            </optgroup>
-        </select>
+  </form>
 
-    </div>
-  
-    
+  <p>Seleziona Ruoli</p>
+  <ng-select [multiple]="true" [(ngModel)]="groupForm.roles" placeholder="Selezionare i ruoli" >
+    <ng-option *ngFor="let role of rolesSelect" [value]="role.name">{{role.name}}</ng-option>   
+  </ng-select>
+<br/>
 
-    <div class="multi-selector">
-
-        <label for="permissions" class="col-sm-2 col-form-label">Permessi</label>
-        <select class="add-permissions" multiple="multiple" id="permissions" [(ngModel)]="group.permissions"
-            name="permissions" style="width: 16%">
-            <option></option>
-
-        </select>
-
-
+<form>
+    <div class="mb-3">
+      <label for="enabled" class="form-label">Attivo </label>
+      <input type="checkbox" name="enabled" [(ngModel)] = "groupForm.enabled" id="enabled"  />
     </div>
 
-    <div class="form-group row">
-        <label for="enabled" class="col-sm-2 col-form-label">Attivo</label>
-        <div class="col-sm-10">
-            <input class="form-check-input" type="checkbox" id="enabled" [(ngModel)]="group.enabled"
-                name="enabled">
-
-        </div>
+    <div class="mb-3">
+      <label for="creationUser" class="form-label">User Creazione</label>
+      <input type="text" name="creationUser" [(ngModel)] = "groupForm.creationUser" class="form-control" id="creationUser" placeholder="Inserire user creazione del gruppo "  />
     </div>
 
-    <div class="form-group row">
-        <label for="creationUser" class="col-sm-2 col-form-label">User
-            Creazione </label>
-        <div class="col-sm-10">
-            <input type="text" id="creationUser" name="creationUser" [(ngModel)]="group.creationUser"
-                placeholder="User creazione">
-        </div>
-    </div>
 
-    <input class="btn btn-success" type="submit" value="Crea gruppo"
-        onclick="enable()">
-
-    </form>
-
-
-<script type="text/javascript">
-    function enable() {
-
-        var x = document.getElementById("enabled").checked;
-
-        console.log(x);
-
-    }
-
-    $(".multiple-roles").select2({
-        placeholder : "Seleziona i ruoli"
-    });
-
-    $(".add-permissions").select2({
-        tags : true,
-        tokenSeparators: [',', ' ', '.'],
-        placeholder: "Seleziona i permessi"
-    });
-    
-</script>
-
-
-
+    <button type="button" (click)="createGroup()" class="btn btn-primary">Crea</button>
+  </form>
+</div>

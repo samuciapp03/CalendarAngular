@@ -1,18 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { data } from 'jquery';
 import { Group } from '../group';
 import { GroupService } from '../group.service';
 
-
 @Component({
-  selector: 'app-group-create',
-  templateUrl: './group-create.component.html',
-  styleUrls: ['./group-create.component.css']
+  selector: 'app-group-update',
+  templateUrl: './group-update.component.html',
+  styleUrls: ['./group-update.component.css']
 })
-export class GroupCreateComponent implements OnInit {
+export class GroupUpdateComponent implements OnInit {
 
-  groupForm: Group = {
-    id: 0,
+  id!:number;
+  group: Group = {
+    id:0,
     groupName: '',
     permissions: '',
     enabled: false,
@@ -21,15 +22,6 @@ export class GroupCreateComponent implements OnInit {
     creationTime: new Date(),
     updateUser: '',
     updateTime: new Date()
-  }
-
-  constructor(private router: Router, private groupService: GroupService, private service: GroupService) {
-
-  }
-
-  ngOnInit(): void {
-
-
   }
 
   rolesSelect = [
@@ -57,18 +49,38 @@ export class GroupCreateComponent implements OnInit {
   ];
 
 
-  createGroup() {
-    this.service.createGroup(this.groupForm).subscribe({
-      next: (data) => {
-        this.router.navigateByUrl("/groups");
-      },
-
-      error: (err) => {
-        console.log(err);
-      }
-    });
+  constructor(private service:GroupService, private actRoute:ActivatedRoute, private router:Router){
 
   }
+
+  ngOnInit(): void {
+    this.id=Number(this.router.url.split('/').pop());
+
+    this.getGroupById(this.id);
+    
+  }
+
+  getGroupById(id:number){
+    this.service.getGroupById(id).subscribe((data)=>{
+      this.group=data;
+    })
+
+  }
+
+  updateGroup(){
+    this.service.udpateGroup(this.group).subscribe({
+      next:(data)=>{
+        this.router.navigateByUrl("/groups");
+      },
+      error:(err)=>{
+        console.log(err);
+      }
+
+    });
+  }
+
+
+
 
 
 }

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "AngularBackoffice": {
+    "BackofficeAngular": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/angular-backoffice",
+            "outputPath": "dist/backoffice-angular",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -26,15 +26,11 @@
             ],
             "styles": [
               "src/styles.css",
-              "node_modules/select2/dist/css/select2.min.css",
-              "node_modules/datatables.net-bs5/css/dataTables.bootstrap5.min.css"
+              "node_modules/datatables.net-dt/css/jquery.dataTables.min.css"
             ],
             "scripts": [
-              "node_modules/jquery/dist/jquery.js",
-              "node_modules/select2/dist/js/select2.min.js",
               "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/datatables.net/js/jquery.dataTables.min.js",
-              "node_modules/datatables.net-bs5/js/dataTables.bootstrap5.min.js"
+              "node_modules/datatables.net/js/jquery.dataTables.min.js"
             ]
           },
           "configurations": {
@@ -68,10 +64,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "AngularBackoffice:build:production"
+              "browserTarget": "BackofficeAngular:build:production"
             },
             "development": {
-              "browserTarget": "AngularBackoffice:build:development"
+              "browserTarget": "BackofficeAngular:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -79,7 +75,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "AngularBackoffice:build"
+            "browserTarget": "BackofficeAngular:build"
           }
         },
         "test": {

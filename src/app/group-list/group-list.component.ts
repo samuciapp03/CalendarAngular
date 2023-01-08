@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { Group } from '../group';
 import { GroupService } from '../group.service';
+import { Subject } from 'rxjs';
+
 @Component({
   selector: 'app-group-list',
   templateUrl: './group-list.component.html',
@@ -9,64 +12,98 @@ import { GroupService } from '../group.service';
 })
 export class GroupListComponent implements OnInit {
 
-  groupList: Array<Group> = new Array();
+  list :Array<Group>=new Array();
 
-  constructor(private groupService: GroupService, private route: ActivatedRoute, private router: Router) {
+  dtTrigger: Subject<any> = new Subject();
 
-  }
+  dtOptions: any = {
+    columns: [
+      { data: 'id' },
+      { data: 'groupName' },
+      { data: 'permissions' },
+      { data: 'roles' },
+      { data: 'enabled' },
+      { data: 'creationUser' },
+      { data: 'creationTime' },
+      { data: 'updateUser' },
+      { data: 'updateTime'},
+      {
+        title: 'Action',
+        render: function (data: any, type: any, full: any) {
+          return 'View';
+        }
+      }
+    ]
+  };
 
-  ngOnInit(): void {
 
-    this.groupService.getAllGroups().subscribe((response => {
-      console.log(response);
 
-      let responseList = (response as Array<Group>);
+constructor(private actRoute:ActivatedRoute, private router:Router, private service:GroupService){
 
-      responseList.forEach((g) => {
+}
 
-        console.log(g.id);
-        console.log(g.groupName);
 
-        this.groupList.push({
-          id: g.id,
-          groupName:  g.groupName,
-          permissions: g.permissions,
-          enabled: g.enabled,
-          creationUser: g.creationUser,
-          creationTime: new Date(g.creationTime),
-          updateUser: g.updateUser,
-          updateTime: new Date(g.updateTime),
-          roles: g.roles
+ngOnInit(): void {
 
-        });
+  this.service.getAllGroups().subscribe((response)=>{
+    console.log("Richesta della lista ricevuta");
+    console.log(response);
 
+    let responseList=(response as Array<Group>);
+
+    responseList.forEach((g)=>{
+
+      console.log("Id del gruppo: "+g.id);
+
+      this.list.push({
+        id:g.id,
+        groupName:g.groupName,
+        permissions:g.permissions,
+        enabled:g.enabled,
+        creationUser:g.creationUser,
+        creationTime:new Date(g.creationTime),
+        updateUser:g.updateUser,
+        updateTime:new Date(g.updateTime),
+        roles:g.roles
       });
 
-    }));
 
-  }
+    });
 
-
-  createGroup() {
-    this.router.navigateByUrl("api/group-create");
-  }
+    this.dtTrigger.next(response);
+    
+  });
 
 
-  detail(id: number) {
-    this.router.navigateByUrl("api/group-detail/" + id);
-  }
 
-  edit(id: number) {
-    this.router.navigateByUrl("api/group-edit/" + id);
 
-  }
+}
 
-  deleteGroup(id:number) {
-    if(confirm("Sei sicuro di voler eliminare il gruppo?")){
-      this.groupService.deleteGroupById(id);
-      this.ngOnInit();
+groupCreate(){
+  this.router.navigateByUrl("/group-create");
+}
+
+groupDetail(id:number){
+  this.router.navigateByUrl("/group-detail/"+id);
+}
+
+groupUpdate(id:number){
+  this.router.navigateByUrl("/group-update/"+id);
+}
+
+
+
+deleteGroup(id: number) {
+  if(confirm("Sei sicuro di voler eliminare il gruppo?")){
+  this.service.deleteGroup(id)
+    .subscribe(
+      data => {
+        console.log(data);
+        this.ngOnInit();
+      },
+      error => console.log(error));
     }
+}
 
-  }
 
 }
