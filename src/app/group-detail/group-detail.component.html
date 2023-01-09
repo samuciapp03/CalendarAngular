@@ -1,6 +1,6 @@
 
-<div class="container" style="width: 75%;">
-    <legend>Gruppo</legend>
+<div class="container" style="width: 65%;">
+    <legend>Dettaglio del Gruppo</legend>
     <form>
       <div class="mb-3">
         <label for="groupName" class="form-label">Nome gruppo</label>
@@ -35,12 +35,12 @@
         <input type="text" name="creationTime" [(ngModel)] = "group.creationTime" class="form-control" id="creationTime" disabled="true" />
       </div>
 
-      <div class="mb-3">
-        <label for="updateUser" class="form-label">User Aggiornamento</label>
+      <div class="mb-3" *ngIf="group.updateUser">
+        <label for="updateUser" class="form-label" >User Aggiornamento</label>
         <input type="text" name="updateUser" [(ngModel)] = "group.updateUser" class="form-control" id="updateUser" disabled="true" />
       </div>
 
-      <div class="mb-3">
+      <div class="mb-3" *ngIf="group.updateTime">
         <label for="updateTime" class="form-label">Data Aggiornamento</label>
         <input type="text" name="updateTime" [(ngModel)] = "group.updateTime" class="form-control" id="updateTime" disabled="true" />
       </div>
