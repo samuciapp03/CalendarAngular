@@ -1,30 +1,6 @@
-<style>
-    td,
-    th {
-        text-align: center !important;
-        vertical-align: middle !important;
-    }
 
-    .mat-sort-header-container {
-        justify-content: center !important;
-    }
-
-
-    table {
-        width: 100%;
-        table-layout: fixed;
-    }
-
-    .td1 {
-        overflow: hidden;
-        width: auto;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
-</style>
-
-<div class="container pb-3">
-    <button type="button" class="btn btn-success" (click)="groupCreate()">Crea nuovo gruppo</button>
+<div class="container pb-3" >
+    <button type="button" class="btn" (click)="groupCreate()" style="background-color: rgba(30, 29, 29, 0.864);color: white;" >Crea nuovo gruppo</button>
 </div>
 <div class="container">
 
@@ -51,22 +27,14 @@
                 <tr *ngFor="let g of list">
 
                     <td scope="col">{{g.id}}</td>
-                    <td scope="col">{{g.groupName}}</td>
-                    <td scope="col" style=" 
-                    overflow: hidden;
-                    width: auto;
-                    text-overflow: ellipsis;
-                    white-space: nowrap;">{{g.permissions}}</td>
+                    <td scope="col" class="overflowTxt">{{g.groupName}}</td>
+                    <td scope="col" class="overflowTxt" [title]="g.permissions">{{g.permissions}}</td>
 
-                    <td scope="col" style=" 
-                    overflow: hidden;
-                    width: auto;
-                    text-overflow: ellipsis;
-                    white-space: nowrap;">{{g.roles}}</td>
+                    <td scope="col" class="overflowTxt" [title]="g.roles">{{g.roles}}</td>
                     <td scope="col">{{g.enabled}}</td>
-                    <td scope="col">{{g.creationUser}}</td>
+                    <td scope="col" class="overflowTxt">{{g.creationUser}}</td>
                     <td scope="col">{{g.creationTime | date:'dd/MM/yyyy HH:mm:ss'}}</td>
-                    <td scope="col">{{g.updateUser}}</td>
+                    <td scope="col" class="overflowTxt">{{g.updateUser}}</td>
                     <td scope="col">{{g.updateTime | date:'dd/MM/yyyy HH:mm:ss'}}</td>
 
 
@@ -79,7 +47,7 @@
                             <i class="fas fa-edit"></i>
                         </button>
 
-                        <button type="button" class="btn btn-danger" (click)="deleteGroup(g.id)">
+                        <button type="button" class="btn btn-danger " (click)="deleteGroup(g.id)">
                             <i class="far fa-trash-alt"></i>
                         </button>
                     </td>

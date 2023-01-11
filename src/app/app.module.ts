@@ -6,6 +6,8 @@ import {ReactiveFormsModule} from "@angular/forms";
 import { NgSelectModule } from "@ng-select/ng-select";
 import { DataTablesModule } from "angular-datatables";
 
+
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GroupListComponent } from './group-list/group-list.component';
@@ -16,6 +18,8 @@ import { UserListComponent } from './user-list/user-list.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { UserUpdateComponent } from './user-update/user-update.component';
 import { UserCreateComponent } from './user-create/user-create.component';
+import { TopBarComponent } from './top-bar/top-bar.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -27,7 +31,8 @@ import { UserCreateComponent } from './user-create/user-create.component';
     UserListComponent,
     UserDetailComponent,
     UserUpdateComponent,
-    UserCreateComponent
+    UserCreateComponent,
+    TopBarComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +41,9 @@ import { UserCreateComponent } from './user-create/user-create.component';
     HttpClientModule,
     ReactiveFormsModule,
     NgSelectModule,
-    DataTablesModule
+    DataTablesModule,
+    BrowserAnimationsModule,
+    
     
   ],
   providers: [],

@@ -1,6 +1,14 @@
-.mat-footer-row,
-.mat-header-row,
-.mat-row {
-    display: inline-flex;
-    min-width: 100%;
+.mat-sort-header-container {
+    justify-content: center !important;
+}
+
+table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+td,
+th {
+    text-align: center !important;
+    vertical-align: middle !important;
 }
