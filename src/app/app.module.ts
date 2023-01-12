@@ -5,6 +5,8 @@ import {HttpClientModule} from '@angular/common/http'
 import {ReactiveFormsModule} from "@angular/forms";
 import { NgSelectModule } from "@ng-select/ng-select";
 import { DataTablesModule } from "angular-datatables";
+import {MatButtonModule} from '@angular/material/button';
+
 
 
 
@@ -43,6 +45,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NgSelectModule,
     DataTablesModule,
     BrowserAnimationsModule,
+    MatButtonModule
     
     
   ],

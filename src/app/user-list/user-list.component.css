@@ -1,27 +1,8 @@
-
-/*.mat-sort-header-container {
-    justify-content: center !important;
-}
-
-td,
-th {
-    text-align: center !important;
-    vertical-align: middle !important;
-}
-
-table {
-    width: 100%;
-    table-layout: fixed;
-}*/
-
 .mat-sort-header-container {
     justify-content: center !important;
 }
 
-table {
-    width: 100%;
-    table-layout: fixed;
-}
+
 
 td,
 th {

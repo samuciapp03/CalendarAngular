@@ -110,8 +110,6 @@ export class UserListComponent {
           .subscribe(
             data => {
               console.log(data);
-             
-              
             },
             error => console.log(error));
             location.reload();
