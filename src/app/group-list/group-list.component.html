@@ -27,7 +27,7 @@
                 <tr *ngFor="let g of list">
 
                     <td scope="col">{{g.id}}</td>
-                    <td scope="col" class="overflowTxt">{{g.groupName}}</td>
+                    <td scope="col" class="overflowTxt" [title]="g.groupName">{{g.groupName}}</td>
                     <td scope="col" class="overflowTxt" [title]="g.permissions">{{g.permissions}}</td>
 
                     <td scope="col" class="overflowTxt" [title]="g.roles">{{g.roles}}</td>

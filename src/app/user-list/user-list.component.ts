@@ -110,12 +110,13 @@ export class UserListComponent {
           .subscribe(
             data => {
               console.log(data);
-              this.ngOnInit();
+             
               
             },
             error => console.log(error));
       
     }
+    location.reload();
   }
 
   edit(id:Number) {
