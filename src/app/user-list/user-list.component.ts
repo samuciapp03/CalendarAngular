@@ -114,9 +114,10 @@ export class UserListComponent {
               
             },
             error => console.log(error));
+            location.reload();
       
     }
-    location.reload();
+    
   }
 
   edit(id:Number) {

@@ -135,9 +135,10 @@ deleteGroup(id: number) {
         //this.refresh();
       },
       error => console.log(error));
+      location.reload();
       
     }
-    location.reload();
+   
 }
 
 
