@@ -22,7 +22,7 @@ export class UserUpdateComponent implements OnInit{
     name: '',
     lastName: '',
     groupName: '',
-    groupId: 0,
+    groupId: '',
     lastLogin: new Date,
     dateModifiedPass: new Date,
     creationTime: new Date,

@@ -7,7 +7,7 @@ export interface User{
     name:string,
     lastName:string,
     groupName:string,
-    groupId:number ,
+    groupId:string ,
     lastLogin:Date,
     dateModifiedPass:Date ,
     creationTime:Date,

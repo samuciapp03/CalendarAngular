@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, TitleStrategy } from '@angular/router';
 import { Group } from '../group';
 import { GroupService } from '../group.service';
 import { User } from '../user';
@@ -13,6 +13,7 @@ import { UserService } from '../user.service';
 export class UserCreateComponent implements OnInit {
 
   list :Array<Group>=new Array();
+  selectedGroup = [];
 
 user:User={
   id: 0,
@@ -22,7 +23,7 @@ user:User={
   name: '',
   lastName: '',
   groupName: '',
-  groupId: 0,
+  groupId: '',
   lastLogin: new Date,
   dateModifiedPass: new Date,
   creationTime: new Date,
@@ -70,6 +71,8 @@ user:User={
 
 
   createUser(){
+    this.user.groupId = this.selectedGroup.toString();
+
     this.service.createUser(this.user).subscribe({
       next:(data)=>{
         this.router.navigateByUrl("/users");
