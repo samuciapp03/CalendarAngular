@@ -47,13 +47,13 @@ ngOnInit(): void {
 
   this.service.getAllGroups().subscribe((response)=>{
     console.log("Richesta della lista ricevuta");
-    console.log(response);
+    
 
     let responseList=(response as Array<Group>);
 
     responseList.forEach((g)=>{
 
-      console.log("Id del gruppo: "+g.id);
+     
 
       this.list.push({
         id:g.id,
@@ -92,38 +92,6 @@ groupUpdate(id:number){
   this.router.navigateByUrl("/group-update/"+id);
 }
 
-refresh(){
-  this.service.getAllGroups().subscribe((response)=>{
-    console.log("Richesta della lista ricevuta");
-    console.log(response);
-
-    let responseList=(response as Array<Group>);
-
-    responseList.forEach((g)=>{
-
-      console.log("Id del gruppo: "+g.id);
-
-      this.list.push({
-        id:g.id,
-        groupName:g.groupName,
-        permissions:g.permissions,
-        enabled:g.enabled,
-        creationUser:g.creationUser,
-        creationTime:new Date(g.creationTime),
-        updateUser:g.updateUser,
-        updateTime:new Date(g.updateTime),
-        roles:g.roles
-        
-      });
-    
-
-
-    });
-
-    this.dtTrigger.next(response);
-    
-  });
-}
 
 deleteGroup(id: number) {
   if(confirm("Sei sicuro di voler eliminare il gruppo?")){
@@ -131,8 +99,7 @@ deleteGroup(id: number) {
     .subscribe(
       data => {
         console.log(data);
-        
-        //this.refresh();
+
       },
       error => console.log(error));
       location.reload();
