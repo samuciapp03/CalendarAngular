@@ -40,12 +40,16 @@
       <div class="mb-3">
         <label for="username" class="form-label">Username *</label>
         <input type="text" name="username" [(ngModel)] = "user.username" class="form-control" id="username" placeholder="Inserire username"  
-        required minlength="1" #username="ngModel" />
+        required minlength="1" #username="ngModel" (change)="checkUsername()"/>
+      </div>
+
+      <div *ngIf="warningString" class="alert alert-danger">      
+          {{warningString}}  
       </div>
 
       <div *ngIf="username.invalid && (username.dirty || username.touched)" class="alert alert-danger">
-        <div *ngIf="username.errors?.['required']">
-            Inserire l'username.
+        <div *ngIf="username.errors?.['required']">      
+            Inserire l'username. 
           </div>
       </div>
 
@@ -93,6 +97,6 @@
     </form>
   
   
-      <button type="button" (click)="createUser()" class="btn btn-primary" [disabled]="creationUser.invalid || email.invalid || lastName.invalid || name.invalid || password.invalid || username.invalid">Crea</button>
+      <button type="button" (click)="createUser()" class="btn btn-primary" [disabled]="creationUser.invalid || email.invalid || lastName.invalid || name.invalid || password.invalid || username.invalid || warningString != '' ">Crea</button>
     
   </div>

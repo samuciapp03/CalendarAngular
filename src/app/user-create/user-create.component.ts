@@ -12,6 +12,7 @@ import { UserService } from '../user.service';
 })
 export class UserCreateComponent implements OnInit {
 
+  warningString: string = '';
   list :Array<Group>=new Array();
   selectedGroup = [];
 
@@ -69,18 +70,40 @@ user:User={
     
   }
 
+  checkUsername() {
+    this.warningString = '';
+    console.log(this.user.username);
+    this.service.usernameAviable(this.user.username, () => {this.warningString = 'Username in uso.'});
+    
+  }
+
 
   createUser(){
-    this.user.groupId = this.selectedGroup.toString();
 
-    this.service.createUser(this.user).subscribe({
-      next:(data)=>{
-        this.router.navigateByUrl("/users");
-      }, 
-      error:(err)=>{
-        console.log(err);
-      }
-    })
+      this.warningString=''
+      console.log('username exists');
+
+      this.user.groupId = this.selectedGroup.toString();
+
+      this.service.createUser(this.user).subscribe({
+        next:(data)=>{
+          this.router.navigateByUrl("/users");
+        }, 
+        error:(err)=>{
+          console.log(err);
+        }
+      })
+    
+    
+
+      this.warningString = 'Username già in uso.'
+    
+
+
+
+
+
+
 
   }
 
