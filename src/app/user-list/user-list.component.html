@@ -56,16 +56,16 @@
 
                 <tr *ngFor="let user of list">
                     <td scope="col">{{user.id}}</td>
-                    <td scope="col" class="overflowTxt">{{user.name}}</td>
-                    <td scope="col" class="overflowTxt"> {{user.lastName}}</td>
-                    <td scope="col" class="overflowTxt">{{user.email}}</td>
-                    <td scope="col" class="overflowTxt">{{user.username}}</td>
+                    <td scope="col" class="overflowTxt" [title]="user.name">{{user.name}}</td>
+                    <td scope="col" class="overflowTxt" [title]="user.lastName"> {{user.lastName}}</td>
+                    <td scope="col" class="overflowTxt" [title]="user.email">{{user.email}}</td>
+                    <td scope="col" class="overflowTxt" [title]="user.username">{{user.username}}</td>
                     <td scope="col">{{user.password}}</td>
                     <!--  
                     <td scope="col">{{user.lastLogin + 'UTC' | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
                     <td scope="col">{{user.dateModifiedPass + 'UTC' | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
                     -->
-                    <td scope="col">{{user.groupName}}</td>
+                    <td scope="col" class="overflowTxt" [title]="user.groupName">{{user.groupName}}</td>
                     <td scope="col">{{user.verified}}</td>
                     <td scope="col">{{user.deleted}}</td>
 
