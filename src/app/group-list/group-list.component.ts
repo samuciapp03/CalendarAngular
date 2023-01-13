@@ -1,21 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Group } from '../group';
 import { GroupService } from '../group.service';
 import { Subject } from 'rxjs';
+import { DataTableDirective } from 'angular-datatables';
 
 @Component({
   selector: 'app-group-list',
   templateUrl: './group-list.component.html',
   styleUrls: ['./group-list.component.css']
 })
-export class GroupListComponent implements OnInit {
+export class GroupListComponent implements OnInit{
+  @ViewChild(DataTableDirective, { static: false })
+  dtElement!: DataTableDirective;
 
   list: Array<Group> = new Array();
+ 
 
   dtTrigger: Subject<any> = new Subject();
-
+  
   dtOptions: any = {
     columns: [
       { data: 'id' },
@@ -45,13 +49,25 @@ export class GroupListComponent implements OnInit {
 
   ngOnInit(): void {
 
-this.refreshList(true);
+    this.refreshList(true);
 
+  
+  }
 
+  restartTable(){
+
+    this.dtElement.dtInstance.then((dtInstance:DataTables.Api)=>{
+      dtInstance.destroy();
+
+      this.service.getAllGroups().subscribe((response) => {
+        this.dtTrigger.next(response);
+      });
+      
+    });
 
   }
 
-  refreshList(trigger: boolean) {
+  refreshList(trigger:boolean) {
     this.service.getAllGroups().subscribe((response) => {
       console.log("Richesta della lista ricevuta");
 
@@ -64,8 +80,6 @@ this.refreshList(true);
 
       responseList.forEach((g) => {
 
-
-
         this.list.push({
           id: g.id,
           groupName: g.groupName,
@@ -77,17 +91,20 @@ this.refreshList(true);
           updateTime: new Date(g.updateTime),
           roles: g.roles
 
+
         });
 
-
+       
       });
 
       console.log('lista dopo push ' + this.list.length);
 
-      if (trigger) {
-        this.dtTrigger.next(response);
-      }
-
+         if (trigger) {
+          this.dtTrigger.next(response);
+        }else{
+        this.restartTable();
+        }
+     
     });
 
   }
@@ -113,14 +130,15 @@ this.refreshList(true);
 
           next: (data) => {
             console.log("Data:", data);
-
+        
             this.refreshList(false);
-
+           
+ 
           },
           error: error => {
-            console.log(error); 
+            console.log(error);
           }
-      });      
+        });
 
     }
 

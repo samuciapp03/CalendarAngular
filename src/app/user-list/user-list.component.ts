@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ADTSettings } from 'angular-datatables/src/models/settings';
+import { DataTableDirective } from 'angular-datatables';
 
 import { Subject } from 'rxjs';
 import { User } from '../user';
@@ -12,8 +13,11 @@ import { UserService } from '../user.service';
   styleUrls: ['./user-list.component.css']
 })
 export class UserListComponent {
+  @ViewChild(DataTableDirective, { static: false })
+  dtElement!: DataTableDirective;
 
   dtTrigger: Subject<any> = new Subject();
+
 
   dtOptions: any = {
     columns: [
@@ -45,19 +49,21 @@ export class UserListComponent {
 
   ngOnInit(): void {
 
-    // this.userService.getAllUsers().subscribe(data => {
-
-
-    //   this.list = data;
-    //   this.dtTrigger.next(data);
-
-    //   console.log(data);
-    //   console.log(this.dtOptions)
-
-    // });
-
     this.refreshList(true);
 
+
+  }
+
+  restartTable(){
+
+    this.dtElement.dtInstance.then((dtInstance:DataTables.Api)=>{
+      dtInstance.destroy();
+
+      this.userService.getAllUsers().subscribe((response) => {
+        this.dtTrigger.next(response);
+      });
+      
+    });
 
   }
 
@@ -98,7 +104,10 @@ export class UserListComponent {
       });
       if (trigger) {
         this.dtTrigger.next(response);
+      }else{
+        this.restartTable();
       }
+
 
 
     });
@@ -123,6 +132,7 @@ export class UserListComponent {
 
           next: (data) => {
             console.log(data);
+          
             this.refreshList(false);
           },
 
