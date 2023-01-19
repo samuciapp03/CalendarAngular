@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ADTSettings } from 'angular-datatables/src/models/settings';
+import { DataTableDirective } from 'angular-datatables';
 
 import { Subject } from 'rxjs';
 import { User } from '../user';
@@ -12,8 +13,11 @@ import { UserService } from '../user.service';
   styleUrls: ['./user-list.component.css']
 })
 export class UserListComponent {
+  @ViewChild(DataTableDirective, { static: false })
+  dtElement!: DataTableDirective;
 
   dtTrigger: Subject<any> = new Subject();
+
 
   dtOptions: any = {
     columns: [
@@ -24,7 +28,7 @@ export class UserListComponent {
       { data: 'username' },
       { data: 'password' },
       { data: 'lastLogin' },
-      { data: 'dateModifiedPass'},
+      { data: 'dateModifiedPass' },
       { data: 'groupName' },
       { data: 'verified' },
       { data: 'deleted' },
@@ -38,34 +42,45 @@ export class UserListComponent {
   };
 
   list: Array<User> = new Array();
-  
-  constructor(private route: ActivatedRoute, private router: Router,  private userService:UserService) {
-    
+
+  constructor(private route: ActivatedRoute, private router: Router, private userService: UserService) {
+
   }
 
   ngOnInit(): void {
 
-    // this.userService.getAllUsers().subscribe(data => {
-      
-      
-    //   this.list = data;
-    //   this.dtTrigger.next(data);
+    this.refreshList(true);
 
-    //   console.log(data);
-    //   console.log(this.dtOptions)
+
+  }
+
+  restartTable(){
+
+    this.dtElement.dtInstance.then((dtInstance:DataTables.Api)=>{
+      dtInstance.destroy();
+
+      this.userService.getAllUsers().subscribe((response) => {
+        this.dtTrigger.next(response);
+      });
       
-    // });
-    
+    });
+
+  }
+
+  refreshList(trigger: boolean) {
+
     this.userService.getAllUsers().subscribe((response) => {
-      
+
       console.log(response)
 
       let responseList = (response as Array<User>);
 
+      this.list.splice(0);
+
       responseList.forEach((u) => {
-        
+
         this.list.push({
-      
+
           id: u.id,
           username: u.username,
           password: u.password,
@@ -78,16 +93,22 @@ export class UserListComponent {
           deleted: u.deleted,
           verified: u.verified,
           groupId: u.groupId,
-          creationTime:u.creationTime,
-          creationUser:u.creationUser,
-          updateUser:u.updateUser,
-          updateTime:new Date(u.updateTime)
-          
+          creationTime: u.creationTime,
+          creationUser: u.creationUser,
+          updateUser: u.updateUser,
+          updateTime: new Date(u.updateTime)
+
         });
-        
+
 
       });
-      this.dtTrigger.next(response);
+      if (trigger) {
+        this.dtTrigger.next(response);
+      }else{
+        this.restartTable();
+      }
+
+
 
     });
 
@@ -103,24 +124,28 @@ export class UserListComponent {
     this.router.navigateByUrl("/user-detail/" + id);
   }
 
-  deleteUser(id:number){
-    if(confirm("Sei sicuro di voler eliminare l'utente?")){
-      
-        this.userService.deleteUser(id)
-          .subscribe(
-            data => {
-              console.log(data);
-            },
-            error => console.log(error));
-            location.reload();
-      
-    }
-    
+  deleteUser(id: number) {
+    if (confirm("Sei sicuro di voler eliminare l'utente?")) {
+
+      this.userService.deleteUser(id)
+        .subscribe({
+
+          next: (data) => {
+            console.log(data);
+          
+            this.refreshList(false);
+          },
+
+          error: (error) => {console.log(error)}
+    });
+
   }
 
-  edit(id:Number) {
-    this.router.navigateByUrl("/user-update/"+id);
-  }
+}
+
+edit(id: Number) {
+  this.router.navigateByUrl("/user-update/" + id);
+}
 
 
 }

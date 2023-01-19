@@ -2,26 +2,3 @@
 @import "~@ng-select/ng-select/themes/default.theme.css";
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
-
-
-.mat-sort-header-container {
-    justify-content: center !important;
-}
-
-
-.overflowTxt{
-    overflow: hidden;
-    width: auto;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-   
-}
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
-
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

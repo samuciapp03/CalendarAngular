@@ -14,3 +14,13 @@ th {
     text-align: center !important;
     vertical-align: middle !important;
 }
+
+
+
+.overflowTxt{
+    overflow: hidden;
+    width: auto;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+   
+}
