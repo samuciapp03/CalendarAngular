@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { data } from 'jquery';
 import { Group } from '../group';
 import { GroupService } from '../group.service';
 
@@ -10,6 +9,8 @@ import { GroupService } from '../group.service';
   styleUrls: ['./group-update.component.css']
 })
 export class GroupUpdateComponent implements OnInit {
+
+  warningString: string = '';
 
   id!:number;
   group: Group = {
@@ -79,6 +80,10 @@ export class GroupUpdateComponent implements OnInit {
     });
   }
 
+  checkGroupname() {
+    this.warningString = '';
+    this.service.groupAviable(this.group.groupName, () => {this.warningString = 'Nome del gruppo già esistente.'})
+  }
 
 
 

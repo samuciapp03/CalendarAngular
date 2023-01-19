@@ -12,7 +12,8 @@ import { UserService } from '../user.service';
 })
 export class UserCreateComponent implements OnInit {
 
-  warningString: string = '';
+  usernameString: string = '';
+  emailString: string = '';
   list :Array<Group>=new Array();
   selectedGroup = [];
 
@@ -41,8 +42,6 @@ user:User={
 
   ngOnInit(): void {
     this.groupService.getAllGroups().subscribe((response)=>{
-      console.log("Richesta della lista ricevuta");
-      console.log(response);
   
       let responseList=(response as Array<Group>);
   
@@ -71,17 +70,19 @@ user:User={
   }
 
   checkUsername() {
-    this.warningString = '';
-    console.log(this.user.username);
-    this.service.usernameAviable(this.user.username, () => {this.warningString = 'Username in uso.'});
+    this.usernameString = '';
+    this.service.valueAviable(this.user.username, () => {this.usernameString = 'Username in uso.'}); 
     
+    
+  }
+
+  checkEmail() {
+    this.emailString = '';
+    this.service.valueAviable(this.user.email, () => {this.emailString = 'Email in uso.'});
   }
 
 
   createUser(){
-
-      this.warningString=''
-      console.log('username exists');
 
       this.user.groupId = this.selectedGroup.toString();
 
@@ -94,18 +95,7 @@ user:User={
         }
       })
     
-    
-
-      this.warningString = 'Username già in uso.'
-    
-
-
-
-
-
-
-
-  }
+    }
 
 
 }

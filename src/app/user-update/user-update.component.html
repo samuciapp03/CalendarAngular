@@ -28,26 +28,34 @@
 
       <div class="mb-3">
         <label for="email" class="form-label">Email</label>
-        <input type="email" name="email" [(ngModel)] = "user.email" class="form-control" id="email" placeholder="Inserire email" value="user.email"   
-        required minlength="1" #email="ngModel"/>
+        <input type="email" name="email" [(ngModel)] = "user.email" class="form-control" id="email" placeholder="Inserire email" value="user.email" email="true"
+        required minlength="1" #email="ngModel" (change)="checkEmail()"/>
       </div>
 
-      <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
-        <div *ngIf="email.errors?.['required']">
-            Inserire l'email dell'utente.
+      <div *ngIf="emailString" class="alert alert-danger">      
+        {{emailString}}  
+      </div>
+
+      <div *ngIf="  email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+        <div *ngIf="email.errors?.['required'] || email.errors">
+            Inserire un'email valida.
           </div>
       </div>
 
       <div class="mb-3">
         <label for="username" class="form-label">Username</label>
         <input type="text" name="username" [(ngModel)] = "user.username" class="form-control" id="username" placeholder="Inserire username" value="user.username"  
-        required minlength="1" #username="ngModel"/>
+        required minlength="1" #username="ngModel" (change)="checkUsername()"/>
       </div>
 
       <div *ngIf="username.invalid && (username.dirty || username.touched)" class="alert alert-danger">
         <div *ngIf="username.errors?.['required']">
             Inserire l'username.
           </div>
+      </div>
+
+      <div *ngIf="usernameString" class="alert alert-danger">      
+        {{usernameString}}  
       </div>
 
       <div class="mb-3">
@@ -97,7 +105,7 @@
 
     </form>
   
-    <button type="button" (click)="updateUser()" class="btn btn-primary" [disabled]="email.invalid || name.invalid || groups.invalid || lastName.invalid || password.invalid || username.invalid">Aggiorna</button>
+    <button type="button" (click)="updateUser()" class="btn btn-primary" [disabled]="email.invalid || name.invalid || groups.invalid || lastName.invalid || password.invalid || username.invalid || emailString != '' || usernameString != ''">Aggiorna</button>
     
   </div>
 

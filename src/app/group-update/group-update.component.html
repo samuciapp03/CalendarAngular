@@ -1,11 +1,15 @@
 
 <div class="container" style="width: 75%;">
-    <legend>Crea Gruppo</legend>
+    <legend>Aggiorna Gruppo</legend>
     <form>
       <div class="mb-3">
         <label for="groupName" class="form-label">Nome gruppo</label>
         <input type="text" name="groupName" [(ngModel)] = "group.groupName" class="form-control" id="groupName" placeholder="Inserire nome del gruppo" value="group.groupName" 
-        required minlength="1" #name="ngModel"/>
+        required minlength="1" #name="ngModel" (change)="checkGroupname()"/>
+      </div>
+
+      <div *ngIf="warningString" class="alert alert-danger">      
+        {{warningString}}  
       </div>
 
       <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
@@ -53,6 +57,6 @@
       </div>
   
   
-      <button type="button" (click)="updateGroup()" class="btn btn-primary" [disabled]="name.invalid || permissions.invalid || roles.invalid">Aggiorna</button>
+      <button type="button" (click)="updateGroup()" class="btn btn-primary" [disabled]="name.invalid || permissions.invalid || roles.invalid || warningString != '' ">Aggiorna</button>
     </form>
   </div>

@@ -5,7 +5,11 @@
       <label for="groupName" class="form-label">Nome gruppo *</label>
 
       <input type="text" name="groupName" [(ngModel)] = "groupForm.groupName" class="form-control" id="groupName" placeholder="Inserire nome del gruppo"  
-      required minlength="1" #name="ngModel" />     
+      required minlength="1" #name="ngModel" (change)="checkGroupname()"/>     
+    </div>
+
+    <div *ngIf="warningString" class="alert alert-danger">      
+      {{warningString}}  
     </div>
 
     <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
@@ -59,6 +63,6 @@
     </div>
 
 
-    <button type="button" (click)="createGroup()" class="btn btn-primary" [disabled]="creationUser.invalid || name.invalid || permissions.invalid || roles.invalid">Crea</button>
+    <button type="button" (click)="createGroup()" class="btn btn-primary" [disabled]="creationUser.invalid || name.invalid || permissions.invalid || roles.invalid || warningString != '' ">Crea</button>
   </form>
 </div>

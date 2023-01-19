@@ -11,6 +11,8 @@ import { GroupService } from '../group.service';
 })
 export class GroupCreateComponent implements OnInit {
 
+  warningString: string = '';
+
   groupForm: Group = {
     id: 0,
     groupName: '',
@@ -68,6 +70,11 @@ export class GroupCreateComponent implements OnInit {
       }
     });
 
+  }
+
+  checkGroupname() {
+    this.warningString = '';
+    this.groupService.groupAviable(this.groupForm.groupName, () => {this.warningString = 'Nome del gruppo già esistente.'})
   }
 
 

@@ -45,9 +45,9 @@ export class UserService {
     return this.httpClient.delete('http://localhost:8080/api/users/'+id);
   }
 
-  usernameAviable(username:string, callbackAviable: () => void){
+  valueAviable(value:string, callbackAviable: () => void){
 
-    this.httpClient.get('http://localhost:8080/api/users?username='+username).subscribe((response:any) => {
+    this.httpClient.get('http://localhost:8080/api/users?value='+value).subscribe((response:any) => {
       console.log(response['exists']);
 
       if(response['exists'] == 'true'){

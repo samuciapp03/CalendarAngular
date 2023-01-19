@@ -12,6 +12,8 @@ import { UserService } from '../user.service';
 })
 export class UserUpdateComponent implements OnInit{
 
+  usernameString: string = '';
+  emailString: string = '';
   list :Array<Group>=new Array();
   id!:number;
   user:User={
@@ -72,12 +74,17 @@ export class UserUpdateComponent implements OnInit{
   
     });
 
-
-
-
-    
   }
 
+  checkUsername() {
+    this.usernameString = '';
+    this.service.valueAviable(this.user.username, () => {this.usernameString = 'Username in uso.'});  
+  }
+
+  checkEmail() {
+    this.emailString = '';
+    this.service.valueAviable(this.user.email, () => {this.emailString = 'Email in uso.'});
+  }
 
   getUserById(id:number){
     this.service.getUserById(id).subscribe((data)=>{

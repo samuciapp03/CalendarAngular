@@ -27,13 +27,17 @@
 
       <div class="mb-3">
         <label for="email" class="form-label">Email *</label>
-        <input type="email" name="email" [(ngModel)] = "user.email" class="form-control" id="email" placeholder="Inserire email" 
-        required minlength="1" #email="ngModel" />
+        <input type="email" name="email" [(ngModel)] = "user.email" class="form-control" id="email" placeholder="Inserire email" email="true"
+        required minlength="1" #email="ngModel" (change)="checkEmail()"/>
       </div>
 
-      <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
-        <div *ngIf="email.errors?.['required']">
-            Inserire l'email.
+      <div *ngIf="emailString" class="alert alert-danger">      
+        {{emailString}}  
+      </div>
+
+      <div *ngIf="  email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+        <div *ngIf="email.errors?.['required'] || email.errors">
+            Inserire un'email valida.
           </div>
       </div>
 
@@ -43,8 +47,8 @@
         required minlength="1" #username="ngModel" (change)="checkUsername()"/>
       </div>
 
-      <div *ngIf="warningString" class="alert alert-danger">      
-          {{warningString}}  
+      <div *ngIf="usernameString" class="alert alert-danger">      
+          {{usernameString}}  
       </div>
 
       <div *ngIf="username.invalid && (username.dirty || username.touched)" class="alert alert-danger">
@@ -97,6 +101,6 @@
     </form>
   
   
-      <button type="button" (click)="createUser()" class="btn btn-primary" [disabled]="creationUser.invalid || email.invalid || lastName.invalid || name.invalid || password.invalid || username.invalid || warningString != '' ">Crea</button>
+      <button type="button" (click)="createUser()" class="btn btn-primary" [disabled]="creationUser.invalid || email.invalid || lastName.invalid || name.invalid || password.invalid || username.invalid || emailString != '' || usernameString != ''">Crea</button>
     
   </div>

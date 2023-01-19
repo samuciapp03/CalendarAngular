@@ -38,10 +38,24 @@ udpateGroup(group:Group):Observable<Object>{
   return this.httpClient.put('http://localhost:8080/api/groups/'+group.id, group);
 }
 
-  deleteGroup(id: number):Observable<Object> {
-    return this.httpClient.delete('http://localhost:8080/api/groups/' + id);
-  }
+deleteGroup(id: number):Observable<Object> {
+  return this.httpClient.delete('http://localhost:8080/api/groups/' + id);
+}
 
+
+groupAviable(value:string, callbackAviable: () => void){
+
+  this.httpClient.get('http://localhost:8080/api/groups?groupname='+value).subscribe((response:any) => {
+    console.log(response['exists']);
+
+    if(response['exists'] == 'true'){
+      console.log('richiamo la funzione di callback')
+      callbackAviable();
+    }
+    
+  });
+  
+}
 
 
 
