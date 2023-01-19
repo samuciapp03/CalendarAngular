@@ -1,22 +1,47 @@
 
 <div class="container" style="width: 75%;">
-    <legend>Crea Gruppo</legend>
+    <legend>Aggiorna Gruppo</legend>
     <form>
       <div class="mb-3">
         <label for="groupName" class="form-label">Nome gruppo</label>
-        <input type="text" name="groupName" [(ngModel)] = "group.groupName" class="form-control" id="groupName" placeholder="Inserire nome del gruppo" value="group.groupName" />
+        <input type="text" name="groupName" [(ngModel)] = "group.groupName" class="form-control" id="groupName" placeholder="Inserire nome del gruppo" value="group.groupName" 
+        required minlength="1" #name="ngModel" (change)="checkGroupname()"/>
       </div>
+
+      <div *ngIf="warningString" class="alert alert-danger">      
+        {{warningString}}  
+      </div>
+
+      <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+        <div *ngIf="name.errors?.['required']">
+            Inserire il nome del gruppo.
+          </div>
+      </div>
+
       <div class="mb-3">
         <label for="permissions" class="form-label">Permessi</label>
-        <input type="text" name="permissions" [(ngModel)] = "group.permissions" class="form-control" id="permissions" placeholder="Inserire permessi del gruppo" value="group.permissions" />
+        <input type="text" name="permissions" [(ngModel)] = "group.permissions" class="form-control" id="permissions" placeholder="Inserire permessi del gruppo" value="group.permissions" 
+        required minlength="1" #permissions="ngModel"/>
       </div>
   
+      <div *ngIf="permissions.invalid && (permissions.dirty || permissions.touched)" class="alert alert-danger">
+        <div *ngIf="permissions.errors?.['required']">
+            Inserire i permessi
+          </div>
+      </div>
     </form>
   
     <p>Seleziona Ruoli</p>
-    <ng-select [multiple]="true" [(ngModel)]="group.roles"  placeholder="Selezionare i ruoli">
+    <ng-select [multiple]="true" [(ngModel)]="group.roles"  placeholder="Selezionare i ruoli" required minlength="1" #roles="ngModel">
       <ng-option *ngFor="let role of rolesSelect" [value]="role.name">{{role.name}}</ng-option>   
     </ng-select>
+    <br />
+
+    <div *ngIf="roles.invalid && (roles.dirty || roles.touched)" class="alert alert-danger">
+      <div *ngIf="roles.errors?.['required']">
+          Inserire almeno un permesso.
+        </div>
+    </div>
   
   
   <form>
@@ -25,10 +50,6 @@
         <input type="checkbox" name="enabled" [(ngModel)] = "group.enabled" id="enabled" value="group.enabled" />
       </div>
   
-      <div class="mb-3">
-        <label for="creationUser" class="form-label">User Creazione</label>
-        <input type="text" name="creationUser" [(ngModel)] = "group.creationUser" class="form-control" id="creationUser" placeholder="Inserire user creazione del gruppo " value="group.creationUser" />
-      </div>
 
       <div class="mb-3">
         <label for="updateUser" class="form-label">User Aggiornamento</label>
@@ -36,6 +57,6 @@
       </div>
   
   
-      <button type="button" (click)="updateGroup()" class="btn btn-primary">Aggiorna</button>
+      <button type="button" (click)="updateGroup()" class="btn btn-primary" [disabled]="name.invalid || permissions.invalid || roles.invalid || warningString != '' ">Aggiorna</button>
     </form>
   </div>

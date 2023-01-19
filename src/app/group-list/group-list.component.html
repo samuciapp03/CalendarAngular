@@ -25,7 +25,7 @@
                     <th scope="col" scope="col" class="align-text-top">Permessi</th>
                     <th scope="col" scope="col" class="align-text-top">Ruoli</th>
                     <th scope="col" scope="col" class="align-text-top">Attivo</th>
-
+                    <th scope="col" scope="col" class="align-text-top">Quantita utenti</th>
                     <th scope="col" scope="col" class="align-text-top">Utente Creazione</th>
                     <!--  
                     <th scope="col" scope="col" class="align-text-top">Data Creazione</th>
@@ -43,8 +43,8 @@
                     <td scope="col">{{g.id}}</td>
                     <td scope="col" class="overflowTxt" [title]="g.groupName">{{g.groupName}}</td>
                     <td scope="col" class="overflowTxt" [title]="g.permissions">{{g.permissions}}</td>
-
                     <td scope="col" class="overflowTxt" [title]="g.roles">{{g.roles}}</td>
+                    <td scope="col" class="overflowTxt" [title]="userCount" >{{g.userNumber}}</td>
 
 
                     <td scope="col" *ngIf="g.enabled; else elseBlock"><svg xmlns="http://www.w3.org/2000/svg"
@@ -64,15 +64,8 @@
                     </td>
                 </ng-template>
 
-
-
                     <td scope="col" class="overflowTxt">{{g.creationUser}}</td>
-                    <!--
-                    <td scope="col">{{g.creationTime | date:'dd/MM/yyyy HH:mm:ss'}}</td>
-                   
-                    <td scope="col" class="overflowTxt">{{g.updateUser}}</td>
-                    <td scope="col">{{g.updateTime | date:'dd/MM/yyyy HH:mm:ss'}}</td>
--->
+
 
                     <td>
 

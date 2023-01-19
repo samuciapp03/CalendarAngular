@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, throwIfEmpty } from 'rxjs';
 import { User } from './user';
 
 @Injectable({
@@ -43,6 +43,20 @@ export class UserService {
 
   deleteUser(id:number){
     return this.httpClient.delete('http://localhost:8080/api/users/'+id);
+  }
+
+  valueAviable(value:string, callbackAviable: () => void){
+
+    this.httpClient.get('http://localhost:8080/api/users?value='+value).subscribe((response:any) => {
+      console.log(response['exists']);
+
+      if(response['exists'] == 'true'){
+        console.log('richiamo la funzione di callback')
+        callbackAviable();
+      }
+      
+    });
+    
   }
 
 

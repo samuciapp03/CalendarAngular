@@ -11,6 +11,8 @@ import { GroupService } from '../group.service';
 })
 export class GroupCreateComponent implements OnInit {
 
+  warningString: string = '';
+
   groupForm: Group = {
     id: 0,
     groupName: '',
@@ -20,7 +22,8 @@ export class GroupCreateComponent implements OnInit {
     roles: [],
     creationTime: new Date(),
     updateUser: '',
-    updateTime: new Date()
+    updateTime: new Date(),
+    userNumber:0
   }
 
   constructor(private router: Router, private groupService: GroupService, private service: GroupService) {
@@ -68,6 +71,11 @@ export class GroupCreateComponent implements OnInit {
       }
     });
 
+  }
+
+  checkGroupname() {
+    this.warningString = '';
+    this.groupService.groupAviable(this.groupForm.groupName, () => {this.warningString = 'Nome del gruppo già esistente.'})
   }
 
 

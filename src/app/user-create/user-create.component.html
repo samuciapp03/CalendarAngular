@@ -2,33 +2,76 @@
     <legend>Crea Utente</legend>
     <form>
       <div class="mb-3">
-        <label for="groupName" class="form-label">Nome Utente</label>
-        <input type="text" name="name" [(ngModel)] = "user.name" class="form-control" placeholder="Inserire nome dell'utente" id="Name" />
+        <label for="userName" class="form-label">Nome Utente *</label>
+        <input type="text" name="name" [(ngModel)] = "user.name" class="form-control" placeholder="Inserire nome dell'utente" id="Name" 
+        required minlength="1" #name="ngModel" />
       </div>
-      <div class="mb-3">
-        <label for="lastName" class="form-label">Cognome</label>
-        <input type="text" name="lastName" [(ngModel)] = "user.lastName" class="form-control" id="lastName" placeholder="Inserire cognome"  />
+
+      <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+        <div *ngIf="name.errors?.['required']">
+            Inserire il nome dell'utente.
+          </div>
       </div>
 
       <div class="mb-3">
-        <label for="email" class="form-label">Email</label>
-        <input type="email" name="email" [(ngModel)] = "user.email" class="form-control" id="email" placeholder="Inserire email"  />
+        <label for="lastName" class="form-label">Cognome *</label>
+        <input type="text" name="lastName" [(ngModel)] = "user.lastName" class="form-control" id="lastName" placeholder="Inserire cognome" 
+        required minlength="1" #lastName="ngModel" />
+      </div>
+
+      <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="alert alert-danger">
+        <div *ngIf="lastName.errors?.['required']">
+            Inserire il cognome dell'utente
+          </div>
       </div>
 
       <div class="mb-3">
-        <label for="username" class="form-label">Username</label>
-        <input type="text" name="username" [(ngModel)] = "user.username" class="form-control" id="username" placeholder="Inserire username"  />
+        <label for="email" class="form-label">Email *</label>
+        <input type="email" name="email" [(ngModel)] = "user.email" class="form-control" id="email" placeholder="Inserire email" email="true"
+        required minlength="1" #email="ngModel" (change)="checkEmail()"/>
+      </div>
+
+      <div *ngIf="emailString" class="alert alert-danger">      
+        {{emailString}}  
+      </div>
+
+      <div *ngIf="  email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+        <div *ngIf="email.errors?.['required'] || email.errors">
+            Inserire un'email valida.
+          </div>
       </div>
 
       <div class="mb-3">
-        <label for="password" class="form-label">Password</label>
-        <input type="text" name="password" [(ngModel)] = "user.password" class="form-control" id="password" placeholder="Inserire password"  />
+        <label for="username" class="form-label">Username *</label>
+        <input type="text" name="username" [(ngModel)] = "user.username" class="form-control" id="username" placeholder="Inserire username"  
+        required minlength="1" #username="ngModel" (change)="checkUsername()"/>
+      </div>
+
+      <div *ngIf="usernameString" class="alert alert-danger">      
+          {{usernameString}}  
+      </div>
+
+      <div *ngIf="username.invalid && (username.dirty || username.touched)" class="alert alert-danger">
+        <div *ngIf="username.errors?.['required']">      
+            Inserire l'username. 
+          </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="password" class="form-label">Password *</label>
+        <input type="text" name="password" [(ngModel)] = "user.password" class="form-control" id="password" placeholder="Inserire password" 
+        required minlength="1" #password="ngModel" />
       </div>
   
+      <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
+        <div *ngIf="password.errors?.['required']">
+            Inserire l'username.
+          </div>
+      </div>
     </form>
   
-    <p>Seleziona Il Grouppo di Appartenenza</p>
-    <ng-select [multiple]="false" [(ngModel)]="user.groupId" placeholder="Selezionare il gruppo di appartenenza" >
+    <p>Seleziona il gruppo di appartenenza</p>
+    <ng-select [multiple]="false" [(ngModel)]="selectedGroup" placeholder="Selezionare il gruppo di appartenenza" >
       <ng-option *ngFor="let group of list" [value]="group.id" >{{group.groupName}}</ng-option>   
     </ng-select>
   
@@ -45,14 +88,19 @@
           </div>
 
           <div class="mb-3">
-            <label for="creationUser" class="form-label">Utente creazione</label>
-            <input type="text" name="creationUser" [(ngModel)] = "user.creationUser" class="form-control" id="creationUser" placeholder="Inserire utente creazione"  />
+            <label for="creationUser" class="form-label">Utente creazione *</label>
+            <input type="text" name="creationUser" [(ngModel)] = "user.creationUser" class="form-control" id="creationUser" placeholder="Inserire utente creazione"  
+            required minlength="1" #creationUser="ngModel" />
           </div>
 
-
+          <div *ngIf="creationUser.invalid && (creationUser.dirty || creationUser.touched)" class="alert alert-danger">
+            <div *ngIf="creationUser.errors?.['required']">
+                Inserire l'utente di creazione.
+              </div>
+          </div>
     </form>
   
   
-      <button type="button" (click)="createUser()" class="btn btn-primary">Crea</button>
+      <button type="button" (click)="createUser()" class="btn btn-primary" [disabled]="creationUser.invalid || email.invalid || lastName.invalid || name.invalid || password.invalid || username.invalid || emailString != '' || usernameString != ''">Crea</button>
     
   </div>

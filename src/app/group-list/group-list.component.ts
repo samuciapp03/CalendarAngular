@@ -7,142 +7,150 @@ import { Subject } from 'rxjs';
 import { DataTableDirective } from 'angular-datatables';
 
 @Component({
-  selector: 'app-group-list',
-  templateUrl: './group-list.component.html',
-  styleUrls: ['./group-list.component.css']
+  selector: 'app-group-list',
+  templateUrl: './group-list.component.html',
+  styleUrls: ['./group-list.component.css']
 })
 export class GroupListComponent implements OnInit{
-  @ViewChild(DataTableDirective, { static: false })
-  dtElement!: DataTableDirective;
+  @ViewChild(DataTableDirective, { static: false })
+  dtElement!: DataTableDirective;
 
-  list: Array<Group> = new Array();
- 
+  userCount:number = 0;
+  list: Array<Group> = new Array();
 
-  dtTrigger: Subject<any> = new Subject();
-  
-  dtOptions: any = {
-    columns: [
-      { data: 'id' },
-      { data: 'groupName' },
-      { data: 'permissions' },
-      { data: 'roles' },
-      { data: 'enabled' },
-      { data: 'creationUser' },
-      { data: 'creationTime' },
-      { data: 'updateUser' },
-      { data: 'updateTime' },
-      {
-        title: 'Action',
-        render: function (data: any, type: any, full: any) {
-          return 'View';
-        }
-      }
-    ]
-  };
+  
 
-
-
-  constructor(private actRoute: ActivatedRoute, private router: Router, private service: GroupService) {
-
-  }
+  dtTrigger: Subject<any> = new Subject();
+  
+  dtOptions: any = {
+    columns: [
+      { data: 'id' },
+      { data: 'groupName' },
+      { data: 'permissions' },
+      { data: 'roles' },
+      { data: 'enabled' },
+      { data: 'creationUser' },
+      { data: 'creationTime' },
+      { data: 'updateUser' },
+      { data: 'updateTime' },
+      {
+        title: 'Action',
+        render: function (data: any, type: any, full: any) {
+          return 'View';
+        }
+      }
+    ]
+  };
 
 
-  ngOnInit(): void {
 
-    this.refreshList(true);
+  constructor(private actRoute: ActivatedRoute, private router: Router, private service: GroupService) {
 
-  
-  }
+  }
 
-  restartTable(){
 
-    this.dtElement.dtInstance.then((dtInstance:DataTables.Api)=>{
-      dtInstance.destroy();
+  ngOnInit(): void {
 
-      this.service.getAllGroups().subscribe((response) => {
-        this.dtTrigger.next(response);
-      });
+    this.refreshList(true);
+
+  
+  }
+
+  restartTable(){
+
+    this.dtElement.dtInstance.then((dtInstance:DataTables.Api)=>{
+      dtInstance.destroy();
+
+      this.service.getAllGroups().subscribe((response) => {
+        this.dtTrigger.next(response);
+      });
+      
+    });
+
+  }
+
+  refreshList(trigger:boolean) {
+    this.service.getAllGroups().subscribe((response) => {
+      console.log("Richesta della lista ricevuta");
+
+
+      let responseList = (response as Array<Group>);
+
+      console.log("Lista prima splice e': " + this.list.length);
+      this.list.splice(0, this.list.length);
+      console.log("Lista dopo splice e': " + this.list.length);
+      
+      responseList.forEach((g) => {
+
+      this.service.getUserQuantity(g.id).subscribe(count => {
+      this.userCount = count;
       
-    });
+        this.list.push({
+          id: g.id,
+          groupName: g.groupName,
+          permissions: g.permissions,
+          enabled: g.enabled,
+          creationUser: g.creationUser,
+          creationTime: new Date(g.creationTime),
+          updateUser: g.updateUser,
+          updateTime: new Date(g.updateTime),
+          roles: g.roles,
+          userNumber: this.userCount,
 
-  }
+        });
+      });
+      
+      });
 
-  refreshList(trigger:boolean) {
-    this.service.getAllGroups().subscribe((response) => {
-      console.log("Richesta della lista ricevuta");
+      
+      
+      console.log('lista dopo push ' + this.list.length);
 
-
-      let responseList = (response as Array<Group>);
-
-      console.log("Lista prima splice e': " + this.list.length);
-      this.list.splice(0, this.list.length);
-      console.log("Lista dopo splice e': " + this.list.length);
-
-      responseList.forEach((g) => {
-
-        this.list.push({
-          id: g.id,
-          groupName: g.groupName,
-          permissions: g.permissions,
-          enabled: g.enabled,
-          creationUser: g.creationUser,
-          creationTime: new Date(g.creationTime),
-          updateUser: g.updateUser,
-          updateTime: new Date(g.updateTime),
-          roles: g.roles
-
-
-        });
-
-       
-      });
-
-      console.log('lista dopo push ' + this.list.length);
-
-         if (trigger) {
-          this.dtTrigger.next(response);
-        }else{
-        this.restartTable();
-        }
-     
-    });
-
-  }
+         if (trigger) {
+          this.dtTrigger.next(response);
+        }else{
+        this.restartTable();
+        }
+     
+    });
+    
+  }
 
 
-  groupCreate() {
-    this.router.navigateByUrl("/group-create");
-  }
+  groupCreate() {
+    this.router.navigateByUrl("/group-create");
+  }
 
-  groupDetail(id: number) {
-    this.router.navigateByUrl("/group-detail/" + id);
-  }
+  groupDetail(id: number) {
+    this.router.navigateByUrl("/group-detail/" + id);
+  }
 
-  groupUpdate(id: number) {
-    this.router.navigateByUrl("/group-update/" + id);
-  }
+  groupUpdate(id: number) {
+    this.router.navigateByUrl("/group-update/" + id);
+  }
 
 
-  deleteGroup(id: number) {
-    if (confirm("Sei sicuro di voler eliminare il gruppo?")) {
-      this.service.deleteGroup(id)
-        .subscribe({
 
-          next: (data) => {
-            console.log("Data:", data);
-        
-            this.refreshList(false);
-           
- 
-          },
-          error: error => {
-            console.log(error);
-          }
-        });
+  deleteGroup(id: number) {
+    if (confirm("Sei sicuro di voler eliminare il gruppo?")) {
+      this.service.deleteGroup(id)
+        .subscribe({
 
-    }
+          next: (data) => {
+            console.log("Data:", data);
+        
+            this.refreshList(false);
+           
+ 
+          },
+          error: error => {
+            console.log(error);
+          }
+        });
 
-  }
+    }
+
+  }
 
 
 }

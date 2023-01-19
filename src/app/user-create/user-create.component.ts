@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, TitleStrategy } from '@angular/router';
 import { Group } from '../group';
 import { GroupService } from '../group.service';
 import { User } from '../user';
@@ -12,7 +12,10 @@ import { UserService } from '../user.service';
 })
 export class UserCreateComponent implements OnInit {
 
+  usernameString: string = '';
+  emailString: string = '';
   list :Array<Group>=new Array();
+  selectedGroup = [];
 
 user:User={
   id: 0,
@@ -22,7 +25,7 @@ user:User={
   name: '',
   lastName: '',
   groupName: '',
-  groupId: 0,
+  groupId: '',
   lastLogin: new Date,
   dateModifiedPass: new Date,
   creationTime: new Date,
@@ -39,8 +42,6 @@ user:User={
 
   ngOnInit(): void {
     this.groupService.getAllGroups().subscribe((response)=>{
-      console.log("Richesta della lista ricevuta");
-      console.log(response);
   
       let responseList=(response as Array<Group>);
   
@@ -57,7 +58,8 @@ user:User={
           creationTime:new Date(g.creationTime),
           updateUser:g.updateUser,
           updateTime:new Date(g.updateTime),
-          roles:g.roles
+          roles:g.roles,
+          userNumber: 0
         });
   
   
@@ -68,18 +70,33 @@ user:User={
     
   }
 
+  checkUsername() {
+    this.usernameString = '';
+    this.service.valueAviable(this.user.username, () => {this.usernameString = 'Username in uso.'}); 
+    
+    
+  }
+
+  checkEmail() {
+    this.emailString = '';
+    this.service.valueAviable(this.user.email, () => {this.emailString = 'Email in uso.'});
+  }
+
 
   createUser(){
-    this.service.createUser(this.user).subscribe({
-      next:(data)=>{
-        this.router.navigateByUrl("/users");
-      }, 
-      error:(err)=>{
-        console.log(err);
-      }
-    })
 
-  }
+      this.user.groupId = this.selectedGroup.toString();
+
+      this.service.createUser(this.user).subscribe({
+        next:(data)=>{
+          this.router.navigateByUrl("/users");
+        }, 
+        error:(err)=>{
+          console.log(err);
+        }
+      })
+    
+    }
 
 
 }
