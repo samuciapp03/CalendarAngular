@@ -43,8 +43,9 @@
                     <td scope="col">{{g.id}}</td>
                     <td scope="col" class="overflowTxt" [title]="g.groupName">{{g.groupName}}</td>
                     <td scope="col" class="overflowTxt" [title]="g.permissions">{{g.permissions}}</td>
+                    
                     <td scope="col" class="overflowTxt" [title]="g.roles">{{g.roles}}</td>
-                    <td scope="col" class="overflowTxt" [title]="userCount" >{{g.userNumber}}</td>
+
 
 
                     <td scope="col" *ngIf="g.enabled; else elseBlock"><svg xmlns="http://www.w3.org/2000/svg"
@@ -63,7 +64,7 @@
                         </svg>
                     </td>
                 </ng-template>
-
+                <td scope="col" class="overflowTxt" [title]="userCount" >{{g.userNumber}}</td>
                     <td scope="col" class="overflowTxt">{{g.creationUser}}</td>
 
 
