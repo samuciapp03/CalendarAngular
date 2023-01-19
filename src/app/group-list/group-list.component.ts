@@ -12,6 +12,7 @@ import { Subject } from 'rxjs';
 })
 export class GroupListComponent implements OnInit {
 
+  userCount:number = 0;
   list :Array<Group>=new Array();
 
   dtTrigger: Subject<any> = new Subject();
@@ -48,35 +49,37 @@ ngOnInit(): void {
   this.service.getAllGroups().subscribe((response)=>{
     console.log("Richesta della lista ricevuta");
     
-
     let responseList=(response as Array<Group>);
 
     responseList.forEach((g)=>{
 
-     
-
-      this.list.push({
-        id:g.id,
-        groupName:g.groupName,
-        permissions:g.permissions,
-        enabled:g.enabled,
-        creationUser:g.creationUser,
-        creationTime:new Date(g.creationTime),
-        updateUser:g.updateUser,
-        updateTime:new Date(g.updateTime),
-        roles:g.roles
         
+
+      this.service.getUserQuantity(g.id).subscribe(count => {
+      this.userCount = count;
+
+
+        this.list.push({
+          id:g.id,
+          groupName:g.groupName,
+          permissions:g.permissions,
+          enabled:g.enabled,
+          creationUser:g.creationUser,
+          creationTime:new Date(g.creationTime),
+          updateUser:g.updateUser,
+          updateTime:new Date(g.updateTime),
+          roles:g.roles,
+          userNumber:this.userCount,
+        
+          
+        });
       });
-  
 
     });
 
     this.dtTrigger.next(response);
     
   });
-
-
-
 
 }
 
@@ -107,6 +110,7 @@ deleteGroup(id: number) {
     }
    
 }
+
 
 
 }

@@ -19,7 +19,7 @@
                     <th scope="col" scope="col" class="align-text-top">Permessi</th>
                     <th scope="col" scope="col" class="align-text-top">Ruoli</th>
                     <th scope="col" scope="col" class="align-text-top">Attivo</th>
-
+                    <th scope="col" scope="col" class="align-text-top">Quantita utenti</th>
                     <th scope="col" scope="col" class="align-text-top">Utente Creazione</th>
                     <!--  
                     <th scope="col" scope="col" class="align-text-top">Data Creazione</th>
@@ -40,6 +40,7 @@
 
                     <td scope="col" class="overflowTxt" [title]="g.roles">{{g.roles}}</td>
                     <td scope="col">{{g.enabled}}</td>
+                    <td scope="col" class="overflowTxt" [title]="userCount" >{{g.userNumber}}</td>
                     <td scope="col" class="overflowTxt">{{g.creationUser}}</td>
                     <!--
                     <td scope="col">{{g.creationTime | date:'dd/MM/yyyy HH:mm:ss'}}</td>

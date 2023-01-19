@@ -22,7 +22,8 @@ export class GroupUpdateComponent implements OnInit {
     roles: [],
     creationTime: new Date(),
     updateUser: '',
-    updateTime: new Date()
+    updateTime: new Date(),
+    userNumber:0,
   }
 
   rolesSelect = [

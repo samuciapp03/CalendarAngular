@@ -22,7 +22,8 @@ export class GroupCreateComponent implements OnInit {
     roles: [],
     creationTime: new Date(),
     updateUser: '',
-    updateTime: new Date()
+    updateTime: new Date(),
+    userNumber:0
   }
 
   constructor(private router: Router, private groupService: GroupService, private service: GroupService) {

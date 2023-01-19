@@ -8,6 +8,7 @@ export interface Group{
     creationTime:Date,
     updateUser:string,
     updateTime:Date,
-    roles:string[]
+    roles:string[],
+    userNumber: number
     
 }

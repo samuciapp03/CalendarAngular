@@ -58,7 +58,8 @@ user:User={
           creationTime:new Date(g.creationTime),
           updateUser:g.updateUser,
           updateTime:new Date(g.updateTime),
-          roles:g.roles
+          roles:g.roles,
+          userNumber: 0
         });
   
   
