@@ -69,52 +69,47 @@ export class GroupListComponent implements OnInit{
 
   }
 
-  refreshList(trigger:boolean) {
-    this.service.getAllGroups().subscribe((response) => {
-      console.log("Richesta della lista ricevuta");
+refreshList(trigger: boolean) {
+  this.service.getAllGroups().subscribe((response) => {
+      this.list.splice(0, this.list.length);
+      console.log("Richesta della lista ricevuta");
+      let responseList = (response as Array<Group>);
+      console.log("Lista prima splice e': " + this.list.length);
+      console.log("Lista dopo splice e': " + this.list.length);
+      responseList.forEach((g) => {
+          this.service.getUserQuantity(g.id).subscribe(count => {
+              this.userCount = count;
+              this.list.push({
+                  id: g.id,
+                  groupName: g.groupName,
+                  permissions: g.permissions,
+                  enabled: g.enabled,
+                  creationUser: g.creationUser,
+                  creationTime: new Date(g.creationTime),
+                  updateUser: g.updateUser,
+                  updateTime: new Date(g.updateTime),
+                  roles: g.roles,
+                  userNumber: this.userCount,
+              });
+              if (this.list.length === responseList.length) {
+                  if (trigger) {
+                      this.dtTrigger.next(this.list);
+                  } else {
+                      this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+                          dtInstance.destroy();
+                          this.dtTrigger.next(this.list);
+                      });
+                  }
+              }
+          });
+      });
+      console.log('lista dopo push ' + this.list.length);
+  });
+}
 
-
-      let responseList = (response as Array<Group>);
-
-      console.log("Lista prima splice e': " + this.list.length);
-      this.list.splice(0, this.list.length);
-      console.log("Lista dopo splice e': " + this.list.length);
-      
-      responseList.forEach((g) => {
-
-      this.service.getUserQuantity(g.id).subscribe(count => {
-      this.userCount = count;
-      
-        this.list.push({
-          id: g.id,
-          groupName: g.groupName,
-          permissions: g.permissions,
-          enabled: g.enabled,
-          creationUser: g.creationUser,
-          creationTime: new Date(g.creationTime),
-          updateUser: g.updateUser,
-          updateTime: new Date(g.updateTime),
-          roles: g.roles,
-          userNumber: this.userCount,
-
-        });
-      });
-      
-      });
-
-      
-      
-      console.log('lista dopo push ' + this.list.length);
-
-         if (trigger) {
-          this.dtTrigger.next(response);
-        }else{
-        this.restartTable();
-        }
-     
-    });
-    
-  }
+ngOnDestroy(): void {
+  this.dtTrigger.unsubscribe();
+}
 
 
   groupCreate() {
