@@ -22,6 +22,10 @@ export class UserService {
     return this.httpClient.post('http://localhost:8080/api/users/', user);
   }
 
+  getUsersFromAGroup(id:number):Observable<Object>{
+    return this.httpClient.get('http://localhost:8080/api/users/'+id+'/usrs_from_group')
+  }
+
   /*
   updateUser(user: User, updateCallback: () => null):Observable<Object> {
     let url = 'http://localhost:8080/api/users/' + user.id;
