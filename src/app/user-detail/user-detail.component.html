@@ -29,13 +29,13 @@
   
         <div class="mb-3">
             <label for="verified" class="form-label">Verificato </label>
-            <input type="checkbox" name="verified" [(ngModel)] = "user.verified"  id="verified" disabled="true"  />
+            <mat-slide-toggle type="checkbox" name="verified" [(ngModel)] = "user.verified"  id="verified" disabled="true"></mat-slide-toggle>
           </div>
           <br/>
 
           <div class="mb-3">
             <label for="elimitato" class="form-label">Elimitato </label>
-            <input type="checkbox" name="elimitato" [(ngModel)] = "user.deleted"  id="elimitato"  disabled="true"  />
+            <mat-slide-toggle type="checkbox" name="elimitato" [(ngModel)] = "user.deleted"  id="elimitato"  disabled="true"></mat-slide-toggle>
           </div>
 
           <div class="mb-3">

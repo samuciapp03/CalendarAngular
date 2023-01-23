@@ -16,6 +16,8 @@ export class GroupDetailComponent implements OnInit{
   group!:Group;
   usrList:Array<User>=new Array();
   clicked!:boolean;
+  notEmpty=true;
+  
 
   constructor(private actRoute:ActivatedRoute, private router:Router, private groupService:GroupService, private userService:UserService){
 
@@ -34,13 +36,19 @@ ngOnInit(): void {
 }
 
 getUsersOfAGroup(){
-  this.clicked=true;
+
 
   this.userService.getUsersFromAGroup(this.id).subscribe((data)=>{
     console.log("La richiesta è stata ricevuta");
     let responseList=(data as Array<User>);
 
+    if(responseList.length==0){
+      this.notEmpty=false;
+    }
+
     responseList.forEach(u => {
+
+      
 
       this.usrList.push({
         id: u.id,
@@ -63,27 +71,17 @@ getUsersOfAGroup(){
       
     });
     
-  //  this.clickedCond();
-this.clicked=true;
+
+this.clicked=!this.clicked;
+if(this.clicked==false){
+  this.usrList.splice(0)
+}
+
 
   })
 
 }
 
-/*
-clickedCond(){
-
-  if (this.clicked==true) {
-
-    this.clicked=false;
-    
-  } else {
-    this.clicked=true;
-
-  }
-
-}
-*/
 
 
 }

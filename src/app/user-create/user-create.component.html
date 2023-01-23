@@ -79,12 +79,12 @@
     <form>
         <div class="mb-3">
             <label for="verified" class="form-label">Verificato</label>
-            <input type="checkbox" name="verified" [(ngModel)] = "user.verified"  id="verified"  />
+            <mat-slide-toggle type="checkbox" name="verified" [(ngModel)] = "user.verified"  id="verified"></mat-slide-toggle>
           </div>
 
           <div class="mb-3">
             <label for="eliminato" class="form-label">Eliminato</label>
-            <input type="checkbox" name="eliminato" [(ngModel)] = "user.deleted"  id="eliminato"   />
+            <mat-slide-toggle type="checkbox" name="eliminato" [(ngModel)] = "user.deleted"  id="eliminato" ></mat-slide-toggle>
           </div>
 
           <div class="mb-3">
