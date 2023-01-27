@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
       try {
         await this.service.login(lr)
         this.messageService.success('Login successful')
-        await this.router.navigateByUrl('/home')
+        await this.router.navigateByUrl('/month')
       } catch (e: any) {
         if (isErrorResponse(e.error)) {
           this.messageService.error(e.error.message)
@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
 
   async ngOnInit() {
     if (this.service.user !== null) {
-      await this.router.navigateByUrl('/home')
+      await this.router.navigateByUrl('/month')
     }
   }
 }
