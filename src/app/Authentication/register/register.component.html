@@ -1,1 +1,123 @@
-<p>register works!</p>
+<div class="row position-relative" [style.opacity]="loading ? 0.7 : 1">
+    <div class="col">
+            <form action="" method="post" class="p-5 border border-3 rounded-3" [formGroup]="registerForm">
+                <h1 class="text-center text-bold mb-3">Registrati</h1>
+    
+                <div class="form-group">
+                    <label for="username">Username: </label>
+                    <input type="text" id="username" class="form-control"
+                           formControlName="username" required>
+                    <div *ngIf="username.invalid && (username.dirty || username.touched)"
+                         class="alert alert-danger my-3">
+                        <div *ngIf="username.errors?.['required']">
+                            L'username è obbligatorio.
+                        </div>
+                        <div *ngIf="username.errors?.['maxlength']">
+                            L'username deve essere lungo massimo 255 caratteri.
+                        </div>
+                        <div *ngIf="username.errors?.['minlength']">
+                            L'username deve essere lungo almeno 4 caratteri.
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="form-group">
+                    <label for="email">Email: </label>
+                    <input type="email" id="email" class="form-control"
+                           formControlName="email" required>
+                    <div *ngIf="email.invalid && (email.dirty || email.touched)"
+                         class="alert alert-danger my-3">
+                        <div *ngIf="email.errors?.['required']">
+                            L'email è obbligatoria.
+                        </div>
+                        <div *ngIf="email.errors?.['maxlength']">
+                            L'email deve essere lunga massimo 255 caratteri.
+                        </div>
+                        <div *ngIf="email.errors?.['minlength']">
+                            L'email deve essere lunga almeno 4 caratteri.
+                        </div>
+                        <div *ngIf="email.errors?.['email']">
+                            L'email dev'essere valida.
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="form-group">
+                    <label for="firstName">Nome: </label>
+                    <input type="text" id="firstName" class="form-control"
+                           formControlName="firstName" required>
+                    <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)"
+                         class="alert alert-danger my-3">
+                        <div *ngIf="firstName.errors?.['required']">
+                            Il nome è obbligatorio.
+                        </div>
+                        <div *ngIf="firstName.errors?.['maxlength']">
+                            Il nome deve essere lungo massimo 255 caratteri.
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="form-group">
+                    <label for="lastName">Cognome: </label>
+                    <input type="text" id="lastName" class="form-control"
+                           formControlName="lastName" required>
+                    <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)"
+                         class="alert alert-danger my-3">
+                        <div *ngIf="lastName.errors?.['required']">
+                            Il cognome è obbligatorio.
+                        </div>
+                        <div *ngIf="lastName.errors?.['maxlength']">
+                            Il cognome deve essere lungo massimo 255 caratteri.
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="form-group">
+                    <label for="password">Password: </label>
+                    <input type="password" id="password" class="form-control"
+                           formControlName="password" required>
+                    <div *ngIf="password.invalid && (password.dirty || password.touched)"
+                         class="alert alert-danger my-3">
+                        <div *ngIf="password.errors?.['required']">
+                            La password è obbligatoria.
+                        </div>
+                        <div *ngIf="password.errors?.['invalidPassword']">
+                            La password deve contenere almeno 8 caratteri, una maiuscola, una minuscola, un numero e un carattere
+                            speciale
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="form-group">
+                    <label for="repeatPassword">Ripeti password: </label>
+                    <input type="password" id="repeatPassword" class="form-control"
+                           formControlName="repeatPassword" required>
+                    <div *ngIf="(repeatPassword.invalid && (repeatPassword.dirty || repeatPassword.touched)) ||
+                         (registerForm.errors?.['invalidPassword'] && (registerForm.touched || registerForm.dirty))"
+                         class="alert alert-danger my-3">
+                        <div *ngIf="repeatPassword.errors?.['required']">
+                            La password è obbligatoria.
+                        </div>
+                        <div *ngIf="registerForm.errors?.['invalidPassword'] && (registerForm.touched || registerForm.dirty)">
+                            Le password non coincidono.
+                        </div>
+                    </div>
+                </div>
+    
+                <div>
+                    <input class="btn btn-primary" type="submit" value="Registrati" (click)="register()"
+                           [disabled]="!registerForm.valid">
+                </div>
+            </form>
+    
+            <div class="fst-italic text-center">
+                Hai già un account?
+                <button class="btn btn-primary" (click)=login()>Accedi</button>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center align-items-center position-absolute" style="top: 0; bottom: 0; left: 0; right: 0;" *ngIf="loading">
+            <div class="spinner-border" role="status" >
+                <span class="visually-hidden"></span>
+            </div>
+        </div>
+    </div>

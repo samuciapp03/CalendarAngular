@@ -1,1 +1,34 @@
-<p>email-list works!</p>
+<table class="table table-striped table-bordered">
+	<thead>
+	<tr>
+		<th>#</th>
+		<th>Email To</th>
+		<th>Subject</th>
+		<th>Body</th>
+		<th>Is Sent</th>
+		<th>Actions</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr *ngFor="let item of emails">
+		<td>{{item.id}}</td>
+		<td>{{item.emailTo}}</td>
+		<td>{{item.subject}}</td>
+		<td>{{item.body}}</td>
+		<td>{{item.sent}}</td>
+		<td>
+			<div class="d-flex flex-row">
+				<button type="button" class="btn btn-primary mr-2" (click)="detail(item.id)"><em
+						class="bi bi-info-lg"></em>
+				</button>
+				<button type="button" class="btn btn-danger mr-2" (click)="deleteEntity(item.id)">
+					<em class="bi bi-trash3-fill d-block"></em>
+				</button>
+				<button type="button" class="btn btn-success" (click)="resendEmail(item.id)">
+					<em class="bi bi-envelope-fill d-block"></em>
+				</button>
+			</div>
+		</td>
+	</tr>
+	</tbody>
+</table>
