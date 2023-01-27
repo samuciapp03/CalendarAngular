@@ -1,0 +1,87 @@
+<div class="row mb-3">
+  <div class="col-lg-1 col-sm-1 col-2">
+    <button class="btn btn-primary" (click)="goBack()"
+            style="height: 100%">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+           fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+        <path fill-rule="evenodd"
+              d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+      </svg>
+    </button>
+  </div>
+  <div class="col-lg-3 col-sm-4 col-5">
+    <div class="d-flex align-items-center" style="height: 100%" id="currentDate">
+      <h3 style="margin: 0px 6px 0px 0px">{{currentDate}}</h3>{{year}}
+    </div>
+
+  </div>
+  <div class="col-lg-6 col-sm-4 col-7">
+    <div class="d-flex">
+      <p style="margin: 0px 3px 0px 0px">Filter per resources</p>
+      <select class="form-select form-select-sm"
+              aria-label="Default select example" #resource (change)="filter(resource.value)">
+        <option [selected]="resourceFilter != null">All resources</option>
+        <ng-container *ngFor="let resource of listResources; let i = index">
+          <option [selected]="resourceFilter == resource">{{resource}}</option>
+        </ng-container>
+      </select>
+    </div>
+  </div>
+  <div class="col-lg-2 col-sm-3 col-5">
+    <div class="d-flex justify-content-end" style="height: 100%">
+      <button class="btn btn-primary" (click)="goCurrentDate()"
+              style="height: 100%">
+        <div style="font-size: 14px">Today</div>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="d-flex align-items-center justify-content-center" style="height: 80vh" *ngIf="loading">
+  <div class="spinner-border" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+
+<div class="table-responsive" style="height: 88vh" *ngIf="!loading">
+  <table class="table">
+    <thead>
+    <th scope="col" class="th-style-day">Ora</th>
+    <ng-container *ngIf="resourceFilter == null; else filter">
+      <th scope="col" *ngFor="let resource of listResources">
+        {{resource}}
+      </th>
+    </ng-container>
+    <ng-template #filter>
+      <th scope="col">
+        {{resourceFilter}}
+      </th>
+    </ng-template>
+    </thead>
+    <tbody>
+    <tr *ngFor="let h of list | keyvalue">
+
+      <td class="th-style-day">{{h.key < 10 ? '0' + h.key : h.key}}:00</td>
+
+      <ng-container *ngFor="let book of h.value; let i = index">
+        <td *ngIf="book == null; else card"></td>
+        <ng-template #card>
+          <td
+            [ngClass]="['card-active',
+                        book.slotStartTime.slice(0, 2) === (h.key < 10 ? '0' + h.key.toString() : h.key.toString()) ? 'event-day-start' : '',
+                        book.slotEndTime.slice(0, 2) === (h.key + 1 < 10 ? '0' + (h.key + 1).toString() : (h.key + 1).toString()) ? 'event-day-end' : '',
+                        (h.key + 1 < 10 ? '0' + (h.key + 1).toString() : (h.key + 1).toString()) != book.slotEndTime.slice(0, 2) ? 'event-day-middle' : '']"
+            role="button"
+            data-bs-toggle="modal"
+            data-bs-target="#modalCard">
+            <div *ngIf="book.slotStartTime.slice(0, 2) === (h.key < 10 ? '0' + h.key.toString() : h.key.toString())">
+              {{book.resource.resourceName}} -
+              {{book.slotStartTime.slice(0, 5)}}/{{book.slotEndTime.slice(0, 5)}}
+            </div>
+          </td>
+        </ng-template>
+      </ng-container>
+    </tr>
+    </tbody>
+  </table>
+</div>

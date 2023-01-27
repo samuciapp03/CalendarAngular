@@ -1,4 +1,66 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@ng-select/ng-select/themes/default.theme.css";
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+} */
+
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap');
+
+body {
+    overflow-y: hidden;
+    font-family: 'Kanit', sans-serif;
+}
+
+:root {
+    --card-active: lightblue;
+    --card-busy: lightcoral;
+    --card-border-radius: 15px;
+}
+
+.overflow-scroll {
+    overflow-x: hidden !important;
+}
+
+.card {
+    padding: 0px;
+}
+
+.card-style {
+    height: 22px !important;
+    padding: 0px 0px 0px 0px !important;
+    margin: 3px 10px 0px 10px !important;
+    text-align: justify;
+    font-size: 13px;
+}
+
+.li-style-card {
+    padding: 0px 6px 6px 6px !important;
+}
+
+.card-active {
+    background-color: var(--card-active) !important;
+}
+
+.card-busy {
+    background-color: var(--card-busy) !important;
+}
+
+.hour {
+    opacity: 35%;
+}
+
+
+
+@media (max-width: 768px) {
+    #sideBar {
+        display: none !important;
+    }
+}

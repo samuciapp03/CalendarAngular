@@ -1,0 +1,18 @@
+.th-style-day {
+    width: 5rem;
+    border-right: var(--bs-table-border-color) solid 1px;
+}
+
+.event-day-start {
+    border-top-left-radius: var(--card-border-radius);
+    border-top-right-radius: var(--card-border-radius);
+}
+
+.event-day-end {
+    border-bottom-left-radius: var(--card-border-radius);
+    border-bottom-right-radius: var(--card-border-radius);
+}
+
+.event-day-middle {
+    border-bottom: 0px !important;
+}

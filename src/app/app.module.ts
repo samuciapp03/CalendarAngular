@@ -1,15 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http'
-import {ReactiveFormsModule} from "@angular/forms";
-import { NgSelectModule } from "@ng-select/ng-select";
-import { DataTablesModule } from "angular-datatables";
-import {MatButtonModule} from '@angular/material/button';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-
-
-
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { DataTablesModule } from 'angular-datatables';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,6 +23,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MessageService } from './message.service';
 import { AuthService } from './auth.service';
 import { LoginComponent } from './login/login.component';
+import { MonthViewComponent } from './month-view/month-view.component';
+import { DayViewComponent } from './day-view/day-view.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +38,9 @@ import { LoginComponent } from './login/login.component';
     UserUpdateComponent,
     UserCreateComponent,
     TopBarComponent,
-    LoginComponent
+    LoginComponent,
+    MonthViewComponent,
+    DayViewComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,22 +54,15 @@ import { LoginComponent } from './login/login.component';
     MatButtonModule,
     MatSlideToggleModule,
     ReactiveFormsModule,
-
-    
-    
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { 
-
+export class AppModule {
   rolesSelect = [
     { name: 'SUPER_USER' },
     { name: 'ADMIN' },
     { name: 'MODERATOR' },
     { name: 'USER' },
-
   ];
-
-
 }

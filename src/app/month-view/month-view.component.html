@@ -1,0 +1,161 @@
+<div class="row mb-3">
+  <div class="col-lg-1 col-sm-1 col-2">
+    <button class="btn btn-primary" (click)="previousMonth()"
+            style="height: 100%">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+           fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+        <path fill-rule="evenodd"
+              d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+      </svg>
+    </button>
+  </div>
+  <div class="col-lg-3 col-sm-4 col-5">
+    <div class="d-flex align-items-center" style="height: 100%" id="currentDate">
+      <h3 style="margin: 0px 6px 0px 0px ">{{currentMonth}}</h3>{{year}}
+    </div>
+
+  </div>
+  <div class="col-lg-6 col-sm-4 col-7">
+    <div class="d-flex">
+      <p style="margin: 0px 3px 0px 0px">Filter per resources</p>
+      <select class="form-select form-select-sm"
+              aria-label="Default select example" #resource (change)="filter(resource.value)">
+        <option [selected]="resourceFilter != null">Select resource</option>
+        <ng-container *ngFor="let resource of listResources; let i = index">
+          <option [selected]="resourceFilter == resource">{{resource}}</option>
+        </ng-container>
+      </select>
+    </div>
+  </div>
+  <div class="col-lg-2 col-sm-3 col-5">
+    <div class="d-flex justify-content-end" style="height: 100%">
+      <button class="me-2 btn btn-primary" (click)="goCurrentDate()"
+              style="height: 100%">
+        <div style="font-size: 14px">Today</div>
+      </button>
+      <button class="btn btn-primary" (click)="nextMonth()"
+              style="height: 100%">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+             fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+          <path fill-rule="evenodd"
+                d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="d-flex align-items-center justify-content-center" style="height: 80vh" *ngIf="loading">
+  <div class="spinner-border" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+
+<div class="overflow-scroll" style="height: 100%">
+  <div class="table-responsive" *ngIf="!loading">
+    <table class="table table-bordered">
+      <thead>
+      <th scope="col" class="th-style-calendar">Monday</th>
+      <th scope="col" class="th-style-calendar">Tuesday</th>
+      <th scope="col" class="th-style-calendar">Wednesday</th>
+      <th scope="col" class="th-style-calendar">Thursday</th>
+      <th scope="col" class="th-style-calendar">Friday</th>
+      <th scope="col" class="th-style-calendar" id="weekend">Saturday</th>
+      <th scope="col" class="th-style-calendar" id="weekend">Sunday</th>
+      </thead>
+      <tbody id="tableBody">
+
+      <tr class="tr-style" *ngFor="let week of calendar"
+          [ngStyle]="{'height': 'calc(82vh/ ' + calendar.length + ')'}">
+        <td *ngFor="let day of week; let i = index" [id]="i == 5 || i == 6 ? 'weekend' : ''">
+          <div class="selectDay" (click)="goToDay(day.getFullYear(), day.getMonth(), day.getDate())"
+               [ngStyle]="{'background-color':(day.getDate() === today.getDate()&&  day.getMonth() === today.getMonth()&&  day.getFullYear() === today.getFullYear()) ? 'var(--bs-blue)' : '',
+                          'color': (day.getDate() === today.getDate()&&  day.getMonth() === today.getMonth()&&  day.getFullYear() === today.getFullYear()) ? 'white' :
+                          ((month - 1) != day.getMonth()) ? 'rgb(0, 0, 0, 0.3)': ''
+          }"
+          >
+            {{day.getDate()}}
+
+            <!--          bisgona prendere dalla mappa i dati ed inserirli con un for-->
+          </div>
+          <ng-container
+            *ngFor="let book of bookings.get(day.getFullYear() + '-' + ('0' + day.getMonth() + 1).slice(-2) + '-' + ('0' + day.getDate()).slice(-2)) ;index as i;">
+            <ng-container *ngIf="i<2; ">
+              <div
+                class="card card-active mt-1"
+                role="button"
+                data-bs-toggle="modal"
+                data-bs-target="#modalCard"
+              >
+                <div class="card-body card-style d-flex justify-content-between">
+                  <p>{{book.resource.resourceId}}</p>
+                  <p class="hour">{{book.slotStartTime.slice(0, 5)}}</p>
+                </div>
+              </div>
+            </ng-container>
+          </ng-container>
+
+          <ng-container
+            *ngIf="bookings.get(day.getFullYear() + '-' + ('0' + day.getMonth() + 1).slice(-2) + '-' + ('0' + day.getDate()).slice(-2))!= undefined && bookings.get(day.getFullYear() + '-' + ('0' + day.getMonth() + 1).slice(-2) + '-' + ('0' + day.getDate()).slice(-2))!.length>2">
+            <div class="dropend d-flex justify-content-center" type="button">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-arrow-return-right"
+                viewBox="0 0 16 16"
+                role="button"
+                id="dropdownMenuLink"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                style="margin: 4px 0px 0px 4px"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5z"
+                />
+              </svg>
+              <ul
+
+                class="dropdown-menu"
+                aria-labelledby="dropdownMenuLink"
+                style="padding: 6px 0px 0px 0px"
+              >
+
+                <ng-container
+                  *ngFor="let book of bookings.get(day.getFullYear() + '-' + ('0' + day.getMonth() + 1).slice(-2) + '-' + ('0' + day.getDate()).slice(-2))|slice:2">
+                  <li class="li-style-card">
+                    <div
+                      class="card card-busy"
+                      role="button"
+                      data-bs-toggle="modal"
+                      data-bs-target="#modalCard"
+                      onclick=""
+                    >
+                      <div
+                        class="card-body card-style d-flex justify-content-between"
+                      >
+                        <p>{{book.resource.resourceId}}</p>
+                        <p class="hour">{{book.slotStartTime.slice(0, 5)}}</p>
+                      </div>
+                    </div>
+                  </li>
+                </ng-container>
+              </ul>
+            </div>
+          </ng-container>
+        </td>
+      </tr>
+
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<script>
+  function writeModal(text) {
+    document.getElementById('modalBodyText').innerHTML = text;
+  }
+</script>
