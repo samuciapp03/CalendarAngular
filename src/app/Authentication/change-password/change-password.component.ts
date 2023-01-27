@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { passwordValidator, repeatPasswordValidator } from '../validators'
 import { ActivatedRoute, Router } from '@angular/router'
-import { AuthService } from '../auth.service'
+import { AuthService } from '../../auth.service'
 import { ErrorsResponse, isErrorsResponse } from '../response/errors.response'
-import { MessageService } from '../message.service'
+import { MessageService } from '../../message.service'
 
 @Component({
   selector: 'app-change-password',

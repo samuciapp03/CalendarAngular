@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
-import { AuthService } from '../auth.service'
+import { AuthService } from '../../auth.service'
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms'
 import { RegisterRequest } from '../requests/register.request'
 import { ErrorsResponse, isErrorsResponse } from '../response/errors.response'
-import { passwordValidator, repeatPasswordValidator } from '../validators'
-import { MessageService } from '../message.service'
+import { passwordValidator, repeatPasswordValidator } from '../../validators'
+import { MessageService } from '../../message.service'
 
 @Component({
   selector: 'app-register',

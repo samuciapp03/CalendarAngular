@@ -1,10 +1,10 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
-import { AuthService } from '../auth.service'
+import { AuthService } from '../../auth.service'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
-import { MessageService } from '../message.service'
+import { MessageService } from '../../message.service'
 import { User } from '../models/user.model'
-import { repeatPasswordValidator } from '../validators'
+import { repeatPasswordValidator } from '../../validators'
 
 
 @Component({

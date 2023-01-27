@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { catchError, EMPTY } from 'rxjs'
-import { Email } from '../email'
-import { EmailService } from '../email.service'
-import { MessageService } from '../message.service'
+import { Email } from '../models/email'
+import { EmailService } from '../../email.service'
+import { MessageService } from '../../message.service'
 
 @Component({
 	selector: 'EmailDetailComponent',
