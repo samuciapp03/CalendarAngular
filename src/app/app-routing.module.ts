@@ -26,7 +26,7 @@ let day: string =
   today.getDate();
 
 const routes: Routes = [
-  { path: '', component: GroupListComponent },
+  { path: '', redirectTo: 'month', pathMatch: 'full' },
   { path: 'groups', component: GroupListComponent },
   { path: 'group-detail/:id', component: GroupDetailComponent },
   { path: 'group-update/:id', component: GroupUpdateComponent },
