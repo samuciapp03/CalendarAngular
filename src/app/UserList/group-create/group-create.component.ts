@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Group } from '../group';
-import { GroupService } from '../group.service';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {GroupService} from '../../group.service';
+import {Group} from "../../models/group.model";
 
 
 @Component({
@@ -23,7 +23,7 @@ export class GroupCreateComponent implements OnInit {
     creationTime: new Date(),
     updateUser: '',
     updateTime: new Date(),
-    userNumber:0
+    userNumber: 0
   }
 
   constructor(private router: Router, private groupService: GroupService, private service: GroupService) {
@@ -36,26 +36,26 @@ export class GroupCreateComponent implements OnInit {
   }
 
   rolesSelect = [
-    { name: 'SUPER_USER' },
-    { name: 'ADMIN' },
-    { name: 'MODERATOR' },
-    { name: 'USER' },
-    { name: 'CREATE_RISORSE' },
-    { name: 'READ_RISORSE' },
-    { name: 'UPDATE_RISORSE' },
-    { name: 'UPDATE_RISORSE' },
-    { name: 'CREATE_USER' },
-    { name: 'READ_USER' },
-    { name: 'UPDATE_USER' },
-    { name: 'DELETE_USER' },
-    { name: 'CREATE_SLOT' },
-    { name: 'READ_SLOT' },
-    { name: 'UPDATE_SLOT' },
-    { name: 'DELETE_SLOT' },
-    { name: 'CREATE_GROUP' },
-    { name: 'READ_GROUP' },
-    { name: 'UPDATE_GROUP' },
-    { name: 'DELETE_GROUP' }
+    {name: 'SUPER_USER'},
+    {name: 'ADMIN'},
+    {name: 'MODERATOR'},
+    {name: 'USER'},
+    {name: 'CREATE_RISORSE'},
+    {name: 'READ_RISORSE'},
+    {name: 'UPDATE_RISORSE'},
+    {name: 'UPDATE_RISORSE'},
+    {name: 'CREATE_USER'},
+    {name: 'READ_USER'},
+    {name: 'UPDATE_USER'},
+    {name: 'DELETE_USER'},
+    {name: 'CREATE_SLOT'},
+    {name: 'READ_SLOT'},
+    {name: 'UPDATE_SLOT'},
+    {name: 'DELETE_SLOT'},
+    {name: 'CREATE_GROUP'},
+    {name: 'READ_GROUP'},
+    {name: 'UPDATE_GROUP'},
+    {name: 'DELETE_GROUP'}
 
   ];
 
@@ -75,7 +75,9 @@ export class GroupCreateComponent implements OnInit {
 
   checkGroupname() {
     this.warningString = '';
-    this.groupService.groupAviable(this.groupForm.groupName, () => {this.warningString = 'Nome del gruppo già esistente.'})
+    this.groupService.groupAviable(this.groupForm.groupName, () => {
+      this.warningString = 'Nome del gruppo già esistente.'
+    })
   }
 
 

@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Title } from '@angular/platform-browser';
-import { Location } from '@angular/common';
-import { Booking } from '../models/booking.model';
-import { BookingService } from '../booking.service';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Title} from '@angular/platform-browser';
+import {Location} from '@angular/common';
+import {Booking} from '../../models/booking.model';
+import {BookingService} from '../../booking.service';
 
 @Component({
   selector: 'day-view',
@@ -65,10 +65,10 @@ export class DayViewComponent implements OnInit {
       result
         .get(
           today.getFullYear() +
-            '-' +
-            ('0' + today.getMonth() + 1).slice(-2) +
-            '-' +
-            ('0' + today.getDate()).slice(-2)
+          '-' +
+          ('0' + today.getMonth() + 1).slice(-2) +
+          '-' +
+          ('0' + today.getDate()).slice(-2)
         )
         ?.forEach((booking) => {
           if (this.resourceFilter == null) {
@@ -135,7 +135,7 @@ export class DayViewComponent implements OnInit {
     if (this.listResources.includes(resource)) {
       this.router.navigate(
         ['day/' + this.year + '/' + this.month + '/' + this.day],
-        { queryParams: { res: resource } }
+        {queryParams: {res: resource}}
       );
     } else {
       this.router.navigate([

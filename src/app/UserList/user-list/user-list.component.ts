@@ -1,11 +1,10 @@
-import { Component, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ADTSettings } from 'angular-datatables/src/models/settings';
-import { DataTableDirective } from 'angular-datatables';
+import {Component, ViewChild} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {DataTableDirective} from 'angular-datatables';
 
-import { Subject } from 'rxjs';
-import { User } from '../user';
-import { UserService } from '../user.service';
+import {Subject} from 'rxjs';
+import {User} from '../../user';
+import {UserService} from '../../user.service';
 
 @Component({
   selector: 'app-user-list',
@@ -13,7 +12,7 @@ import { UserService } from '../user.service';
   styleUrls: ['./user-list.component.css']
 })
 export class UserListComponent {
-  @ViewChild(DataTableDirective, { static: false })
+  @ViewChild(DataTableDirective, {static: false})
   dtElement!: DataTableDirective;
 
   dtTrigger: Subject<any> = new Subject();
@@ -21,17 +20,17 @@ export class UserListComponent {
 
   dtOptions: any = {
     columns: [
-      { data: 'id' },
-      { data: 'name' },
-      { data: 'lastName' },
-      { data: 'email' },
-      { data: 'username' },
-      { data: 'password' },
-      { data: 'lastLogin' },
-      { data: 'dateModifiedPass' },
-      { data: 'groupName' },
-      { data: 'verified' },
-      { data: 'deleted' },
+      {data: 'id'},
+      {data: 'name'},
+      {data: 'lastName'},
+      {data: 'email'},
+      {data: 'username'},
+      {data: 'password'},
+      {data: 'lastLogin'},
+      {data: 'dateModifiedPass'},
+      {data: 'groupName'},
+      {data: 'verified'},
+      {data: 'deleted'},
       {
         title: 'Action',
         render: function (data: any, type: any, full: any) {
@@ -54,15 +53,15 @@ export class UserListComponent {
 
   }
 
-  restartTable(){
+  restartTable() {
 
-    this.dtElement.dtInstance.then((dtInstance:DataTables.Api)=>{
+    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
       dtInstance.destroy();
 
       this.userService.getAllUsers().subscribe((response) => {
         this.dtTrigger.next(response);
       });
-      
+
     });
 
   }
@@ -104,10 +103,9 @@ export class UserListComponent {
       });
       if (trigger) {
         this.dtTrigger.next(response);
-      }else{
+      } else {
         this.restartTable();
       }
-
 
 
     });
@@ -132,20 +130,22 @@ export class UserListComponent {
 
           next: (data) => {
             console.log(data);
-          
+
             this.refreshList(false);
           },
 
-          error: (error) => {console.log(error)}
-    });
+          error: (error) => {
+            console.log(error)
+          }
+        });
+
+    }
 
   }
 
-}
-
-edit(id: Number) {
-  this.router.navigateByUrl("/user-update/" + id);
-}
+  edit(id: Number) {
+    this.router.navigateByUrl("/user-update/" + id);
+  }
 
 
 }

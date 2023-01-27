@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Title } from '@angular/platform-browser';
-import { BookingService } from '../booking.service';
-import { Booking } from '../models/booking.model';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Title} from '@angular/platform-browser';
+import {BookingService} from '../../booking.service';
+import {Booking} from '../../models/booking.model';
 
 @Component({
   selector: 'month-view',
@@ -50,8 +50,8 @@ export class MonthViewComponent implements OnInit {
     this.service.findBookingsByDate(
       this.calendar[0][0],
       this.calendar[this.calendar.length - 1][
-        this.calendar[this.calendar.length - 1].length - 1
-      ],
+      this.calendar[this.calendar.length - 1].length - 1
+        ],
       (result) => {
         result.forEach((value, key) => {
           if (this.resourceFilter != null) {
@@ -115,7 +115,7 @@ export class MonthViewComponent implements OnInit {
   filter(resource: string) {
     if (this.listResources.includes(resource)) {
       this.router.navigate(['month/' + this.year + '/' + this.month], {
-        queryParams: { res: resource },
+        queryParams: {res: resource},
       });
     } else {
       this.router.navigate(['month/' + this.year + '/' + this.month]);
@@ -129,7 +129,7 @@ export class MonthViewComponent implements OnInit {
       date.toLocaleDateString('en-US', {
         weekday: 'long',
       }) != 'Monday'
-    ) {
+      ) {
       date.setDate(date.getDate() - 1);
     }
 
@@ -157,7 +157,7 @@ export class MonthViewComponent implements OnInit {
       date.toLocaleDateString('en-US', {
         weekday: 'long',
       }) != 'Sunday'
-    ) {
+      ) {
       date.setDate(date.getDate() + 1);
 
       days.push(new Date(date));
