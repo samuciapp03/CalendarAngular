@@ -68,15 +68,15 @@
         <ng-template #card>
           <td
             [ngClass]="['card-active',
-                        book.slotStartTime.slice(0, 2) === (h.key < 10 ? '0' + h.key.toString() : h.key.toString()) ? 'event-day-start' : '',
-                        book.slotEndTime.slice(0, 2) === (h.key + 1 < 10 ? '0' + (h.key + 1).toString() : (h.key + 1).toString()) ? 'event-day-end' : '',
-                        (h.key + 1 < 10 ? '0' + (h.key + 1).toString() : (h.key + 1).toString()) != book.slotEndTime.slice(0, 2) ? 'event-day-middle' : '']"
+                        book.from.slice(0, 2) === (h.key < 10 ? '0' + h.key.toString() : h.key.toString()) ? 'event-day-start' : '',
+                        book.to.slice(0, 2) === (h.key + 1 < 10 ? '0' + (h.key + 1).toString() : (h.key + 1).toString()) ? 'event-day-end' : '',
+                        (h.key + 1 < 10 ? '0' + (h.key + 1).toString() : (h.key + 1).toString()) != book.to.slice(0, 2) ? 'event-day-middle' : '']"
             role="button"
             data-bs-toggle="modal"
             data-bs-target="#modalCard">
-            <div *ngIf="book.slotStartTime.slice(0, 2) === (h.key < 10 ? '0' + h.key.toString() : h.key.toString())">
-              {{book.resource.resourceName}} -
-              {{book.slotStartTime.slice(0, 5)}}/{{book.slotEndTime.slice(0, 5)}}
+            <div *ngIf="book.from.slice(0, 2) === (h.key < 10 ? '0' + h.key.toString() : h.key.toString())">
+              {{book.resource.name}} -
+              {{book.from.slice(0, 5)}}/{{book.to.slice(0, 5)}}
             </div>
           </td>
         </ng-template>

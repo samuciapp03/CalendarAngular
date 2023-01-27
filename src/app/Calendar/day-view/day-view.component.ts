@@ -75,13 +75,13 @@ export class DayViewComponent implements OnInit {
             listBookings.push(booking);
           } else if (
             this.resourceFilter != null &&
-            booking.resource.resourceName === this.resourceFilter
+            booking.resource.name === this.resourceFilter
           ) {
             listBookings.push(booking);
           }
 
-          if (!this.listResources.includes(booking.resource.resourceName)) {
-            this.listResources.push(booking.resource.resourceName);
+          if (!this.listResources.includes(booking.resource.name)) {
+            this.listResources.push(booking.resource.name);
           }
         });
 
@@ -99,12 +99,12 @@ export class DayViewComponent implements OnInit {
 
         listBookings.forEach((book) => {
           if (
-            i >= Number(book.slotStartTime.split(':')[0]) &&
-            i < Number(book.slotEndTime.split(':')[0])
+            i >= Number(book.from.split(':')[0]) &&
+            i < Number(book.to.split(':')[0])
           ) {
             if (this.resourceFilter == null) {
               tempBookings.splice(
-                this.listResources.indexOf(book.resource.resourceName),
+                this.listResources.indexOf(book.resource.name),
                 1,
                 book
               );

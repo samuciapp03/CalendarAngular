@@ -58,7 +58,7 @@ export class MonthViewComponent implements OnInit {
             let bookings = new Array<Booking>();
 
             value.forEach((book) => {
-              if (book.resource.resourceName === this.resourceFilter) {
+              if (book.resource.name === this.resourceFilter) {
                 bookings.push(book);
               }
             });
@@ -71,8 +71,8 @@ export class MonthViewComponent implements OnInit {
 
         result.forEach((e) => {
           e.forEach((book) => {
-            if (!this.listResources.includes(book.resource.resourceName))
-              this.listResources.push(book.resource.resourceName);
+            if (!this.listResources.includes(book.resource.name))
+              this.listResources.push(book.resource.name);
           });
         });
 

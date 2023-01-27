@@ -88,8 +88,8 @@
                 data-bs-target="#modalCard"
               >
                 <div class="card-body card-style d-flex justify-content-between">
-                  <p>{{book.resource.resourceId}}</p>
-                  <p class="hour">{{book.slotStartTime.slice(0, 5)}}</p>
+                  <p>{{book.resource.id}}</p>
+                  <p class="hour">{{book.from.slice(0, 5)}}</p>
                 </div>
               </div>
             </ng-container>
@@ -136,8 +136,8 @@
                       <div
                         class="card-body card-style d-flex justify-content-between"
                       >
-                        <p>{{book.resource.resourceId}}</p>
-                        <p class="hour">{{book.slotStartTime.slice(0, 5)}}</p>
+                        <p>{{book.resource.id}}</p>
+                        <p class="hour">{{book.from.slice(0, 5)}}</p>
                       </div>
                     </div>
                   </li>

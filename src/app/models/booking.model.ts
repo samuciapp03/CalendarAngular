@@ -1,10 +1,15 @@
-import {Resource} from "./resource.model";
-
 export interface Booking {
-  slotId: number,
-  slotDate: Date,
-  slotStartTime: string,
-  slotEndTime: string,
-  resource: Resource
-
+  id: number,
+  date: Date,
+  from: string,
+  to: string,
+  resource: {
+    id: string,
+    name: string,
+    type: string
+  },
+  free: boolean,
+  bookingId: string,
+  bookingName: string,
+  bookingDate: Date,
 }

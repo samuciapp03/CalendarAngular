@@ -4,3 +4,9 @@ login
 models
 request
 response
+
+
+delete-resource
+modify-resource
+resource-detail
+resource-list

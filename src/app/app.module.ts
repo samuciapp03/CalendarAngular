@@ -30,6 +30,25 @@ import {EmailListComponent} from './Authentication/email-list/email-list.compone
 import {EmailDetailComponent} from './Authentication/email-detail/email-detail.component';
 import {ProfileComponent} from './Authentication/profile/profile.component';
 import {PageNotFoundComponent} from './Authentication/page-not-found/page-not-found.component';
+import {DeleteResourceComponent} from './ResourceList/delete-resource/delete-resource.component';
+import {ModifyResourceComponent} from './ResourceList/modify-resource/modify-resource.component';
+import {ResourceDetailComponent} from './ResourceList/resource-detail/resource-detail.component';
+import {ResourceListComponent} from './ResourceList/resource-list/resource-list.component';
+import {
+  ListSlotPrenotazioniComponent
+} from './PrenotazioniList/list-slot-prenotazioni/list-slot-prenotazioni.component';
+import {
+  DetailSlotPrenotazioniComponent
+} from './PrenotazioniList/detail-slot-prenotazioni/detail-slot-prenotazioni.component';
+import {
+  UpdateSlotPrenotazioniComponent
+} from './PrenotazioniList/update-slot-prenotazioni/update-slot-prenotazioni.component';
+import {
+  DeleteSlotPrenotazioniComponent
+} from './PrenotazioniList/delete-slot-prenotazioni/delete-slot-prenotazioni.component';
+import {
+  CreateSlotPrenotazioniComponent
+} from './PrenotazioniList/create-slot-prenotazioni/create-slot-prenotazioni.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +73,15 @@ import {PageNotFoundComponent} from './Authentication/page-not-found/page-not-fo
     EmailDetailComponent,
     ProfileComponent,
     PageNotFoundComponent,
+    DeleteResourceComponent,
+    ModifyResourceComponent,
+    ResourceDetailComponent,
+    ResourceListComponent,
+    ListSlotPrenotazioniComponent,
+    DetailSlotPrenotazioniComponent,
+    UpdateSlotPrenotazioniComponent,
+    DeleteSlotPrenotazioniComponent,
+    CreateSlotPrenotazioniComponent,
   ],
   imports: [
     BrowserModule,
@@ -71,6 +99,7 @@ import {PageNotFoundComponent} from './Authentication/page-not-found/page-not-fo
   providers: [],
   bootstrap: [AppComponent],
 })
+
 export class AppModule {
   rolesSelect = [
     {name: 'SUPER_USER'},
