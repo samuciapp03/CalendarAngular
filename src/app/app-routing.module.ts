@@ -11,6 +11,13 @@ import {UserCreateComponent} from './UserList/user-create/user-create.component'
 import {UserDetailComponent} from './UserList/user-detail/user-detail.component';
 import {UserListComponent} from './UserList/user-list/user-list.component';
 import {UserUpdateComponent} from './UserList/user-update/user-update.component';
+import {PasswordForgottenComponent} from './Authentication/password-forgotten/password-forgotten.component';
+import {ChangePasswordComponent} from './Authentication/change-password/change-password.component';
+import {ActiveUserComponent} from './Authentication/active-user/active-user.component';
+import {EmailListComponent} from './Authentication/email-list/email-list.component';
+import {EmailDetailComponent} from './Authentication/email-detail/email-detail.component';
+import {ProfileComponent} from './Authentication/profile/profile.component';
+import {PageNotFoundComponent} from './Authentication/page-not-found/page-not-found.component';
 
 let today = new Date();
 
@@ -36,6 +43,14 @@ const routes: Routes = [
   {path: 'user-update/:id', component: UserUpdateComponent},
   {path: 'user-create', component: UserCreateComponent},
   {path: 'login', component: LoginComponent},
+  {path: 'password-forgotten', component: PasswordForgottenComponent },
+  {path: 'register', component: RegisterComponent },
+  {path: 'change-password', component: ChangePasswordComponent },
+  {path: 'activate-user', component: ActivateUserComponent },
+  {path: 'email-list', component: EmailListComponent },
+  {path: 'email-detail/:id', component: EmailDetailComponent },
+  {path: 'profile', component:ProfileComponent},
+  {path: '**', component: PageNotFoundComponent},
   {
     path: '',
     redirectTo: month,
