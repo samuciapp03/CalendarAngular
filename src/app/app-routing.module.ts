@@ -37,11 +37,6 @@ const routes: Routes = [
   {path: 'user-create', component: UserCreateComponent},
   {path: 'login', component: LoginComponent},
   {
-    path: '',
-    redirectTo: month,
-    pathMatch: 'full',
-  },
-  {
     path: 'month',
     redirectTo: month,
     pathMatch: 'full',
