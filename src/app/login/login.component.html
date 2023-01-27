@@ -1,0 +1,49 @@
+<div class="row position-relative" [style.opacity]="loading ? 0.7 : 1">
+  <div class="col">
+    <form action="" method="post" class="p-5 border border-3 rounded-3" [formGroup]="form">
+      <h1 class="text-center text-bold mb-3">Accedi al tuo account</h1>
+
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" class="form-control" formControlName="username">
+        <div *ngIf="(form.get('username')!.invalid && (form.get('username')!.dirty || form.get('username')!.touched))"
+             class="alert alert-danger my-3">
+          <div *ngIf="form.get('username')!.errors?.['required']">
+            L'username è obbligatorio.
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" class="form-control" formControlName="password">
+        <div *ngIf="(form.get('password')!.invalid && (form.get('password')!.dirty || form.get('password')!.touched))"
+             class="alert alert-danger my-3">
+          <div *ngIf="form.get('password')!.errors?.['required']">
+            La password è obbligatoria.
+          </div>
+        </div>
+      </div>
+
+      <button class="btn btn-primary" (click)="login()" [disabled]="loading || form.invalid">
+        Login
+      </button>
+
+      <div class="d-flex flex-column align-items-center mt-4">
+        <div class="mb-3">
+          Non hai ancora un account?
+          <button class="btn btn-primary ml-2" (click)=register()>Registrati</button>
+        </div>
+        <div>
+          Hai dimenticato la password?
+          <button class="btn btn-primary" (click)=fp()> Recupera</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="d-flex justify-content-center align-items-center position-absolute" style="top: 0; bottom: 0; left: 0; right: 0;" *ngIf="loading">
+    <div class="spinner-border" role="status" >
+      <span class="visually-hidden"></span>
+    </div>
+  </div>
+</div>

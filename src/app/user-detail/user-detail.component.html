@@ -4,11 +4,11 @@
     <form>
       <div class="mb-3">
         <label for="groupName" class="form-label">Nome Utente</label>
-        <input type="text" name="name" [(ngModel)] = "user.name" class="form-control" disabled="true" id="Name" />
+        <input type="text" name="name" [(ngModel)] = "user.firstname" class="form-control" disabled="true" id="Name" />
       </div>
       <div class="mb-3">
         <label for="lastName" class="form-label">Cognome</label>
-        <input type="text" name="lastName" [(ngModel)] = "user.lastName" class="form-control" id="lastName"disabled="true"  />
+        <input type="text" name="lastName" [(ngModel)] = "user.lastname" class="form-control" id="lastName"disabled="true"  />
       </div>
 
       <div class="mb-3">
@@ -25,16 +25,14 @@
         <label for="password" class="form-label">Password</label>
         <input type="text" name="password" [(ngModel)] = "user.password" class="form-control" id="password" disabled="true"  />
       </div>
-      <br/>
   
         <div class="mb-3">
             <label for="verified" class="form-label">Verificato </label>
             <mat-slide-toggle type="checkbox" name="verified" [(ngModel)] = "user.verified"  id="verified" disabled="true"></mat-slide-toggle>
           </div>
-          <br/>
 
           <div class="mb-3">
-            <label for="elimitato" class="form-label">Elimitato </label>
+            <label for="elimitato" class="form-label">Eliminato </label>
             <mat-slide-toggle type="checkbox" name="elimitato" [(ngModel)] = "user.deleted"  id="elimitato"  disabled="true"></mat-slide-toggle>
           </div>
 

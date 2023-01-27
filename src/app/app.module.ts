@@ -23,6 +23,9 @@ import { UserUpdateComponent } from './user-update/user-update.component';
 import { UserCreateComponent } from './user-create/user-create.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MessageService } from './message.service';
+import { AuthService } from './auth.service';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +38,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     UserDetailComponent,
     UserUpdateComponent,
     UserCreateComponent,
-    TopBarComponent
+    TopBarComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -47,8 +51,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     DataTablesModule,
     BrowserAnimationsModule,
     MatButtonModule,
-    MatSlideToggleModule
-   
+    MatSlideToggleModule,
+    ReactiveFormsModule,
+
     
     
   ],

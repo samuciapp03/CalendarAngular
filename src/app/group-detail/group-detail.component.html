@@ -101,8 +101,8 @@
 
           <tr *ngFor="let user of usrList">
             <td scope="col">{{user.id}}</td>
-            <td scope="col" class="overflowTxt" [title]="user.name">{{user.name}}</td>
-            <td scope="col" class="overflowTxt" [title]="user.lastName"> {{user.lastName}}</td>
+            <td scope="col" class="overflowTxt" [title]="user.firstname">{{user.firstname}}</td>
+            <td scope="col" class="overflowTxt" [title]="user.lastname"> {{user.lastname}}</td>
             <td scope="col" class="overflowTxt" [title]="user.email">{{user.email}}</td>
             <td scope="col" class="overflowTxt" [title]="user.username">{{user.username}}</td>
             <td scope="col" class="overflowTxt" [title]="user.password">{{user.password}}</td>

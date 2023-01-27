@@ -4,6 +4,7 @@ import { GroupCreateComponent } from './group-create/group-create.component';
 import { GroupDetailComponent } from './group-detail/group-detail.component';
 import { GroupListComponent } from './group-list/group-list.component';
 import { GroupUpdateComponent } from './group-update/group-update.component';
+import { LoginComponent } from './login/login.component';
 import { UserCreateComponent } from './user-create/user-create.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { UserListComponent } from './user-list/user-list.component';
@@ -18,7 +19,8 @@ const routes: Routes = [
   {path:'users', component:UserListComponent},
   {path:'user-detail/:id', component:UserDetailComponent},
   {path:'user-update/:id', component:UserUpdateComponent},
-  {path:'user-create', component:UserCreateComponent}
+  {path:'user-create', component:UserCreateComponent},
+  {path:'login', component:LoginComponent}
 
 ];
 
