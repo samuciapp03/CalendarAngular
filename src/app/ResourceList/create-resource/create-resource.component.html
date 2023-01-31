@@ -1,0 +1,26 @@
+<div class="container col-sm-12" style="font-size: 25px;">
+    <br>
+    <h2>Creazione nuova risorsa</h2>
+    <br>
+    <div class="form-group">
+        <label for="name" class="col-sm-2">Nome</label>
+        <input type="text" id="name" name="name" [(ngModel)]="resource.name" (ngModelChange)="checkValues()"> 
+        <div class="textError">{{ resourceError.rName }}</div>   
+    </div>
+    <br>
+    <div class="form-group">
+        <label for="type" class="col-sm-2">Tipo</label>
+        <input type="type" id="type" name="type" [(ngModel)]="resource.type" (ngModelChange)="checkValues()"> 
+        <div class="textError">{{ resourceError.rType }}</div>  
+    </div>
+    <br>
+    <div class="form-group">
+        <label for="active" class="col-sm-2">Attiva</label>
+        <input type="checkbox" id="active" name="active" class="form-check-input" [(ngModel)]="resource.active">
+    </div>
+    <br>
+    <div class="form-group">
+        <button (click)="create()" class="btn btn-success" style="margin-right: 25px">Conferma e crea</button>
+        <button (click)="back()" class="btn btn-danger">Torna alla lista</button> 
+    </div>
+</div>

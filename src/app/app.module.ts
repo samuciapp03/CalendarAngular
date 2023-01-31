@@ -49,6 +49,7 @@ import {
 import {
   CreateSlotPrenotazioniComponent
 } from './PrenotazioniList/create-slot-prenotazioni/create-slot-prenotazioni.component';
+import { CreateResourceComponent } from './ResourceList/create-resource/create-resource.component';
 
 @NgModule({
   declarations: [
@@ -82,6 +83,7 @@ import {
     UpdateSlotPrenotazioniComponent,
     DeleteSlotPrenotazioniComponent,
     CreateSlotPrenotazioniComponent,
+    CreateResourceComponent,
   ],
   imports: [
     BrowserModule,
