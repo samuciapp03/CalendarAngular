@@ -22,7 +22,7 @@ export class PasswordForgottenComponent {
     if (this.email.valid) {
       this.loading = true
       try {
-        const s = await this.service.passwordForgotten(this.email.value);
+        const s = await this.service.passwordForgotten(this.email.value!);
         this.messageService.success(s.message);
         await this.router.navigateByUrl('/login')
       } catch (e: any) {

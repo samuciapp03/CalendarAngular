@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
-import { passwordValidator, repeatPasswordValidator } from '../validators'
+import { passwordValidator, repeatPasswordValidator } from '../../validators'
 import { ActivatedRoute, Router } from '@angular/router'
 import { AuthService } from '../../auth.service'
-import { ErrorsResponse, isErrorsResponse } from '../response/errors.response'
+import { ErrorsResponse, isErrorsResponse } from '../../response/errors.response'
 import { MessageService } from '../../message.service'
 
 @Component({
   selector: 'app-change-password',
   templateUrl: './change-password.component.html',
-  styleUrls: ['./email-list.component.css'],
+  styleUrls: ['./change-password.component.css'],
 })
 export class ChangePasswordComponent {
   token!: string
@@ -44,7 +44,7 @@ export class ChangePasswordComponent {
     }
     this.loading = true
     try {
-      const res = await this.authService.changePassword({ token: this.token!, password: this.password.value })
+      const res = await this.authService.changePassword({ token: this.token!, password: this.password.value! })
       this.messageService.success(res.message)
       await this.router.navigate(['/login'])
     } catch (e: any) {

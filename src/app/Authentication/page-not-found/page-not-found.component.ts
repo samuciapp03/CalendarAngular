@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-page-not-found',
@@ -17,6 +18,6 @@ export class PageNotFoundComponent {
   }
 
   onHome(): void {
-    this.router.navigateByUrl('/home')
+    this.router.navigateByUrl('/month')
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
-import { Email } from '../models/email'
+import { Email } from '../../models/email.model'
 import { EmailService } from '../../email.service'
 import { MessageService } from '../../message.service'
 

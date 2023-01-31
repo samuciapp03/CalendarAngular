@@ -25,7 +25,7 @@ import {DayViewComponent} from './Calendar/day-view/day-view.component';
 import {RegisterComponent} from './Authentication/register/register.component';
 import {PasswordForgottenComponent} from './Authentication/password-forgotten/password-forgotten.component';
 import {ChangePasswordComponent} from './Authentication/change-password/change-password.component';
-import {ActiveUserComponent} from './Authentication/active-user/active-user.component';
+import {ActivateUserComponent} from './Authentication/active-user/active-user.component';
 import {EmailListComponent} from './Authentication/email-list/email-list.component';
 import {EmailDetailComponent} from './Authentication/email-detail/email-detail.component';
 import {ProfileComponent} from './Authentication/profile/profile.component';
@@ -49,7 +49,7 @@ import {PageNotFoundComponent} from './Authentication/page-not-found/page-not-fo
     RegisterComponent,
     PasswordForgottenComponent,
     ChangePasswordComponent,
-    ActiveUserComponent,
+    ActivateUserComponent,
     EmailListComponent,
     EmailDetailComponent,
     ProfileComponent,

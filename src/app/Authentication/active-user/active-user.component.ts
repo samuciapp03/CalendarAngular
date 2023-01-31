@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { AuthService } from '../../auth.service'
-import { ErrorsResponse, isErrorsResponse } from '../response/errors.response'
-import { MessageService } from '../message.service'
+import { ErrorsResponse, isErrorsResponse } from '../../response/errors.response'
+import { MessageService } from '../../message.service'
 
 @Component({
   selector: 'app-active-user',
