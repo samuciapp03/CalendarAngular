@@ -1,0 +1,39 @@
+<h1>Resource</h1>
+
+<form style="width:40%" class="form-background">
+    <input class="form-control" type="file" 
+    (change)="onChange($event)">
+    <button (click)="onUpload()" class="btn btn-success">Upload</button>
+  
+    <button type="button" class="btn btn-primary"  (click)="downloadResource()">Export Resource</button>                                              
+</form>
+
+<br>    
+  <table class="table table-bordered">
+     
+    <thead >
+       
+        <tr>
+           
+            <th scope="col"> <font color="black">Id</font></th>
+            <th scope="col"> <font color="black">Creation Time</font></th>
+            <th scope="col"> <font color="black">Undo Code</font></th>
+            <th scope="col"> <font color="black">type</font></th>
+            <th scope="col"> <font color="black">delete</font></th>
+        </tr>
+    </thead>
+    <tbody>
+       
+        <tr *ngFor = "let item of list">
+            <td scope="col"> <font color="black">{{item.id}}</font></td>
+            <td scope="col"> <font color="black">{{item.creationTime}}</font></td>
+            <td scope="col"> <font color="black">{{item.undoCode}}</font></td>
+            <td scope="col"> <font color="black">{{item.type}}</font></td>
+            <td class="right">
+                 <button type="button" class="btn btn-primary"  (click)="deleteLog(item.undoCode)"><span class="material-icons">delete_outline</span></button>
+
+            </td>
+            </tr>
+    </tbody>
+     </table>
+        

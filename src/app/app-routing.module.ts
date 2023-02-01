@@ -11,6 +11,7 @@ import {UserCreateComponent} from './UserList/user-create/user-create.component'
 import {UserDetailComponent} from './UserList/user-detail/user-detail.component';
 import {UserListComponent} from './UserList/user-list/user-list.component';
 import {UserUpdateComponent} from './UserList/user-update/user-update.component';
+import { ExcelPageResourceComponent } from './ResourceList/excel-page-resource/excel-page-resource.component';
 
 let today = new Date();
 
@@ -36,6 +37,7 @@ const routes: Routes = [
   {path: 'user-update/:id', component: UserUpdateComponent},
   {path: 'user-create', component: UserCreateComponent},
   {path: 'login', component: LoginComponent},
+  {path: 'excel-page-resource', component:ExcelPageResourceComponent},
   {
     path: '',
     redirectTo: month,

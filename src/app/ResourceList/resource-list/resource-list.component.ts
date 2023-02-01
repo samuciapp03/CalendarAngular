@@ -9,7 +9,7 @@ import { RestResponse } from '../interfaces/response';
 @Component({
   selector: 'app-resource-list',
   templateUrl: './resource-list.component.html',
-  styleUrls: ['./resource-list.component.css', '../css/styleAdmin.css']
+  styleUrls: ['./resource-list.component.css']
 })
 export class ResourceListComponent {
 
@@ -111,5 +111,7 @@ export class ResourceListComponent {
     }
     });
   }
-
+  excelPage(){
+    this.router.navigateByUrl('excel-page')
+  }
 }
