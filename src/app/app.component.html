@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid" style="font-size: 18px;">
   <div class="row flex-nowrap">
     <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark"
          id="sideBar">
@@ -38,8 +38,10 @@
 
           <li style="cursor: pointer" class="nav-item" routerLink="/groups">
             <p>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
-                <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                   class="bi bi-people-fill" viewBox="0 0 16 16">
+                <path
+                  d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
               </svg>
               Lista Gruppi
             </p>
@@ -47,10 +49,19 @@
 
           <li style="cursor: pointer" class="nav-item" routerLink="/users">
             <p>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-lines-fill" viewBox="0 0 16 16">
-                <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z"/>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                   class="bi bi-person-lines-fill" viewBox="0 0 16 16">
+                <path
+                  d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z"/>
               </svg>
               Lista Utenti
+            </p>
+          </li>
+
+          <li style="cursor: pointer" class="nav-item" routerLink="/email-list" *ngIf="this.service.isAdmin">
+            <p>
+              <i class="fas fa-envelope"></i>
+              Lista Email
             </p>
           </li>
         </ul>
@@ -68,16 +79,17 @@
               <path fill-rule="evenodd"
                     d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
             </svg>
-            <span class="d-none d-sm-inline mx-1 ms-2">User
-								name</span>
+            <span
+              class="d-none d-sm-inline mx-1 ms-2">{{ isLoggedIn ? 'Benvenuto, ' + user!.username : 'Non autenticato' }}</span>
           </a>
           <ul class="dropdown-menu dropdown-menu-dark text-small shadow"
               aria-labelledby="dropdownUser1">
-            <li><a class="dropdown-item" href="#">Profile</a></li>
-            <li>
+            <li *ngIf="isLoggedIn"><a class="dropdown-item" routerLink="/profile">Profile</a></li>
+            <li *ngIf="isLoggedIn">
               <hr class="dropdown-divider"/>
             </li>
-            <li><a class="dropdown-item" href="#">Sign out</a></li>
+            <li *ngIf="isLoggedIn"><a class="dropdown-item" (click)="logout()">Sign out</a></li>
+            <li *ngIf="!isLoggedIn"><a class="dropdown-item" routerLink="/login">Sign in</a></li>
           </ul>
         </div>
       </div>
@@ -85,6 +97,13 @@
 
     <!-- body interno alla sidebar -->
     <div class="col py-3">
+      <div class="text-center my-2" *ngIf="messages.length > 0" style="flex-grow: 1">
+        <div class="alert alert-dismissible fade show" role="alert" style="opacity: 1;"
+             *ngFor="let message of messages" [ngClass]="getAlertClass(message)">
+          {{ message.text }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      </div>
       <router-outlet></router-outlet>
     </div>
 

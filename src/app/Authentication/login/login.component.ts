@@ -1,9 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core'
 import { Router } from '@angular/router'
-import { AuthService } from '../auth.service'
-import { isErrorResponse } from '../response/error.response'
+import { AuthService } from '../../auth.service'
+import { isErrorResponse } from '../../response/error.response'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
-import { MessageService } from '../message.service'
+import { MessageService } from '../../message.service'
 
 @Component({
   selector: 'app-login',

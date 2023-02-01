@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import {NgSelectModule} from '@ng-select/ng-select';
 import {DataTablesModule} from 'angular-datatables';
 import {MatButtonModule} from '@angular/material/button';
@@ -19,7 +19,7 @@ import {UserUpdateComponent} from './UserList/user-update/user-update.component'
 import {UserCreateComponent} from './UserList/user-create/user-create.component';
 import {TopBarComponent} from './UserList/top-bar/top-bar.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {LoginComponent} from './login/login.component';
+import {LoginComponent} from './Authentication/login/login.component';
 import {MonthViewComponent} from './Calendar/month-view/month-view.component';
 import {DayViewComponent} from './Calendar/day-view/day-view.component';
 import {RegisterComponent} from './Authentication/register/register.component';
@@ -30,6 +30,7 @@ import {EmailListComponent} from './Authentication/email-list/email-list.compone
 import {EmailDetailComponent} from './Authentication/email-detail/email-detail.component';
 import {ProfileComponent} from './Authentication/profile/profile.component';
 import {PageNotFoundComponent} from './Authentication/page-not-found/page-not-found.component';
+import { TokenInterceptor } from './Authentication/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -68,14 +69,8 @@ import {PageNotFoundComponent} from './Authentication/page-not-found/page-not-fo
     MatSlideToggleModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }],
   bootstrap: [AppComponent],
 })
 export class AppModule {
-  rolesSelect = [
-    {name: 'SUPER_USER'},
-    {name: 'ADMIN'},
-    {name: 'MODERATOR'},
-    {name: 'USER'},
-  ];
 }

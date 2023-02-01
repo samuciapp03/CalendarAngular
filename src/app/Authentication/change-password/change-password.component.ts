@@ -14,7 +14,7 @@ import { MessageService } from '../../message.service'
 export class ChangePasswordComponent {
   token!: string
   form = new FormGroup({
-    password: new FormControl('', [Validators.required, passwordValidator]),
+    password: new FormControl('', [Validators.required, passwordValidator()]),
     repeatPassword: new FormControl('', [Validators.required]),
   }, { validators: repeatPasswordValidator })
   loading = false
@@ -28,10 +28,9 @@ export class ChangePasswordComponent {
   }
   constructor(private readonly route: ActivatedRoute, private readonly router: Router, private readonly authService: AuthService,
               private readonly messageService: MessageService) {
-
-    const t = this.authService.token 
-    console.log(t)
-    if (t === null) {
+    const t = this.route.snapshot.queryParamMap.get('token')
+    if (!t) {
+      this.messageService.warning('No token found')
       this.router.navigate(['/'])
     } else {
       this.token = t

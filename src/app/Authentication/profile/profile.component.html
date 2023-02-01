@@ -1,106 +1,145 @@
-<div [formGroup]="profileForm">
-    <div class="container col-sm-12">
-      <div class="form-group">
-        <label for="Label" class="col-sm-2">ID</label>
-           <span>{{user!.id}}</span>
-      </div>
-    
-      <div class="form-group">
-        <label for="Label" class="col-sm-2">Username</label>
-        <div *ngIf ="isFirstButtonVisible === true">
-          <input type ="text" id="username" placeholder={{user!.username}}
-           class="form-control" formControlName="username">
-           <div *ngIf="username.invalid && (username.dirty || username.touched)"
-                         class="alert alert-danger my-3">
-                        <div *ngIf="username.errors?.['maxlength']">
-                            L'username deve essere lungo massimo 255 caratteri.
-                        </div>
-                        <div *ngIf="username.errors?.['minlength']">
-                            L'username deve essere lungo almeno 4 caratteri.
-                        </div>
-           </div>
-       </div>
-       <div *ngIf ="isFirstButtonVisible === false">
-          <span>{{user!.username}}</span>
-       </div>
-      </div>
-    
-      <div class="form-group">
-        <label for="Label" class="col-sm-2">Nome</label>
-        <div *ngIf ="isFirstButtonVisible === true">
-          <input type ="text" id="user.firstName" placeholder={{user!.firstName}}
-          class="form-control" formControlName="firstName" required>
-          <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)"
-                         class="alert alert-danger my-3">
-                <div *ngIf="firstName.errors?.['required']">
-                  Il nome è richiesto
-                </div>
-                        <div *ngIf="firstName.errors?.['maxlength']">
-                            Il nome deve essere lungo massimo 255 caratteri.
-                        </div>
-                    </div>
-       </div>
-       <div *ngIf ="isFirstButtonVisible === false">
-          <span>{{user!.firstName}}</span>
-       </div>
-      </div>
-    
-      <div class="form-group">
-        <label for="Label" class="col-sm-2">Cognome</label>
-        <div *ngIf ="isFirstButtonVisible === true">
-          <input type ="text" id="user.lastName" placeholder={{user!.lastName}}
-          class="form-control" formControlName="lastName" required>
-          <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)"
-                         class="alert alert-danger my-3">
-              <div *ngIf="lastName.errors?.['required']">
-                Il cognome è richiesto
-              </div>
-                        <div *ngIf="lastName.errors?.['maxlength']">
-                            Il cognome deve essere lungo massimo 255 caratteri.
-                        </div>
-                </div>
-       </div>
-       <div *ngIf ="isFirstButtonVisible === false">
-          <span>{{user!.lastName}}</span>
-       </div>
-      </div>
-    
-      <div class="form-group">
-      <label for="Label" class="col-sm-2">E-mail</label>
-      <span>
-        <div *ngIf ="isFirstButtonVisible === true">
-          <input type ="email" id="user.E-mail" placeholder={{user!.email}}
-          class="form-control" formControlName="email" required>
-          <div *ngIf="email.invalid && (email.dirty || email.touched)"
-                         class="alert alert-danger my-3">
-                        <div *ngIf="email.errors?.['required']">
-                            L'email è obbligatoria.
-                        </div>
-                        <div *ngIf="email.errors?.['maxlength']">
-                            L'email deve essere lunga massimo 255 caratteri.
-                        </div>
-                        <div *ngIf="email.errors?.['minlength']">
-                            L'email deve essere lunga almeno 4 caratteri.
-                        </div>
-                        <div *ngIf="email.errors?.['email']">
-                            L'email dev'essere valida.
-                        </div>
-           </div>
-       </div>
-       <div *ngIf ="isFirstButtonVisible === false">
-             {{user!.email}}
-       </div>
-      </span>
-    
-      </div>
-      <div *ngIf="isFirstButtonVisible === false">
-        <button class="btn btn-primary" (click)="changeButton()"><i class="far fa-user pr-2" aria-hidden="true"></i>Edit</button>
-      </div>
-      <div *ngIf="isFirstButtonVisible === true">
-        <button class="btn btn-primary" (click)="onSave()"><i class="far fa-user pr-2" aria-hidden="true"></i>Save</button>
-        <span>  <button class="btn btn-primary" (click)="goBack()">Back</button></span>
-    
-      </div>
+<form [formGroup]="profileForm">
+  <div class="container col-sm-12">
+
+    <!-- Username -->
+    <div class="mb-3">
+      <label for="username" class="form-label">Username</label>
+      <input type="text" class="form-control" id="username" formControlName="username" [readOnly]="!isEditing">
     </div>
+
+    <!-- First Name -->
+    <div class="mb-3">
+      <label for="firstName" class="form-label">First Name</label>
+      <input type="text" class="form-control" id="firstName" formControlName="firstName" [readOnly]="!isEditing">
     </div>
-    
+
+    <!-- Last Name -->
+    <div class="mb-3">
+      <label for="lastName" class="form-label">Last Name</label>
+      <input type="text" class="form-control" id="lastName" formControlName="lastName" [readOnly]="!isEditing">
+    </div>
+
+    <div class="col g-3 m-2">
+      <button *ngIf="!isEditing" class="btn btn-primary" (click)="isEditing = true">
+        <i class="far fa-user pr-2 me-2" aria-hidden="true"></i>Edit
+      </button>
+      <button *ngIf="isEditing" class="btn btn-primary me-3" (click)="save()" [disabled]="!profileForm.valid">
+        <i class="far fa-user pr-2 me-2" aria-hidden="true"></i>Save
+      </button>
+      <button *ngIf="isEditing" class="btn btn-danger" (click)="cancel()">
+        Cancel
+      </button>
+    </div>
+
+    <div class="col m-2">
+      <button class="btn btn-primary" (click)="changePassword()">
+        <i class="fas fa-key pr-2 me-2" aria-hidden="true"></i>Change Password
+      </button>
+    </div>
+
+    <!--    <div class="form-group">-->
+    <!--      <label for="Label" class="col-sm-2">ID</label>-->
+    <!--      <span>{{user!.id}}</span>-->
+    <!--    </div>-->
+
+    <!--    <div class="form-group">-->
+    <!--      <label for="Label" class="col-sm-2">Username</label>-->
+    <!--      <div *ngIf="isFirstButtonVisible === true">-->
+    <!--        <input type="text" id="username" placeholder={{user!.username}}-->
+    <!--               class="form-control" formControlName="username">-->
+    <!--        <div *ngIf="username.invalid && (username.dirty || username.touched)"-->
+    <!--             class="alert alert-danger my-3">-->
+    <!--          <div *ngIf="username.errors?.['maxlength']">-->
+    <!--            L'username deve essere lungo massimo 255 caratteri.-->
+    <!--          </div>-->
+    <!--          <div *ngIf="username.errors?.['minlength']">-->
+    <!--            L'username deve essere lungo almeno 4 caratteri.-->
+    <!--          </div>-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--      <div *ngIf="isFirstButtonVisible === false">-->
+    <!--        <span>{{user!.username}}</span>-->
+    <!--      </div>-->
+    <!--    </div>-->
+
+    <!--    <div class="form-group">-->
+    <!--      <label for="Label" class="col-sm-2">Nome</label>-->
+    <!--      <div *ngIf="isFirstButtonVisible === true">-->
+    <!--        <input type="text" id="user.firstName" placeholder={{user!.firstName}}-->
+    <!--               class="form-control" formControlName="firstName" required>-->
+    <!--        <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)"-->
+    <!--             class="alert alert-danger my-3">-->
+    <!--          <div *ngIf="firstName.errors?.['required']">-->
+    <!--            Il nome è richiesto-->
+    <!--          </div>-->
+    <!--          <div *ngIf="firstName.errors?.['maxlength']">-->
+    <!--            Il nome deve essere lungo massimo 255 caratteri.-->
+    <!--          </div>-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--      <div *ngIf="isFirstButtonVisible === false">-->
+    <!--        <span>{{user!.firstName}}</span>-->
+    <!--      </div>-->
+    <!--    </div>-->
+
+    <!--    <div class="form-group">-->
+    <!--      <label for="Label" class="col-sm-2">Cognome</label>-->
+    <!--      <div *ngIf="isFirstButtonVisible === true">-->
+    <!--        <input type="text" id="user.lastName" placeholder={{user!.lastName}}-->
+    <!--               class="form-control" formControlName="lastName" required>-->
+    <!--        <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)"-->
+    <!--             class="alert alert-danger my-3">-->
+    <!--          <div *ngIf="lastName.errors?.['required']">-->
+    <!--            Il cognome è richiesto-->
+    <!--          </div>-->
+    <!--          <div *ngIf="lastName.errors?.['maxlength']">-->
+    <!--            Il cognome deve essere lungo massimo 255 caratteri.-->
+    <!--          </div>-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--      <div *ngIf="isFirstButtonVisible === false">-->
+    <!--        <span>{{user!.lastName}}</span>-->
+    <!--      </div>-->
+    <!--    </div>-->
+
+    <!--    <div class="form-group">-->
+    <!--      <label for="Label" class="col-sm-2">E-mail</label>-->
+    <!--      <span>-->
+    <!--        <div *ngIf="isFirstButtonVisible === true">-->
+    <!--          <input type="email" id="user.E-mail" placeholder={{user!.email}}-->
+    <!--                 class="form-control" formControlName="email" required>-->
+    <!--          <div *ngIf="email.invalid && (email.dirty || email.touched)"-->
+    <!--               class="alert alert-danger my-3">-->
+    <!--                        <div *ngIf="email.errors?.['required']">-->
+    <!--                            L'email è obbligatoria.-->
+    <!--                        </div>-->
+    <!--                        <div *ngIf="email.errors?.['maxlength']">-->
+    <!--                            L'email deve essere lunga massimo 255 caratteri.-->
+    <!--                        </div>-->
+    <!--                        <div *ngIf="email.errors?.['minlength']">-->
+    <!--                            L'email deve essere lunga almeno 4 caratteri.-->
+    <!--                        </div>-->
+    <!--                        <div *ngIf="email.errors?.['email']">-->
+    <!--                            L'email dev'essere valida.-->
+    <!--                        </div>-->
+    <!--           </div>-->
+    <!--       </div>-->
+    <!--       <div *ngIf="isFirstButtonVisible === false">-->
+    <!--             {{user!.email}}-->
+    <!--       </div>-->
+    <!--      </span>-->
+
+    <!--    </div>-->
+    <!--    <div *ngIf="isFirstButtonVisible === false">-->
+    <!--      <button class="btn btn-primary" (click)="changeButton()"><i class="far fa-user pr-2" aria-hidden="true"></i>Edit-->
+    <!--      </button>-->
+    <!--    </div>-->
+    <!--    <div *ngIf="isFirstButtonVisible === true">-->
+    <!--      <button class="btn btn-primary" (click)="onSave()"><i class="far fa-user pr-2" aria-hidden="true"></i>Save-->
+    <!--      </button>-->
+    <!--      <span>  <button class="btn btn-primary" (click)="goBack()">Back</button></span>-->
+
+    <!--    </div>-->
+  </div>
+</form>
+

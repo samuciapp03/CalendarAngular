@@ -27,10 +27,10 @@ export class GroupUpdateComponent implements OnInit {
   }
 
   rolesSelect = [
-    {name: 'SUPER_USER'},
-    {name: 'ADMIN'},
-    {name: 'MODERATOR'},
-    {name: 'USER'},
+    {name: 'ROLE_SUPER_USER'},
+    {name: 'ROLE_ADMIN'},
+    {name: 'ROLE_MODERATOR'},
+    {name: 'ROLE_USER'},
     {name: 'ROLE_CREATE_RISORSE'},
     {name: 'ROLE_READ_RISORSE'},
     {name: 'ROLE_UPDATE_RISORSE'},
