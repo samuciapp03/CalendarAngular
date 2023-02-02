@@ -64,14 +64,12 @@ export class BookingService {
   }
 
   deleteBooking(booking: Booking) {
-    const {id} = booking;
     this.httpClient.delete('http://localhost:8080/calendar/api/booking/' + booking.bookingId, {headers: this.headers}).subscribe(resp => {
       console.log(resp)
     })
   }
 
   bookBooking(booking: Booking) {
-    const {id} = booking;
     this.httpClient.post('http://localhost:8080/calendar/api/booking/' + booking.id, '', {headers: this.headers})
       .subscribe({
         next: console.log,

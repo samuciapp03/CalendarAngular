@@ -25,7 +25,7 @@ export class MonthViewComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private title: Title,
-    private service: BookingService
+    private service: BookingService,
   ) {
     this.title.setTitle('Calendar - Month');
   }
