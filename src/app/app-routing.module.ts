@@ -53,7 +53,6 @@ const routes: Routes = [
   { path: 'email-list', component: EmailListComponent, canActivate: [AdminGuard] },
   { path: 'email-detail/:id', component: EmailDetailComponent, canActivate: [AdminGuard] },
   { path: 'profile', component: ProfileComponent, canActivate: [UserGuard] },
-  //{path: '**', component: PageNotFoundComponent},
   {
     path: 'month',
     redirectTo: month,
@@ -72,6 +71,7 @@ const routes: Routes = [
     path: 'day/:year/:month/:day',
     component: DayViewComponent,
   },
+  { path: '**', component: PageNotFoundComponent},
 ];
 
 @NgModule({
