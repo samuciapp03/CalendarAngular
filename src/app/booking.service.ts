@@ -19,10 +19,10 @@ export class BookingService {
       from:
         start.getFullYear() +
         '-' +
-        (start.getMonth() + 1) +
+        ('0' + start.getMonth() + 1).slice(-2) +
         '-' +
-        start.getDate(),
-      to: end.getFullYear() + '-' + (end.getMonth() + 1) + '-' + end.getDate(),
+        ('0' + start.getDate()).slice(-2),
+      to: end.getFullYear() + '-' + ('0' + (end.getMonth() + 1)).slice(-2) + '-' + ('0' + end.getDate()).slice(-2),
     };
 
     console.log(body);
