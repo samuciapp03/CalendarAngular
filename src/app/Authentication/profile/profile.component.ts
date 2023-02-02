@@ -90,6 +90,7 @@ export class ProfileComponent {
         firstName: this.firstName.value!,
         lastName: this.lastName.value!,
       })
+      this.isEditing = false;
     } catch (e: any) {
       if (isErrorsResponse(e.error)) {
         (e.error as ErrorsResponse).forEach(err => {
