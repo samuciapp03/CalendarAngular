@@ -12,19 +12,19 @@ export class UserService {
   constructor(private httpClient: HttpClient, private auth: AuthService) { }
 
   getAllUsers(): Observable<Object> {
-    return this.httpClient.get('http://localhost:8080/api/users/', this.auth.headers);
+    return this.httpClient.get('http://localhost:8080/api/users/');
   }
 
   getUserById(id: number): Observable<User> {
-    return this.httpClient.get<User>('http://localhost:8080/api/users/' + id, this.auth.headers);
+    return this.httpClient.get<User>('http://localhost:8080/api/users/' + id);
   }
 
   createUser(user: User):Observable<Object> {
-    return this.httpClient.post('http://localhost:8080/api/users/', user, this.auth.headers);
+    return this.httpClient.post('http://localhost:8080/api/users/', user);
   }
 
   getUsersFromAGroup(id:number):Observable<Object>{
-    return this.httpClient.get('http://localhost:8080/api/users/'+id+'/usrs_from_group', this.auth.headers)
+    return this.httpClient.get('http://localhost:8080/api/users/'+id+'/usrs_from_group')
   }
 
   /*
@@ -41,27 +41,27 @@ export class UserService {
   */
 
   updateUser(user:User):Observable<Object>{
-    return this.httpClient.put('http://localhost:8080/api/users/'+user.id, user, this.auth.headers);
+    return this.httpClient.put('http://localhost:8080/api/users/'+user.id, user);
   }
 
-  
+
 
   deleteUser(id:number){
-    return this.httpClient.delete('http://localhost:8080/api/users/'+id, this.auth.headers);
+    return this.httpClient.delete('http://localhost:8080/api/users/'+id);
   }
 
   valueAviable(value:string, callbackAviable: () => void){
 
-    this.httpClient.get('http://localhost:8080/api/users?value='+value, this.auth.headers).subscribe((response:any) => {
+    this.httpClient.get('http://localhost:8080/api/users?value='+value).subscribe((response:any) => {
       console.log(response['exists']);
 
       if(response['exists'] == 'true'){
         console.log('richiamo la funzione di callback')
         callbackAviable();
       }
-      
+
     });
-    
+
   }
 
 

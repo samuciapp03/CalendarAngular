@@ -1,16 +1,26 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {DayViewComponent} from './Calendar/day-view/day-view.component';
-import {GroupCreateComponent} from './UserList/group-create/group-create.component';
-import {GroupDetailComponent} from './UserList/group-detail/group-detail.component';
-import {GroupListComponent} from './UserList/group-list/group-list.component';
-import {GroupUpdateComponent} from './UserList/group-update/group-update.component';
-import {LoginComponent} from './login/login.component';
-import {MonthViewComponent} from './Calendar/month-view/month-view.component';
-import {UserCreateComponent} from './UserList/user-create/user-create.component';
-import {UserDetailComponent} from './UserList/user-detail/user-detail.component';
-import {UserListComponent} from './UserList/user-list/user-list.component';
-import {UserUpdateComponent} from './UserList/user-update/user-update.component';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { DayViewComponent } from './Calendar/day-view/day-view.component';
+import { GroupCreateComponent } from './UserList/group-create/group-create.component';
+import { GroupDetailComponent } from './UserList/group-detail/group-detail.component';
+import { GroupListComponent } from './UserList/group-list/group-list.component';
+import { GroupUpdateComponent } from './UserList/group-update/group-update.component';
+import { LoginComponent } from './Authentication/login/login.component';
+import { MonthViewComponent } from './Calendar/month-view/month-view.component';
+import { UserCreateComponent } from './UserList/user-create/user-create.component';
+import { UserDetailComponent } from './UserList/user-detail/user-detail.component';
+import { UserListComponent } from './UserList/user-list/user-list.component';
+import { UserUpdateComponent } from './UserList/user-update/user-update.component';
+import { PasswordForgottenComponent } from './Authentication/password-forgotten/password-forgotten.component';
+import { ChangePasswordComponent } from './Authentication/change-password/change-password.component';
+import { ActivateUserComponent } from './Authentication/active-user/active-user.component';
+import { EmailListComponent } from './Authentication/email-list/email-list.component';
+import { EmailDetailComponent } from './Authentication/email-detail/email-detail.component';
+import { ProfileComponent } from './Authentication/profile/profile.component';
+import { PageNotFoundComponent } from './Authentication/page-not-found/page-not-found.component';
+import { RegisterComponent } from './Authentication/register/register.component';
+import { AdminGuard } from './Authentication/admin.guard';
+import { UserGuard } from './Authentication/user.guard';
 
 let today = new Date();
 
@@ -26,16 +36,23 @@ let day: string =
   today.getDate();
 
 const routes: Routes = [
-  {path: '', redirectTo: 'month', pathMatch: 'full'},
-  {path: 'groups', component: GroupListComponent},
-  {path: 'group-detail/:id', component: GroupDetailComponent},
-  {path: 'group-update/:id', component: GroupUpdateComponent},
-  {path: 'group-create', component: GroupCreateComponent},
-  {path: 'users', component: UserListComponent},
-  {path: 'user-detail/:id', component: UserDetailComponent},
-  {path: 'user-update/:id', component: UserUpdateComponent},
-  {path: 'user-create', component: UserCreateComponent},
-  {path: 'login', component: LoginComponent},
+  { path: '', redirectTo: 'login', pathMatch: 'full' }, // firstComponent?
+  { path: 'groups', component: GroupListComponent },
+  { path: 'group-detail/:id', component: GroupDetailComponent },
+  { path: 'group-update/:id', component: GroupUpdateComponent },
+  { path: 'group-create', component: GroupCreateComponent },
+  { path: 'users', component: UserListComponent },
+  { path: 'user-detail/:id', component: UserDetailComponent },
+  { path: 'user-update/:id', component: UserUpdateComponent },
+  { path: 'user-create', component: UserCreateComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'password-forgotten', component: PasswordForgottenComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'change-password', component: ChangePasswordComponent },
+  { path: 'activate-user', component: ActivateUserComponent },
+  { path: 'email-list', component: EmailListComponent, canActivate: [AdminGuard] },
+  { path: 'email-detail/:id', component: EmailDetailComponent, canActivate: [AdminGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate: [UserGuard] },
   {
     path: 'month',
     redirectTo: month,
