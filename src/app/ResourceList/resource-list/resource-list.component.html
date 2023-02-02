@@ -1,1 +1,110 @@
-<p>resource-list works!</p>
+<div class="overflow-scroll" style="height: 96vh">
+	<div class="body">
+		<div class="sas d-flex justify-content-between align-items-center ">
+			<div class="newResource">
+				<button class="btn btn-success" (click)="createResource()">Crea nuova risorsa</button>
+			</div>
+			<div class="excel">
+				<button class="btn btn-success" (click)="excelPage()">
+					<i class="fas fa-file-excel"></i> Excel
+				  </button>
+			</div>
+			<div class="filler"></div>
+			<div class="form d-flex align-self-center justify-content-xxl-end">
+				<div class="inputContainer align-self-center">
+					<input type="date" id="search" class="form-control inputSearch"
+						name="search">
+				</div>
+				<div class="submitContainer align-self-center">
+					<input type="submit" value="Search" class="btn btn-primary">
+				</div>
+			</div>
+		</div>
+		
+		<br>
+		<div class="tableDiv">
+			<table class="table myTable">
+				<caption>lista risorse</caption>
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Name</th>
+						<th scope="col">Type</th>
+						<th scope="col">Active</th>
+						<th scope="col" class="withBtn"></th>
+					</tr>
+				</thead>
+				<tbody>
+						<tr *ngFor="let resource of page.content">
+							<td>{{resource.id}}</td>
+							<td>{{resource.name}}</td>
+							<td>{{resource.type}}</td>
+							<td>{{resource.active}}</td>
+							<td class="withBtn"><button type="submit" class="btn btn-primary tbBtn"
+									(click)="viewResource(resource.id!)">
+									<div class="fa fa-eye"></div>
+								</button>
+								<button type="submit" class="btn btn-success tbBtn"
+									(click)="modifyResource(resource.id!)">
+									<div class="fa fa-pencil"></div>
+								</button>
+								<button type="submit" class="btn btn-danger tbBtn"
+									(click)="deleteResource(resource.id!)">
+									<div class="fa fa-trash"></div>
+								</button></td>
+						</tr>
+				</tbody>
+			</table>
+		</div>
+		<br>
+		<div class="foot">
+			<div class="pages">
+				<nav aria-label="Page navigation example">
+					<ul class="pagination" *ngIf="page.totalPages != 1">
+	
+						<li class="page-item liNoPadding" *ngIf="currentPage != 1">
+							<a class="page-link" (click)="changePageByNum(1)"> 
+								<span aria-hidden="true">&laquo;</span>
+							</a>
+						</li>
+	
+						<li class="page-item liNoPadding" *ngIf="currentPage != 1" aria-current="page">
+							<a class="page-link" (click)="changePageByNum(currentPage - 1)">
+								{{ currentPage - 1 }}
+							</a>
+						</li>
+	
+						<li class="page-item liNoPadding" aria-current="page">
+							<a class="page-link" id="curr">
+								{{ currentPage }}
+							</a>
+						</li>
+	
+						<li class="page-item liNoPadding" aria-current="page" *ngIf="currentPage < page.totalPages">
+							<a class="page-link" (click)="changePageByNum(currentPage + 1)">
+								{{ currentPage + 1 }}
+							</a>
+						</li>
+	
+						<li class="page-item liNoPadding" *ngIf="currentPage < page.totalPages ">
+							<a class="page-link" (click)="changePageByNum(page.totalPages)">
+								<span aria-hidden="true">&raquo;</span>
+							</a>
+						</li>
+	
+					</ul>
+	
+				</nav>
+			</div>
+			<div class="selectContainer">
+				<select [(ngModel)]="selectValue" class="form-select" aria-label="Default select example"
+					name="select" id="select" (change)="changeNumItems()">
+					<option value="10" [attr.selected]="selectValue == 10 ? true : null">10</option>
+					<option value="25" [attr.selected]="selectValue == 25 ? true : null">25</option>
+					<option value="50" [attr.selected]="selectValue == 50 ? true : null">50</option>
+					<option value="100" [attr.selected]="selectValue == 100 ? true : null">100</option>
+				</select>
+			</div>
+		</div>
+	</div>
+</div>

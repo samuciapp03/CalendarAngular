@@ -1,1 +1,26 @@
-<p>modify-resource works!</p>
+<div class="container col-sm-12" style="font-size: 25px;">
+    <br>
+    <h2>Modifica della risorsa con id: {{ detail.id }}</h2>
+    <br>
+    <div class="form-group">
+        <label for="name" class="col-sm-2">Nome</label>
+        <input type="text" id="name" name="name" [(ngModel)]="detail.name" (change)="checkValues()">
+        <div class="errorText">{{ resourceError.rName }}</div>
+    </div>
+    <br>
+    <div class="form-group">
+        <label for="type" class="col-sm-2">Tipo</label>
+        <input type="type" id="type" name="type" [(ngModel)]="detail.type" (change)="checkValues()"> 
+        <div class="errorText">{{ resourceError.rType }}</div> 
+    </div>
+    <br>
+    <div class="form-group">
+        <label for="active" class="col-sm-2">Attiva</label>
+        <input type="checkbox" id="active" name="active" class="form-check-input" [(ngModel)]="detail.active">
+    </div>
+    <br>
+    <div class="form-group">
+        <button (click)="update()" class="btn btn-success" style="margin-right: 25px">Conferma e modifica</button> 
+        <button (click)="back()" class="btn btn-danger">Torna alla lista</button>
+    </div>
+</div>

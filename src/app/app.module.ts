@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import {HttpClientModule} from '@angular/common/http';
 import {NgSelectModule} from '@ng-select/ng-select';
 import {DataTablesModule} from 'angular-datatables';
 import {MatButtonModule} from '@angular/material/button';
@@ -19,7 +19,7 @@ import {UserUpdateComponent} from './UserList/user-update/user-update.component'
 import {UserCreateComponent} from './UserList/user-create/user-create.component';
 import {TopBarComponent} from './UserList/top-bar/top-bar.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {LoginComponent} from './Authentication/login/login.component';
+import {LoginComponent} from './login/login.component';
 import {MonthViewComponent} from './Calendar/month-view/month-view.component';
 import {DayViewComponent} from './Calendar/day-view/day-view.component';
 import {RegisterComponent} from './Authentication/register/register.component';
@@ -30,7 +30,6 @@ import {EmailListComponent} from './Authentication/email-list/email-list.compone
 import {EmailDetailComponent} from './Authentication/email-detail/email-detail.component';
 import {ProfileComponent} from './Authentication/profile/profile.component';
 import {PageNotFoundComponent} from './Authentication/page-not-found/page-not-found.component';
-import { TokenInterceptor } from './Authentication/token.interceptor';
 import {DeleteResourceComponent} from './ResourceList/delete-resource/delete-resource.component';
 import {ModifyResourceComponent} from './ResourceList/modify-resource/modify-resource.component';
 import {ResourceDetailComponent} from './ResourceList/resource-detail/resource-detail.component';
@@ -50,9 +49,6 @@ import {
 import {
   CreateSlotPrenotazioniComponent
 } from './PrenotazioniList/create-slot-prenotazioni/create-slot-prenotazioni.component';
-import {CreateResourceComponent} from './ResourceList/create-resource/create-resource.component';
-import {ExcelPageComponent} from './excel-page/excel-page.component';
-import {ModalBodyComponent} from './Calendar/modal-body/modal-body.component';
 
 @NgModule({
   declarations: [
