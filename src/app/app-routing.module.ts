@@ -5,36 +5,22 @@ import {GroupCreateComponent} from './UserList/group-create/group-create.compone
 import {GroupDetailComponent} from './UserList/group-detail/group-detail.component';
 import {GroupListComponent} from './UserList/group-list/group-list.component';
 import {GroupUpdateComponent} from './UserList/group-update/group-update.component';
-import {LoginComponent} from './login/login.component';
 import {MonthViewComponent} from './Calendar/month-view/month-view.component';
 import {UserCreateComponent} from './UserList/user-create/user-create.component';
 import {UserDetailComponent} from './UserList/user-detail/user-detail.component';
 import {UserListComponent} from './UserList/user-list/user-list.component';
 import {UserUpdateComponent} from './UserList/user-update/user-update.component';
-import { ExcelPageResourceComponent } from './ResourceList/excel-page-resource/excel-page-resource.component';
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { DayViewComponent } from './Calendar/day-view/day-view.component';
-import { GroupCreateComponent } from './UserList/group-create/group-create.component';
-import { GroupDetailComponent } from './UserList/group-detail/group-detail.component';
-import { GroupListComponent } from './UserList/group-list/group-list.component';
-import { GroupUpdateComponent } from './UserList/group-update/group-update.component';
-import { LoginComponent } from './Authentication/login/login.component';
-import { MonthViewComponent } from './Calendar/month-view/month-view.component';
-import { UserCreateComponent } from './UserList/user-create/user-create.component';
-import { UserDetailComponent } from './UserList/user-detail/user-detail.component';
-import { UserListComponent } from './UserList/user-list/user-list.component';
-import { UserUpdateComponent } from './UserList/user-update/user-update.component';
-import { PasswordForgottenComponent } from './Authentication/password-forgotten/password-forgotten.component';
-import { ChangePasswordComponent } from './Authentication/change-password/change-password.component';
-import { ActivateUserComponent } from './Authentication/active-user/active-user.component';
-import { EmailListComponent } from './Authentication/email-list/email-list.component';
-import { EmailDetailComponent } from './Authentication/email-detail/email-detail.component';
-import { ProfileComponent } from './Authentication/profile/profile.component';
-import { PageNotFoundComponent } from './Authentication/page-not-found/page-not-found.component';
-import { RegisterComponent } from './Authentication/register/register.component';
-import { AdminGuard } from './Authentication/admin.guard';
-import { UserGuard } from './Authentication/user.guard';
+import {ExcelPageResourceComponent} from './ResourceList/excel-page-resource/excel-page-resource.component';
+import {LoginComponent} from './Authentication/login/login.component';
+import {PasswordForgottenComponent} from './Authentication/password-forgotten/password-forgotten.component';
+import {ChangePasswordComponent} from './Authentication/change-password/change-password.component';
+import {ActivateUserComponent} from './Authentication/active-user/active-user.component';
+import {EmailListComponent} from './Authentication/email-list/email-list.component';
+import {EmailDetailComponent} from './Authentication/email-detail/email-detail.component';
+import {ProfileComponent} from './Authentication/profile/profile.component';
+import {RegisterComponent} from './Authentication/register/register.component';
+import {AdminGuard} from './Authentication/admin.guard';
+import {UserGuard} from './Authentication/user.guard';
 
 let today = new Date();
 
@@ -67,7 +53,7 @@ const routes: Routes = [
   { path: 'email-list', component: EmailListComponent, canActivate: [AdminGuard] },
   { path: 'email-detail/:id', component: EmailDetailComponent, canActivate: [AdminGuard] },
   { path: 'profile', component: ProfileComponent, canActivate: [UserGuard] },
-  {path: 'excel-page-resource', component:ExcelPageResourceComponent},
+  { path: 'excel-page-resource', component: ExcelPageResourceComponent },
   {
     path: 'month',
     redirectTo: month,

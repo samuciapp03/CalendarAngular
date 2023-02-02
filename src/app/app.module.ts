@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {NgSelectModule} from '@ng-select/ng-select';
 import {DataTablesModule} from 'angular-datatables';
 import {MatButtonModule} from '@angular/material/button';
@@ -19,7 +19,7 @@ import {UserUpdateComponent} from './UserList/user-update/user-update.component'
 import {UserCreateComponent} from './UserList/user-create/user-create.component';
 import {TopBarComponent} from './UserList/top-bar/top-bar.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {LoginComponent} from './login/login.component';
+import {LoginComponent} from './Authentication/login/login.component';
 import {MonthViewComponent} from './Calendar/month-view/month-view.component';
 import {DayViewComponent} from './Calendar/day-view/day-view.component';
 import {RegisterComponent} from './Authentication/register/register.component';
@@ -49,6 +49,10 @@ import {
 import {
   CreateSlotPrenotazioniComponent
 } from './PrenotazioniList/create-slot-prenotazioni/create-slot-prenotazioni.component';
+import {ExcelPageComponent} from './excel-page/excel-page.component';
+import {CreateResourceComponent} from './ResourceList/create-resource/create-resource.component';
+import {ModalBodyComponent} from './Calendar/modal-body/modal-body.component';
+import {TokenInterceptor} from './Authentication/token.interceptor';
 
 @NgModule({
   declarations: [

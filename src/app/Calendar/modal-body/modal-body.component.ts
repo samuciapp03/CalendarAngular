@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Booking} from "../../models/booking.model";
 import {BookingService} from "../../booking.service";
+import {AuthService} from '../../auth.service';
 
 @Component({
   selector: 'app-modal-body',
@@ -11,7 +12,7 @@ export class ModalBodyComponent implements OnInit {
 
   @Input() booking: any;
 
-  constructor(private service: BookingService) {
+  constructor(private service: BookingService, readonly auth: AuthService) {
   }
 
   deleteBooking() {
