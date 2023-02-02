@@ -51,6 +51,7 @@ import {
 } from './PrenotazioniList/create-slot-prenotazioni/create-slot-prenotazioni.component';
 import {CreateResourceComponent} from './ResourceList/create-resource/create-resource.component';
 import {ExcelPageComponent} from './excel-page/excel-page.component';
+import {ModalBodyComponent} from './Calendar/modal-body/modal-body.component';
 
 @NgModule({
   declarations: [
@@ -86,6 +87,7 @@ import {ExcelPageComponent} from './excel-page/excel-page.component';
     CreateSlotPrenotazioniComponent,
     CreateResourceComponent,
     ExcelPageComponent,
+    ModalBodyComponent,
   ],
   imports: [
     BrowserModule,

@@ -17,6 +17,7 @@ export class DayViewComponent implements OnInit {
   currentDate: string = '';
   loading: boolean = true;
   resourceFilter?: string;
+  selectedBooking?: Booking;
 
   list: Map<number, Array<Booking>> = new Map<number, Array<Booking>>();
   listResources: Array<string> = new Array<string>();
@@ -32,7 +33,7 @@ export class DayViewComponent implements OnInit {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
-  ngOnInit() {
+  public ngOnInit() {
     const routeParams = this.route.snapshot.paramMap;
     this.year = Number(routeParams.get('year'));
     this.month = Number(routeParams.get('month'));
@@ -121,6 +122,10 @@ export class DayViewComponent implements OnInit {
 
       this.loading = false;
     });
+  }
+
+  selectBook(book: Booking) {
+    this.selectedBooking = book;
   }
 
   goBack() {

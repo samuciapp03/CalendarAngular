@@ -10,6 +10,11 @@ export class BookingService {
   constructor(private httpClient: HttpClient) {
   }
 
+  headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjgwODAvcHJlbm90YXppb25lX3Jpc29yc2UiLCJzdWIiOiIxIiwiZmlyc3RuYW1lIjoiRW1pbGlhbm8iLCJuYmYiOjE2NzM1Mzc2NzcsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3ByZW5vdGF6aW9uZV9yaXNvcnNlIiwiZXhwIjoxNjgzNTM4NTc3LCJpYXQiOjE2NzM1Mzc2NzcsImVtYWlsIjoiZW1pbGlhbm8yMzAxMDRAZ21haWwuY29tIiwidXNlcm5hbWUiOiJFTUlOQVZBIiwibGFzdG5hbWUiOiJOYXZhIn0.rkE2kzfR4apzmb0c71xx4DVZ1q6a8jnkEtFDTffeB1E',
+  });
+
   findBookingsByDate(
     start: Date,
     end: Date,
@@ -27,15 +32,10 @@ export class BookingService {
 
     console.log(body);
 
-    let headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjgwODAvcHJlbm90YXppb25lX3Jpc29yc2UiLCJzdWIiOiIxIiwiZmlyc3RuYW1lIjoiRW1pbGlhbm8iLCJuYmYiOjE2NzM1Mzc2NzcsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3ByZW5vdGF6aW9uZV9yaXNvcnNlIiwiZXhwIjoxNjgzNTM4NTc3LCJpYXQiOjE2NzM1Mzc2NzcsImVtYWlsIjoiZW1pbGlhbm8yMzAxMDRAZ21haWwuY29tIiwidXNlcm5hbWUiOiJFTUlOQVZBIiwibGFzdG5hbWUiOiJOYXZhIn0.rkE2kzfR4apzmb0c71xx4DVZ1q6a8jnkEtFDTffeB1E',
-    });
-
     let result = new Map<string, Array<Booking>>();
 
     this.httpClient
-      .post('http://localhost:8080/calendar/api/booking/user', body, {headers: headers})
+      .post('http://localhost:8080/calendar/api/booking/user', body, {headers: this.headers})
       .subscribe((resp) => {
         let list = new Map<string, Array<BookingDto>>(Object.entries(resp));
 
@@ -61,5 +61,21 @@ export class BookingService {
 
         updateCallBack(result);
       });
+  }
+
+  deleteBooking(booking: Booking) {
+    const {id} = booking;
+    this.httpClient.delete('http://localhost:8080/calendar/api/booking/' + booking.bookingId, {headers: this.headers}).subscribe(resp => {
+      console.log(resp)
+    })
+  }
+
+  bookBooking(booking: Booking) {
+    const {id} = booking;
+    this.httpClient.post('http://localhost:8080/calendar/api/booking/' + booking.id, '', {headers: this.headers})
+      .subscribe({
+        next: console.log,
+        error: console.log
+      })
   }
 }

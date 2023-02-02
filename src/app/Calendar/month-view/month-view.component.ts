@@ -19,6 +19,7 @@ export class MonthViewComponent implements OnInit {
   listResources: Array<string> = new Array<string>();
   loading: boolean = true;
   resourceFilter?: string;
+  selectedBooking?: Booking
 
   constructor(
     private route: ActivatedRoute,
@@ -80,6 +81,10 @@ export class MonthViewComponent implements OnInit {
         this.loading = false;
       }
     );
+  }
+
+  selectBook(book: Booking) {
+    this.selectedBooking = book;
   }
 
   previousMonth() {

@@ -67,13 +67,14 @@
         <td *ngIf="book == null; else card"></td>
         <ng-template #card>
           <td
-            [ngClass]="['card-active',
+            [ngClass]="[book.free ? 'card-active' : 'card-busy',
                         book.from.slice(0, 2) === (h.key < 10 ? '0' + h.key.toString() : h.key.toString()) ? 'event-day-start' : '',
                         book.to.slice(0, 2) === (h.key + 1 < 10 ? '0' + (h.key + 1).toString() : (h.key + 1).toString()) ? 'event-day-end' : '',
                         (h.key + 1 < 10 ? '0' + (h.key + 1).toString() : (h.key + 1).toString()) != book.to.slice(0, 2) ? 'event-day-middle' : '']"
             role="button"
             data-bs-toggle="modal"
-            data-bs-target="#modalCard">
+            data-bs-target="#modalCard"
+            (click)="selectBook(book)">
             <div *ngIf="book.from.slice(0, 2) === (h.key < 10 ? '0' + h.key.toString() : h.key.toString())">
               {{book.resource.name}} -
               {{book.from.slice(0, 5)}}/{{book.to.slice(0, 5)}}
@@ -85,3 +86,5 @@
     </tbody>
   </table>
 </div>
+
+<app-modal-body [booking]="selectedBooking"></app-modal-body>
