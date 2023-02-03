@@ -24,11 +24,11 @@ export class LoginComponent implements OnInit {
   async login() {
     if (this.form.valid) {
       this.loading = true
-      const lr = {username: this.form.value.username!, password: this.form.value.password!}
+      const lr = { username: this.form.value.username!, password: this.form.value.password! }
       try {
         await this.service.login(lr)
         this.messageService.success('Login successful')
-        await this.router.navigateByUrl('/month')
+        await this.router.navigateByUrl('/groups')
       } catch (e: any) {
         if (isErrorResponse(e.error)) {
           this.messageService.error(e.error.message)
