@@ -30,7 +30,7 @@ export class MonthViewComponent implements OnInit {
     this.title.setTitle('Calendar - Month');
   }
 
-  ngOnInit() {
+  public ngOnInit() {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
 
     const routeParams = this.route.snapshot.paramMap;
@@ -120,7 +120,7 @@ export class MonthViewComponent implements OnInit {
   filter(resource: string) {
     if (this.listResources.includes(resource)) {
       this.router.navigate(['month/' + this.year + '/' + this.month], {
-        queryParams: {res: resource},
+        queryParams: { res: resource },
       });
     } else {
       this.router.navigate(['month/' + this.year + '/' + this.month]);

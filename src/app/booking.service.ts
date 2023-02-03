@@ -24,7 +24,7 @@ export class BookingService {
       from:
         start.getFullYear() +
         '-' +
-        ('0' + start.getMonth() + 1).slice(-2) +
+        ('0' + (start.getMonth() + 1)).slice(-2) +
         '-' +
         ('0' + start.getDate()).slice(-2),
       to: end.getFullYear() + '-' + ('0' + (end.getMonth() + 1)).slice(-2) + '-' + ('0' + end.getDate()).slice(-2),
@@ -35,7 +35,7 @@ export class BookingService {
     let result = new Map<string, Array<Booking>>();
 
     this.httpClient
-      .post('http://localhost:8080/calendar/api/booking/user', body, {headers: this.headers})
+      .post('http://localhost:8080/calendar/api/booking/user', body, { headers: this.headers })
       .subscribe((resp) => {
         let list = new Map<string, Array<BookingDto>>(Object.entries(resp));
 
@@ -63,17 +63,26 @@ export class BookingService {
       });
   }
 
-  deleteBooking(booking: Booking) {
-    this.httpClient.delete('http://localhost:8080/calendar/api/booking/' + booking.bookingId, {headers: this.headers}).subscribe(resp => {
-      console.log(resp)
+  deleteBooking(booking: Booking, updateCallBack: () => void) {
+    this.httpClient.delete('http://localhost:8080/calendar/api/booking/' + booking.bookingId, { headers: this.headers }).subscribe({
+      next: () => {
+        updateCallBack()
+      },
+      error: (err) => {
+        console.log(err);
+      }
     })
   }
 
-  bookBooking(booking: Booking) {
-    this.httpClient.post('http://localhost:8080/calendar/api/booking/' + booking.id, '', {headers: this.headers})
+  bookBooking(booking: Booking, updateCallBack: () => void) {
+    this.httpClient.post('http://localhost:8080/calendar/api/booking/' + booking.id, '', { headers: this.headers })
       .subscribe({
-        next: console.log,
-        error: console.log
+        next: () => {
+          updateCallBack()
+        },
+        error: (err) => {
+          console.log(err);
+        }
       })
   }
 }

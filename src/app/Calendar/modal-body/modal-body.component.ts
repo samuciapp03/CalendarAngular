@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Booking} from "../../models/booking.model";
 import {BookingService} from "../../booking.service";
 import {AuthService} from '../../auth.service';
@@ -11,16 +11,22 @@ import {AuthService} from '../../auth.service';
 export class ModalBodyComponent implements OnInit {
 
   @Input() booking: any;
+  @Output("onChange") onChange: EventEmitter<any> = new EventEmitter();
 
   constructor(private service: BookingService, readonly auth: AuthService) {
   }
 
   deleteBooking() {
-    this.service.deleteBooking(this.booking);
+    this.service.deleteBooking(this.booking, () => {
+      this.onChange.emit();
+    });
+
   }
 
   bookBooking() {
-    this.service.bookBooking(this.booking);
+    this.service.bookBooking(this.booking, () => {
+      this.onChange.emit();
+    });
   }
 
   ngOnInit(): void {

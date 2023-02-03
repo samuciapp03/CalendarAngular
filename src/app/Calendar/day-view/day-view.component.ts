@@ -67,11 +67,12 @@ export class DayViewComponent implements OnInit {
         .get(
           today.getFullYear() +
           '-' +
-          ('0' + today.getMonth() + 1).slice(-2) +
+          ('0' + (today.getMonth() + 1)).slice(-2) +
           '-' +
           ('0' + today.getDate()).slice(-2)
         )
         ?.forEach((booking) => {
+
           if (this.resourceFilter == null) {
             listBookings.push(booking);
           } else if (
@@ -86,8 +87,8 @@ export class DayViewComponent implements OnInit {
           }
         });
 
-      console.log(this.listResources);
-      console.log(listBookings);
+      console.log('list resources: ', this.listResources);
+      console.log('bookings: ', listBookings);
 
       for (let i = 0; i < 24; i++) {
         let tempBookings = new Array();
@@ -140,7 +141,7 @@ export class DayViewComponent implements OnInit {
     if (this.listResources.includes(resource)) {
       this.router.navigate(
         ['day/' + this.year + '/' + this.month + '/' + this.day],
-        {queryParams: {res: resource}}
+        { queryParams: { res: resource } }
       );
     } else {
       this.router.navigate([
