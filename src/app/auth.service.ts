@@ -7,7 +7,7 @@ import { RegisterRequest } from './requests/register.request'
 import { User } from './models/user.model'
 import { Token } from './models/token.model'
 import { SuccessResponse } from './response/success.response'
-import { UpdateProfileRequest } from './requests/update-profile.request';
+import { UpdateProfileRequest } from './requests/update-profile.request'
 
 @Injectable({
   providedIn: 'root',
@@ -73,8 +73,8 @@ export class AuthService {
   }
 
   logout() {
-    console.log('logout')
     this.token = null
+
   }
 
   async activateUser(param: { token: string }) {
