@@ -1,38 +1,34 @@
-<div style="display: inline;">
-    <label for="select" class="col-sm-2">Show</label>
-    <select class="form-select" id="select" [(ngModel)]="slotSize" (change)="aggiornaPagina()">
-        <option>10</option>
-        <option>25</option>
-        <option>50</option>
-        <option>100</option>
-    </select>
-</div>
-<div style="display: inline;">
-    <label for="orderDate" class="col-sm-2">Ordina per data:</label>
-    <input id="orderDate" type="date" [ngModel]="sortDate | date: 'yyyy-MM-dd'" (ngModelChange)="convertToDate($event)">
-</div>
-
-<div style="display: inline;">
-    <label for="pageSize" class="col-sm-2">Create New:</label>
-    <button type="button" id="pageSize" class="btn btn-primary" (click)="create()">
-        <i class="far fa-edit"></i>
-    </button>
-
-    <div class="excel" style="display: inline; margin-left: 50px">
+<div class="sas d-flex justify-content-between align-items-center ">
+    <div class="newResource">
+        <button class="btn btn-success" (click)="create()">Crea nuovo slot</button>
+    </div>
+    <div class="excel">
         <button class="btn btn-success" (click)="excelBooking()">
             <i class="fas fa-file-excel"></i> Excel
           </button>
     </div>
+    <div class="filler"></div>
+    <div class="form d-flex align-self-center justify-content-xxl-end">
+        <div class="inputContainer align-self-center">
+            <input type="date" id="search" class="form-control inputSearch"
+                name="search">
+        </div>
+        <div class="submitContainer align-self-center">
+            <input type="submit" value="Search" class="btn btn-primary">
+        </div>
+    </div>
 </div>
-<table class="table table-bordered">
+<br>
+<table class="table myTable">
+    <caption>lista slot</caption>
     <thead>
         <tr>
-            <th scope="col">Id</th>
+            <th scope="col">#</th>
             <th scope="col">Data</th>
             <th scope="col">Ora inizio</th>
             <th scope="col">Ora fine</th>
             <th scope="col">Libero</th>
-            <th scope="col">Id Risorsa</th>
+            <th scope="col">Nome risorsa</th>
             <td>&nbsp;</td>
         </tr>
     </thead>
@@ -43,7 +39,7 @@
             <td scope="col">{{slot.startDate | date:'HH:mm'}}</td>
             <td scope="col">{{slot.endDate | date:'HH:mm'}}</td>
             <td scope="col">{{slot.status}}</td>
-            <td scope="col">{{slot.resource.id}}</td>
+            <td scope="col">{{slot.resource.name}}</td>
             <td>
                  <button type="button" class="btn btn-primary" (click)="detail(slot.id)">
                     <i class="far fa-eye"></i>
@@ -99,3 +95,13 @@
 
         </nav>
     </div>
+    <div class="selectContainer">
+        <select [(ngModel)]="slotSize" class="form-select" aria-label="Default select example"
+            name="select" id="select" (change)="aggiornaPagina()">
+            <option value="10" [attr.selected]="slotSize == 10 ? true : null">10</option>
+            <option value="25" [attr.selected]="slotSize == 25 ? true : null">25</option>
+            <option value="50" [attr.selected]="slotSize == 50 ? true : null">50</option>
+            <option value="100" [attr.selected]="slotSize == 100 ? true : null">100</option>
+        </select>
+    </div>
+</div>
