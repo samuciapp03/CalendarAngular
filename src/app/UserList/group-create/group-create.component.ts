@@ -36,26 +36,26 @@ export class GroupCreateComponent implements OnInit {
   }
 
   rolesSelect = [
-    {name: 'SUPER_USER'},
-    {name: 'ADMIN'},
-    {name: 'MODERATOR'},
-    {name: 'USER'},
-    {name: 'CREATE_RISORSE'},
-    {name: 'READ_RISORSE'},
-    {name: 'UPDATE_RISORSE'},
-    {name: 'UPDATE_RISORSE'},
-    {name: 'CREATE_USER'},
-    {name: 'READ_USER'},
-    {name: 'UPDATE_USER'},
-    {name: 'DELETE_USER'},
-    {name: 'CREATE_SLOT'},
-    {name: 'READ_SLOT'},
-    {name: 'UPDATE_SLOT'},
-    {name: 'DELETE_SLOT'},
-    {name: 'CREATE_GROUP'},
-    {name: 'READ_GROUP'},
-    {name: 'UPDATE_GROUP'},
-    {name: 'DELETE_GROUP'}
+    {name: 'ROLE_SUPER_USER'},
+    {name: 'ROLE_ADMIN'},
+    {name: 'ROLE_MODERATOR'},
+    {name: 'ROLE_USER'},
+    {name: 'ROLE_CREATE_RISORSE'},
+    {name: 'ROLE_READ_RISORSE'},
+    {name: 'ROLE_UPDATE_RISORSE'},
+    {name: 'ROLE_UPDATE_RISORSE'},
+    {name: 'ROLE_CREATE_USER'},
+    {name: 'ROLE_READ_USER'},
+    {name: 'ROLE_UPDATE_USER'},
+    {name: 'ROLE_DELETE_USER'},
+    {name: 'ROLE_CREATE_SLOT'},
+    {name: 'ROLE_READ_SLOT'},
+    {name: 'ROLE_UPDATE_SLOT'},
+    {name: 'ROLE_DELETE_SLOT'},
+    {name: 'ROLE_CREATE_GROUP'},
+    {name: 'ROLE_READ_GROUP'},
+    {name: 'ROLE_UPDATE_GROUP'},
+    {name: 'ROLE_DELETE_GROUP'}
 
   ];
 
