@@ -17,6 +17,11 @@ import { DetailSlotPrenotazioniComponent } from './PrenotazioniList/detail-slot-
 import { ListSlotPrenotazioniComponent } from './PrenotazioniList/list-slot-prenotazioni/list-slot-prenotazioni.component';
 import { UpdateSlotPrenotazioniComponent } from './PrenotazioniList/update-slot-prenotazioni/update-slot-prenotazioni.component';
 import {CreateSlotPrenotazioniComponent} from './PrenotazioniList/create-slot-prenotazioni/create-slot-prenotazioni.component';
+import { CreateResourceComponent } from './ResourceList/create-resource/create-resource.component';
+import { DeleteResourceComponent } from './ResourceList/delete-resource/delete-resource.component';
+import { ModifyResourceComponent } from './ResourceList/modify-resource/modify-resource.component';
+import { ResourceDetailComponent } from './ResourceList/resource-detail/resource-detail.component';
+import { ResourceListComponent } from './ResourceList/resource-list/resource-list.component';
 
 let today = new Date();
 
@@ -48,6 +53,11 @@ const routes: Routes = [
   {path: 'update-slotPrenotazioni/:id', component: UpdateSlotPrenotazioniComponent},
   {path: 'delete-slotPrenotazioni/:id', component: DeleteSlotPrenotazioniComponent},
   {path: 'create-slotPrenotazioni', component: CreateSlotPrenotazioniComponent },
+  { path: 'resource-list', component: ResourceListComponent},
+  { path: 'resource-detail/:id', component: ResourceDetailComponent},
+  { path: 'create-resource', component: CreateResourceComponent},
+  { path: 'modify-resource/:id', component: ModifyResourceComponent},
+  { path: 'delete-resource/:id', component: DeleteResourceComponent},
   {
     path: '',
     redirectTo: month,
