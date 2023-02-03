@@ -1,1 +1,44 @@
-<p>detail-slot-prenotazioni works!</p>
+<div class="container col-sm-12">
+			
+    <div class="form-group">
+        <label for="Label" class="col-sm-2">ID</label>
+        <span>{{detail?.id}}</span>
+    </div>
+
+    <div class="form-group">
+        <label for="Label" class="col-sm-2">Data</label>
+        <span>{{detail?.startDate | date: 'dd/MM/yyyy'}}</span>
+    </div>
+
+    <div class="form-group">
+        <label for="Label" class="col-sm-2">Ora inizio</label>
+        <span>{{detail?.startDate | date:'HH:mm'}}</span>
+    </div>
+
+    <div class="form-group">
+        <label for="Label" class="col-sm-2">Ora fine</label>
+        <span>{{detail?.endDate | date:'HH:mm'}}</span>
+    </div>
+
+    <div class="form-group">
+        <label for="Label" class="col-sm-2">Attiva</label>
+        <span>{{detail?.status}}</span>
+    </div>
+    <div class="form-group">
+        <label for="Label" class="col-sm-2">ID Risorsa</label>
+        <span>{{detail?.resource?.id}}</span>
+    </div>
+    <div class="form-group">
+        <label for="Label" class="col-sm-2">Nome Risorsa</label>
+        <span>{{detail?.resource?.name}}</span>
+    </div>
+    <div class="form-group">
+        <label for="Label" class="col-sm-2">Tipo Risorsa</label>
+        <span>{{detail?.resource?.type}}</span>
+    </div>
+    <div class="form-group">
+        <label for="Label" class="col-sm-2">Risorsa Attiva/Non attiva</label>
+        <span>{{detail?.resource?.active}}</span>
+    </div>
+
+</div>

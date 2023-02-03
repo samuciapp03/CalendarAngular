@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Resource } from './SlotPrenotazioni/interfaces/resource';
-import { RestResponse } from './SlotPrenotazioni/interfaces/response';
-import { SlotPrenotazioni } from './SlotPrenotazioni/interfaces/slot-prenotazioni';
-import { SlotPrenotazioniRequest } from './SlotPrenotazioni/interfaces/slot-prenotazioni-request';
+import { SlotPrenotazioni } from './PrenotazioniList/interfaces/slot-prenotazioni';
+import { SlotPrenotazioniRequest } from './PrenotazioniList/interfaces/slot-prenotazioni-request';
+import { Resource } from './PrenotazioniList/interfaces/resource';
+import { RestResponse } from './PrenotazioniList/interfaces/response';
+
 
 @Injectable({
   providedIn: 'root'

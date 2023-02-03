@@ -12,6 +12,11 @@ import {UserDetailComponent} from './UserList/user-detail/user-detail.component'
 import {UserListComponent} from './UserList/user-list/user-list.component';
 import {UserUpdateComponent} from './UserList/user-update/user-update.component';
 import { ExcelPageResourceComponent } from './ResourceList/excel-page-resource/excel-page-resource.component';
+import { DeleteSlotPrenotazioniComponent } from './PrenotazioniList/delete-slot-prenotazioni/delete-slot-prenotazioni.component';
+import { DetailSlotPrenotazioniComponent } from './PrenotazioniList/detail-slot-prenotazioni/detail-slot-prenotazioni.component';
+import { ListSlotPrenotazioniComponent } from './PrenotazioniList/list-slot-prenotazioni/list-slot-prenotazioni.component';
+import { UpdateSlotPrenotazioniComponent } from './PrenotazioniList/update-slot-prenotazioni/update-slot-prenotazioni.component';
+import {CreateSlotPrenotazioniComponent} from './PrenotazioniList/create-slot-prenotazioni/create-slot-prenotazioni.component';
 
 let today = new Date();
 
@@ -38,6 +43,11 @@ const routes: Routes = [
   {path: 'user-create', component: UserCreateComponent},
   {path: 'login', component: LoginComponent},
   {path: 'excel-page-resource', component:ExcelPageResourceComponent},
+  {path: 'list-slotPrenotazioni', component: ListSlotPrenotazioniComponent},
+  {path: 'detail-slotPrenotazioni/:id', component: DetailSlotPrenotazioniComponent},
+  {path: 'update-slotPrenotazioni/:id', component: UpdateSlotPrenotazioniComponent},
+  {path: 'delete-slotPrenotazioni/:id', component: DeleteSlotPrenotazioniComponent},
+  {path: 'create-slotPrenotazioni', component: CreateSlotPrenotazioniComponent },
   {
     path: '',
     redirectTo: month,

@@ -1,1 +1,68 @@
-<p>update-slot-prenotazioni works!</p>
+<div class="container col-sm-12">
+			
+    <div class="form-group">
+        <label for="Label" class="col-sm-2">ID</label>
+        <span>{{detail?.id}}</span>
+    </div>
+
+    <div class="form-group">
+        <label for="Label" class="col-sm-2">Data/Ora inizio</label>
+        <input type="datetime-local" [value]="detail?.startDate | date:'yyyy-MM-ddTHH:mm'" #startDate 
+        [(ngModel)]="dataInizio" (change)="formatDate('start')">
+        
+    </div>
+    
+
+    <div class="form-group">
+        <label for="Label" class="col-sm-2">Data/Ora fine</label>
+        <input type="datetime-local" value="{{detail?.endDate | date:'yyyy-MM-ddTHH:mm'}}"#endDate 
+        [(ngModel)]="dataFine" (change)="formatDate('end')">
+    </div>
+
+    <div class="form-group" >
+
+        <div class="row">
+            <label for="Label" class="col-sm-2">Slot Libero</label>
+            <div class="col-sm-2">
+                <label for="radio_libero" class="">AVAILABLE</label>
+                <input id="radio_libero" type="radio" [value]="'AVAILABLE'" name="free" [(ngModel)] = "status">
+                <label for="radio_occupato">RESERVED</label>
+                <input id="radio_occupato" type="radio" [value]="'RESERVED'" name="free" [(ngModel)] = "status">
+                <label for="radio_disposed">DISPOSED</label>
+                <input id="radio_disposed" type="radio" [value]="'DISPOSED'" name="free" [(ngModel)] = "status">
+            </div>
+        </div>
+
+    </div>
+
+    <div class="form-group">
+        <label for="Label" class="col-sm-2">ID Risorsa</label>
+        <select class="form-select" id="inputGroupSelect01" (change)="showResource(resourceName.value)" #resourceName>
+            <option *ngFor= "let resource of list" [selected]="detail?.resource?.name==resource.name">{{resource.name}}</option>
+          </select>
+        </div>
+        <div class="form-group" *ngIf="detailResource">
+            <h6 class="col-sm-2">Dettagli risorsa:</h6>
+        </div>
+        <div class="form-group" *ngIf="detailResource">
+            <label for="Label" class="col-sm-2">ID</label>
+            <span>{{detailResource.id}}</span>
+        </div>
+        <div class="form-group" *ngIf="detailResource">
+            <label for="Label" class="col-sm-2">Nome</label>
+            <span>{{detailResource.name}}</span>
+        </div>
+        <div class="form-group" *ngIf="detailResource">
+            <label for="Label" class="col-sm-2">Tipo</label>
+            <span>{{detailResource.type}}</span>
+        </div>
+        <div class="form-group" *ngIf="detailResource">
+            <label for="Label" class="col-sm-2">Attiva/Non attiva</label>
+            <span>{{detailResource.active}}</span>
+        </div>
+
+    <button class="btn btn-primary" (click) = "update(startDate.value, endDate.value,resourceName.value)" [style.display] = "loading ? 'none' : ''">Salva</button>
+    <div class="spinner-border" role="status" [style.display] = "loading ? '' : 'none'">
+        <span class="visually-hidden"></span>
+    </div>
+</div>
