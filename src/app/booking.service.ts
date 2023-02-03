@@ -2,17 +2,18 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Booking} from './models/booking.model';
 import {BookingDto} from "./models/dto/booking.dto";
+import {AuthService} from './auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BookingService {
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, readonly auth: AuthService) {
   }
 
   headers = new HttpHeaders({
     'Content-Type': 'application/json',
-    'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjgwODAvcHJlbm90YXppb25lX3Jpc29yc2UiLCJzdWIiOiIxIiwiZmlyc3RuYW1lIjoiRW1pbGlhbm8iLCJuYmYiOjE2NzM1Mzc2NzcsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3ByZW5vdGF6aW9uZV9yaXNvcnNlIiwiZXhwIjoxNjgzNTM4NTc3LCJpYXQiOjE2NzM1Mzc2NzcsImVtYWlsIjoiZW1pbGlhbm8yMzAxMDRAZ21haWwuY29tIiwidXNlcm5hbWUiOiJFTUlOQVZBIiwibGFzdG5hbWUiOiJOYXZhIn0.rkE2kzfR4apzmb0c71xx4DVZ1q6a8jnkEtFDTffeB1E',
+    // 'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjgwODAvcHJlbm90YXppb25lX3Jpc29yc2UiLCJzdWIiOiIxIiwiZmlyc3RuYW1lIjoiRW1pbGlhbm8iLCJuYmYiOjE2NzM1Mzc2NzcsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3ByZW5vdGF6aW9uZV9yaXNvcnNlIiwiZXhwIjoxNjgzNTM4NTc3LCJpYXQiOjE2NzM1Mzc2NzcsImVtYWlsIjoiZW1pbGlhbm8yMzAxMDRAZ21haWwuY29tIiwidXNlcm5hbWUiOiJFTUlOQVZBIiwibGFzdG5hbWUiOiJOYXZhIn0.rkE2kzfR4apzmb0c71xx4DVZ1q6a8jnkEtFDTffeB1E',
   });
 
   findBookingsByDate(
@@ -34,8 +35,13 @@ export class BookingService {
 
     let result = new Map<string, Array<Booking>>();
 
+    let url = 'http://localhost:8080/calendar/api/booking/' + this.auth.isAdmin ? '' : 'user/'
+
+    let uri: URL = new URL(url)
+    uri.searchParams
+
     this.httpClient
-      .post('http://localhost:8080/calendar/api/booking/user', body, { headers: this.headers })
+      .post(url, body, { headers: this.headers })
       .subscribe((resp) => {
         let list = new Map<string, Array<BookingDto>>(Object.entries(resp));
 
