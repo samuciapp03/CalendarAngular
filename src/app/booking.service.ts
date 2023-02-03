@@ -38,7 +38,7 @@ export class BookingService {
 
     let subscribe: Observable<any>
 
-    if (this.auth.isAdmin) {
+    /* if (this.auth.isAdmin) {
 
       let uri: URL = new URL('http://localhost:8080/calendar/api/booking/')
       uri.searchParams.set('from', body.from)
@@ -46,9 +46,9 @@ export class BookingService {
 
       subscribe = this.httpClient.get(uri.toString(), { headers: this.headers })
 
-    } else {
-      subscribe = this.httpClient.post('http://localhost:8080/calendar/api/booking/user', body, { headers: this.headers })
-    }
+    } else {  */
+    subscribe = this.httpClient.post('http://localhost:8080/calendar/api/booking/user', body, { headers: this.headers })
+    // }
 
     subscribe.subscribe((resp) => {
         let list = new Map<string, Array<BookingDto>>(Object.entries(resp));
