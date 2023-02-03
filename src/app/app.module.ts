@@ -6,7 +6,6 @@ import {NgSelectModule} from '@ng-select/ng-select';
 import {DataTablesModule} from 'angular-datatables';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {GroupListComponent} from './UserList/group-list/group-list.component';
@@ -49,13 +48,11 @@ import {
 import {
   CreateSlotPrenotazioniComponent
 } from './PrenotazioniList/create-slot-prenotazioni/create-slot-prenotazioni.component';
-import { CreateResourceComponent } from './ResourceList/create-resource/create-resource.component';
-import { ExcelPageResourceComponent } from './ResourceList/excel-page-resource/excel-page-resource.component';
-import { ExcelBookingServiceService } from './excel-booking-service.service';
-import { ExcelPageBookingComponent } from './ResourceList/excel-page-booking/excel-page-booking.component';
-import {ExcelPageComponent} from './excel-page/excel-page.component';
-import {ModalBodyComponent} from './Calendar/modal-body/modal-body.component';
+import {CreateResourceComponent} from './ResourceList/create-resource/create-resource.component';
+import {ExcelPageResourceComponent} from './ResourceList/excel-page-resource/excel-page-resource.component';
+import {ExcelPageBookingComponent} from './ResourceList/excel-page-booking/excel-page-booking.component';
 import {TokenInterceptor} from './Authentication/token.interceptor';
+import {ModalBodyComponent} from './Calendar/modal-body/modal-body.component';
 
 @NgModule({
   declarations: [
@@ -91,7 +88,8 @@ import {TokenInterceptor} from './Authentication/token.interceptor';
     CreateSlotPrenotazioniComponent,
     CreateResourceComponent,
     ExcelPageResourceComponent,
-    ExcelPageBookingComponent
+    ExcelPageBookingComponent,
+    ModalBodyComponent
   ],
   imports: [
     BrowserModule,
