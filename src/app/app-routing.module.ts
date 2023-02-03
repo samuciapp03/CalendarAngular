@@ -33,6 +33,8 @@ import {ResourceDetailComponent} from './ResourceList/resource-detail/resource-d
 import {ResourceListComponent} from './ResourceList/resource-list/resource-list.component';
 import {ExcelPageBookingComponent} from './ResourceList/excel-page-booking/excel-page-booking.component';
 import {LoginComponent} from './Authentication/login/login.component';
+import {AdminGuard} from './Authentication/admin.guard';
+import {UserGuard} from './Authentication/user.guard';
 
 let today = new Date()
 
@@ -49,27 +51,27 @@ let day: string =
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' }, // firstComponent?
-  { path: 'groups', component: GroupListComponent },
-  { path: 'group-detail/:id', component: GroupDetailComponent },
-  { path: 'group-update/:id', component: GroupUpdateComponent },
-  { path: 'group-create', component: GroupCreateComponent },
-  { path: 'users', component: UserListComponent },
-  { path: 'user-detail/:id', component: UserDetailComponent },
-  { path: 'user-update/:id', component: UserUpdateComponent },
-  { path: 'user-create', component: UserCreateComponent },
+  { path: 'groups', component: GroupListComponent, canActivate: [AdminGuard] },
+  { path: 'group-detail/:id', component: GroupDetailComponent, canActivate: [AdminGuard] },
+  { path: 'group-update/:id', component: GroupUpdateComponent, canActivate: [AdminGuard] },
+  { path: 'group-create', component: GroupCreateComponent, canActivate: [AdminGuard] },
+  { path: 'users', component: UserListComponent, canActivate: [AdminGuard] },
+  { path: 'user-detail/:id', component: UserDetailComponent, canActivate: [AdminGuard] },
+  { path: 'user-update/:id', component: UserUpdateComponent, canActivate: [AdminGuard] },
+  { path: 'user-create', component: UserCreateComponent, canActivate: [AdminGuard] },
   { path: 'login', component: LoginComponent },
-  { path: 'excel-page-resource', component: ExcelPageResourceComponent },
-  { path: 'excel-page-booking', component: ExcelPageBookingComponent },
-  { path: 'list-slotPrenotazioni', component: ListSlotPrenotazioniComponent },
-  { path: 'detail-slotPrenotazioni/:id', component: DetailSlotPrenotazioniComponent },
-  { path: 'update-slotPrenotazioni/:id', component: UpdateSlotPrenotazioniComponent },
-  { path: 'delete-slotPrenotazioni/:id', component: DeleteSlotPrenotazioniComponent },
-  { path: 'create-slotPrenotazioni', component: CreateSlotPrenotazioniComponent },
-  { path: 'resource-list', component: ResourceListComponent },
-  { path: 'resource-detail/:id', component: ResourceDetailComponent },
-  { path: 'create-resource', component: CreateResourceComponent },
-  { path: 'modify-resource/:id', component: ModifyResourceComponent },
-  { path: 'delete-resource/:id', component: DeleteResourceComponent },
+  { path: 'excel-page-resource', component: ExcelPageResourceComponent, canActivate: [AdminGuard] },
+  { path: 'excel-page-booking', component: ExcelPageBookingComponent, canActivate: [AdminGuard] },
+  { path: 'list-slotPrenotazioni', component: ListSlotPrenotazioniComponent, canActivate: [AdminGuard] },
+  { path: 'detail-slotPrenotazioni/:id', component: DetailSlotPrenotazioniComponent, canActivate: [AdminGuard] },
+  { path: 'update-slotPrenotazioni/:id', component: UpdateSlotPrenotazioniComponent, canActivate: [AdminGuard] },
+  { path: 'delete-slotPrenotazioni/:id', component: DeleteSlotPrenotazioniComponent, canActivate: [AdminGuard] },
+  { path: 'create-slotPrenotazioni', component: CreateSlotPrenotazioniComponent, canActivate: [AdminGuard] },
+  { path: 'resource-list', component: ResourceListComponent, canActivate: [AdminGuard] },
+  { path: 'resource-detail/:id', component: ResourceDetailComponent, canActivate: [AdminGuard] },
+  { path: 'create-resource', component: CreateResourceComponent, canActivate: [AdminGuard] },
+  { path: 'delete-resource/:id', component: DeleteResourceComponent, canActivate: [AdminGuard] },
+  { path: 'modify-resource/:id', component: ModifyResourceComponent, canActivate: [AdminGuard] },
   {
     path: 'month',
     redirectTo: month,
@@ -83,10 +85,12 @@ const routes: Routes = [
   {
     path: 'month/:year/:month',
     component: MonthViewComponent,
+    canActivate: [UserGuard]
   },
   {
     path: 'day/:year/:month/:day',
     component: DayViewComponent,
+    canActivate: [UserGuard]
   },
 ]
 

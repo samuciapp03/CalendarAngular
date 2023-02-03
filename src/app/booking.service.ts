@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Booking} from './models/booking.model';
-import {BookingDto} from "./models/dto/booking.dto";
 import {AuthService} from './auth.service';
+import {Observable} from 'rxjs';
+import {BookingDto} from './models/dto/booking.dto';
 
 @Injectable({
   providedIn: 'root',
@@ -35,14 +36,21 @@ export class BookingService {
 
     let result = new Map<string, Array<Booking>>();
 
-    let url = 'http://localhost:8080/calendar/api/booking/' + this.auth.isAdmin ? '' : 'user/'
+    let subscribe: Observable<any>
 
-    let uri: URL = new URL(url)
-    uri.searchParams
+    if (this.auth.isAdmin) {
 
-    this.httpClient
-      .post(url, body, { headers: this.headers })
-      .subscribe((resp) => {
+      let uri: URL = new URL('http://localhost:8080/calendar/api/booking/')
+      uri.searchParams.set('from', body.from)
+      uri.searchParams.set('to', body.to)
+
+      subscribe = this.httpClient.get(uri.toString(), { headers: this.headers })
+
+    } else {
+      subscribe = this.httpClient.post('http://localhost:8080/calendar/api/booking/user', body, { headers: this.headers })
+    }
+
+    subscribe.subscribe((resp) => {
         let list = new Map<string, Array<BookingDto>>(Object.entries(resp));
 
         list.forEach((values, key) => {
@@ -61,12 +69,12 @@ export class BookingService {
               bookingDate: new Date(e.booking.bookingDate)
             });
           });
-
           result.set(key.toString(), bookings);
         });
+      }
+    )
 
-        updateCallBack(result);
-      });
+    updateCallBack(result);
   }
 
   deleteBooking(booking: Booking, updateCallBack: () => void) {
