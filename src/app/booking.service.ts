@@ -71,10 +71,12 @@ export class BookingService {
           });
           result.set(key.toString(), bookings);
         });
+
+        updateCallBack(result);
       }
     )
 
-    updateCallBack(result);
+
   }
 
   deleteBooking(booking: Booking, updateCallBack: () => void) {

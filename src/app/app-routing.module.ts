@@ -34,7 +34,6 @@ import {ResourceListComponent} from './ResourceList/resource-list/resource-list.
 import {ExcelPageBookingComponent} from './ResourceList/excel-page-booking/excel-page-booking.component';
 import {LoginComponent} from './Authentication/login/login.component';
 import {AdminGuard} from './Authentication/admin.guard';
-import {UserGuard} from './Authentication/user.guard';
 
 let today = new Date()
 
@@ -85,12 +84,12 @@ const routes: Routes = [
   {
     path: 'month/:year/:month',
     component: MonthViewComponent,
-    canActivate: [UserGuard]
+    // canActivate: [UserGuard]
   },
   {
     path: 'day/:year/:month/:day',
     component: DayViewComponent,
-    canActivate: [UserGuard]
+    // canActivate: [UserGuard]
   },
 ]
 
