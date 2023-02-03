@@ -4,7 +4,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SlotPrenotazioniService } from 'src/app/slot-prenotazioni.service';
 import { Resource } from '../interfaces/resource';
 import { RestResponse } from '../interfaces/response';
+import { SlotPrenotazioni } from '../interfaces/slot-prenotazioni';
 import { SlotPrenotazioniRequest } from '../interfaces/slot-prenotazioni-request';
+import { Status } from '../interfaces/status';
 
 @Component({
   selector: 'app-create-slot-prenotazioni',
@@ -23,6 +25,7 @@ export class CreateSlotPrenotazioniComponent implements OnInit{
   detailResource?: Resource;
   date1?: string;
   date2?: string;
+  status?: Status;
   
 
   ngOnInit(): void {
@@ -61,7 +64,7 @@ export class CreateSlotPrenotazioniComponent implements OnInit{
     this.detail={
       startDate: new Date(startDate),
       endDate: new Date(endDate),
-      free: this.free,
+      status: this.status!,
       resourceId: temp.id!
     }
 
@@ -94,7 +97,7 @@ export class CreateSlotPrenotazioniComponent implements OnInit{
         console.log(this.date2)
       }else{
         this.date2= this.date1?.split('T')[0];
-        this.date2+='T01:00';
+        this.date2+='T'+this.date1?.split('T')[1];
       }
       return;
     }
@@ -105,7 +108,7 @@ export class CreateSlotPrenotazioniComponent implements OnInit{
         this.date1+='T'+hour;
       }else{
         this.date1= this.date2?.split('T')[0];
-        this.date1+='T01:00';
+        this.date1+='T'+this.date2?.split('T')[1];;
       }
       return;
     }
