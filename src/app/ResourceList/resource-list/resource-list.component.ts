@@ -112,6 +112,6 @@ export class ResourceListComponent {
     });
   }
   excelPage(){
-    this.router.navigateByUrl('excel-page')
+    this.router.navigateByUrl('excel-page-resource')
   }
 }

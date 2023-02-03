@@ -1,17 +1,22 @@
 .form-background {
-    background-color: #4e4d4d; /* scegli il colore di sfondo */
-    border-radius: 10px; /* scegli il raggio di arrotondamento */
-    padding: 20px; /* aggiungi un po' di padding */
-    width: 40%
-  }
- 
-  th {
-    background-color: #28ac45;
-    color: white;
-  }
-  .btn-primary {
-    margin: 10px;
-  }
-  .right{
+  background-color: #4e4d4d;
+  /* scegli il colore di sfondo */
+  border-radius: 10px;
+  /* scegli il raggio di arrotondamento */
+  padding: 20px;
+  /* aggiungi un po' di padding */
+  width: 40%
+}
+
+th {
+  background-color: #28ac45;
+  color: white;
+}
+
+.btn-primary {
+  margin: 10px;
+}
+
+.right {
   width: 10px;
 }

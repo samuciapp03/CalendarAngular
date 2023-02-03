@@ -1,1 +1,101 @@
-<p>list-slot-prenotazioni works!</p>
+<div style="display: inline;">
+    <label for="select" class="col-sm-2">Show</label>
+    <select class="form-select" id="select" [(ngModel)]="slotSize" (change)="aggiornaPagina()">
+        <option>10</option>
+        <option>25</option>
+        <option>50</option>
+        <option>100</option>
+    </select>
+</div>
+<div style="display: inline;">
+    <label for="orderDate" class="col-sm-2">Ordina per data:</label>
+    <input id="orderDate" type="date" [ngModel]="sortDate | date: 'yyyy-MM-dd'" (ngModelChange)="convertToDate($event)">
+</div>
+
+<div style="display: inline;">
+    <label for="pageSize" class="col-sm-2">Create New:</label>
+    <button type="button" id="pageSize" class="btn btn-primary" (click)="create()">
+        <i class="far fa-edit"></i>
+    </button>
+
+    <div class="excel" style="display: inline; margin-left: 50px">
+        <button class="btn btn-success" (click)="excelBooking()">
+            <i class="fas fa-file-excel"></i> Excel
+          </button>
+    </div>
+</div>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Data</th>
+            <th scope="col">Ora inizio</th>
+            <th scope="col">Ora fine</th>
+            <th scope="col">Libero</th>
+            <th scope="col">Id Risorsa</th>
+            <td>&nbsp;</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor = "let slot of page.content">
+            <td scope="col">{{slot.id}}</td>
+            <td scope="col">{{slot.startDate | date:'dd/MM/yyyy'}}</td>
+            <td scope="col">{{slot.startDate | date:'HH:mm'}}</td>
+            <td scope="col">{{slot.endDate | date:'HH:mm'}}</td>
+            <td scope="col">{{slot.status}}</td>
+            <td scope="col">{{slot.resource.id}}</td>
+            <td>
+                 <button type="button" class="btn btn-primary" (click)="detail(slot.id)">
+                    <i class="far fa-eye"></i>
+                </button>
+
+                <button type="button" class="btn btn-success" (click)="edit(slot.id)">
+                    <i class="fas fa-edit"></i>
+                </button>
+                
+                <button type="button" class="btn btn-danger" (click)="deleteEntity(slot.id)">
+                    <i class="far fa-trash-alt"></i>
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div class="foot">
+    <div class="pages">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination" *ngIf="page.totalPages != 1">
+
+                <li class="page-item liNoPadding" *ngIf="currentPage != 1">
+                    <a class="page-link" (click)="changePageByNum(1)"> 
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+
+                <li class="page-item liNoPadding" *ngIf="currentPage != 1" aria-current="page">
+                    <a class="page-link" (click)="changePageByNum(currentPage - 1)">
+                        {{ currentPage - 1 }}
+                    </a>
+                </li>
+
+                <li class="page-item liNoPadding" aria-current="page">
+                    <a class="page-link" id="curr">
+                        {{ currentPage }}
+                    </a>
+                </li>
+
+                <li class="page-item liNoPadding" aria-current="page" *ngIf="currentPage < page.totalPages">
+                    <a class="page-link" (click)="changePageByNum(currentPage + 1)">
+                        {{ currentPage + 1 }}
+                    </a>
+                </li>
+
+                <li class="page-item liNoPadding" *ngIf="currentPage < page.totalPages ">
+                    <a class="page-link" (click)="changePageByNum(page.totalPages)">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+    </div>

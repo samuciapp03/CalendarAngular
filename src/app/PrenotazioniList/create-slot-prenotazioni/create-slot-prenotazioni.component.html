@@ -1,1 +1,61 @@
-<p>create-slot-prenotazioni works!</p>
+<div class="container col-sm-12">
+			
+    <div class="form-group">
+        <label for="Label" class="col-sm-2" >Data/Ora inizio</label>
+        <input type="datetime-local" [(ngModel)]="date1" (change)="formatDate('start')" #startDate >
+        
+    </div>
+    
+
+    <div class="form-group">
+        <label for="Label" class="col-sm-2">Data/Ora fine</label>
+        <input type="datetime-local" [(ngModel)]="date2" (change)="formatDate('end')" #endDate>
+    </div>
+
+    <div class="form-group" >
+
+        <div class="row">
+            <label for="Label" class="col-sm-2">Slot Libero</label>
+            <div class="col-sm-2">
+                <label for="radio_libero" class="">Libero</label>
+                <input id="radio_libero" type="radio" [value]="true" name="free" [(ngModel)] = "free">
+                <label for="radio_occupato">Occupato</label>
+                <input id="radio_occupato" type="radio" [value]="false" name="free" [(ngModel)] = "free">
+            </div>
+        </div>
+
+    </div>
+
+    <div class="form-group">
+        <label for="Label" class="col-sm-2">ID Risorsa</label>
+        <select class="form-select" id="inputGroupSelect01" [(ngModel)]="resource" (change)="showResource()" #resourceName>
+            <option selected>Choose...</option>
+            <option *ngFor= "let resource of list">{{resource.name}}</option>
+          </select>
+        </div>
+        <div class="form-group" *ngIf="detailResource">
+            <h6 class="col-sm-2">Dettagli risorsa:</h6>
+        </div>
+        <div class="form-group" *ngIf="detailResource">
+            <label for="Label" class="col-sm-2">ID</label>
+            <span>{{detailResource.id}}</span>
+        </div>
+        <div class="form-group" *ngIf="detailResource">
+            <label for="Label" class="col-sm-2">Nome</label>
+            <span>{{detailResource.name}}</span>
+        </div>
+        <div class="form-group" *ngIf="detailResource">
+            <label for="Label" class="col-sm-2">Tipo</label>
+            <span>{{detailResource.type}}</span>
+        </div>
+        <div class="form-group" *ngIf="detailResource">
+            <label for="Label" class="col-sm-2">Attiva/Non attiva</label>
+            <span>{{detailResource.active}}</span>
+        </div>
+
+
+    <button class="btn btn-primary" (click) = "create(startDate.value, endDate.value, resourceName.value)" [style.display] = "loading ? 'none' : ''">Salva</button>
+    <div class="spinner-border" role="status" [style.display] = "loading ? '' : 'none'">
+        <span class="visually-hidden"></span>
+    </div>
+</div>

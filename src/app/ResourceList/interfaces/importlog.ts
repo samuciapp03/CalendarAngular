@@ -1,4 +1,4 @@
-export interface importlog{
+export interface importlog {
     id?: number,
     creationTime: Date,
     undoCode: String,

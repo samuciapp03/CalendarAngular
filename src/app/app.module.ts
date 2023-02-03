@@ -49,8 +49,11 @@ import {
 import {
   CreateSlotPrenotazioniComponent
 } from './PrenotazioniList/create-slot-prenotazioni/create-slot-prenotazioni.component';
+import { CreateResourceComponent } from './ResourceList/create-resource/create-resource.component';
+import { ExcelPageResourceComponent } from './ResourceList/excel-page-resource/excel-page-resource.component';
+import { ExcelBookingServiceService } from './excel-booking-service.service';
+import { ExcelPageBookingComponent } from './ResourceList/excel-page-booking/excel-page-booking.component';
 import {ExcelPageComponent} from './excel-page/excel-page.component';
-import {CreateResourceComponent} from './ResourceList/create-resource/create-resource.component';
 import {ModalBodyComponent} from './Calendar/modal-body/modal-body.component';
 import {TokenInterceptor} from './Authentication/token.interceptor';
 
@@ -87,8 +90,8 @@ import {TokenInterceptor} from './Authentication/token.interceptor';
     DeleteSlotPrenotazioniComponent,
     CreateSlotPrenotazioniComponent,
     CreateResourceComponent,
-    ExcelPageComponent,
-    ModalBodyComponent,
+    ExcelPageResourceComponent,
+    ExcelPageBookingComponent
   ],
   imports: [
     BrowserModule,
