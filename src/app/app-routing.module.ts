@@ -22,6 +22,7 @@ import { DeleteResourceComponent } from './ResourceList/delete-resource/delete-r
 import { ModifyResourceComponent } from './ResourceList/modify-resource/modify-resource.component';
 import { ResourceDetailComponent } from './ResourceList/resource-detail/resource-detail.component';
 import { ResourceListComponent } from './ResourceList/resource-list/resource-list.component';
+import { ExcelPageBookingComponent } from './ResourceList/excel-page-booking/excel-page-booking.component';
 
 let today = new Date();
 
@@ -48,6 +49,7 @@ const routes: Routes = [
   {path: 'user-create', component: UserCreateComponent},
   {path: 'login', component: LoginComponent},
   {path: 'excel-page-resource', component:ExcelPageResourceComponent},
+  {path: 'excel-page-booking', component:ExcelPageBookingComponent},
   {path: 'list-slotPrenotazioni', component: ListSlotPrenotazioniComponent},
   {path: 'detail-slotPrenotazioni/:id', component: DetailSlotPrenotazioniComponent},
   {path: 'update-slotPrenotazioni/:id', component: UpdateSlotPrenotazioniComponent},

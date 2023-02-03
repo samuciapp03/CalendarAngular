@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ExcelBookingServiceService } from 'src/app/excel-booking-service.service';
 import { SlotPrenotazioniService } from 'src/app/slot-prenotazioni.service';
 import { Page } from '../interfaces/page';
 import { RestResponse } from '../interfaces/response';
@@ -67,6 +68,9 @@ export class ListSlotPrenotazioniComponent implements OnInit{
     });
 
    
+  }
+  excelBooking(){
+  this.router.navigateByUrl('excel-page-booking')
   }
   aggiornaPagina(){
     this.service.findAllSlotWithPaginationHttp(this.currentPage!, this.slotSize!).subscribe({
